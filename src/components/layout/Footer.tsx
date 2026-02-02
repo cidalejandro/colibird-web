@@ -10,7 +10,7 @@ const Footer = () => {
             <img 
               src={magnoLogoFull} 
               alt="MAGNO Partners - Strategy. Execution. Impact." 
-              className="h-16 md:h-20 w-auto object-contain bg-white rounded-lg p-2" 
+              className="h-12 md:h-16 w-auto object-contain bg-white rounded-lg px-3 py-2" 
             />
           </div>
 
