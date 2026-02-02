@@ -1,4 +1,4 @@
-import { FileX, BarChart3, Clock, DollarSign } from "lucide-react";
+import { FileX, BarChart3, Clock, DollarSign, Users } from "lucide-react";
 
 const problems = [
   {
@@ -12,14 +12,14 @@ const problems = [
     description: "Los planes no se traducen en ingresos concretos",
   },
   {
-    icon: Clock,
-    title: "Time-to-market demasiado largo",
-    description: "Los productos tardan demasiado en llegar al mercado",
+    icon: DollarSign,
+    title: "Pricing desconectado del negocio",
+    description: "Modelos comerciales que no reflejan la realidad del mercado",
   },
   {
-    icon: DollarSign,
-    title: "Costos de ejecución elevados",
-    description: "La inversión no se traduce en valor tangible",
+    icon: Clock,
+    title: "Falta de accountability",
+    description: "Equipos sin bandwidth para ejecutar mientras operan el día a día",
   },
 ];
 
@@ -28,7 +28,7 @@ const Problem = () => {
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">
             El Problema que Resolvemos
           </h2>
           <p className="text-gradient text-xl font-semibold mb-4">
@@ -37,7 +37,7 @@ const Problem = () => {
           <p className="text-muted-foreground text-lg">
             Muchas fintechs, empresas de pagos y startups con capital disponible
             enfrentan un mismo desafío: la ejecución es más lenta y costosa que la
-            visión.
+            visión. Existe claridad sobre "qué hacer", pero el valor no se captura a tiempo.
           </p>
         </div>
 
@@ -45,14 +45,14 @@ const Problem = () => {
           {problems.map((problem, index) => (
             <div
               key={problem.title}
-              className="group bg-card rounded-2xl p-6 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 border border-border/50"
+              className="group bg-card rounded-xl p-6 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 border border-border/50"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center flex-shrink-0 group-hover:bg-gradient-primary transition-all duration-300">
-                  <problem.icon className="w-6 h-6 text-accent-foreground group-hover:text-primary-foreground transition-colors" />
+                <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center flex-shrink-0 group-hover:bg-secondary transition-all duration-300">
+                  <problem.icon className="w-6 h-6 text-muted-foreground group-hover:text-secondary-foreground transition-colors" />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-lg text-foreground mb-2">
+                  <h3 className="font-bold text-lg text-foreground mb-2">
                     {problem.title}
                   </h3>
                   <p className="text-muted-foreground">{problem.description}</p>
