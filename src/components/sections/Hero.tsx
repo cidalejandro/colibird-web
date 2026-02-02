@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import magnoLogoFull from "@/assets/magno-logo-full.png";
 
 const Hero = () => {
   return (
@@ -44,37 +45,35 @@ const Hero = () => {
         />
         <defs>
           <linearGradient id="warmGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(25 100% 63%)" />
-            <stop offset="100%" stopColor="hsl(358 100% 68%)" />
+            <stop offset="0%" stopColor="hsl(25 100% 60%)" />
+            <stop offset="100%" stopColor="hsl(5 100% 60%)" />
           </linearGradient>
           <linearGradient id="warmGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(358 100% 68%)" />
-            <stop offset="100%" stopColor="hsl(350 50% 35%)" />
+            <stop offset="0%" stopColor="hsl(5 100% 60%)" />
+            <stop offset="100%" stopColor="hsl(350 65% 35%)" />
           </linearGradient>
           <linearGradient id="warmGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(25 100% 70%)" />
-            <stop offset="100%" stopColor="hsl(358 80% 60%)" />
+            <stop offset="0%" stopColor="hsl(30 100% 65%)" />
+            <stop offset="100%" stopColor="hsl(15 90% 55%)" />
           </linearGradient>
         </defs>
       </svg>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 animate-fade-in-up tracking-tight">
-            MAGNO PARTNERS
-          </h1>
-          <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6 animate-fade-in-up font-medium" style={{ animationDelay: '0.1s' }}>
-            Strategy. Execution. Impact.
-          </h2>
-          <p className="text-gradient text-xl md:text-2xl font-semibold mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Where strategy becomes execution.
-          </p>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+        <div className="max-w-4xl">
+          {/* Full Logo with tagline */}
+          <img 
+            src={magnoLogoFull} 
+            alt="MAGNO PARTNERS - Strategy. Execution. Impact." 
+            className="w-full max-w-2xl mb-10 animate-fade-in-up"
+          />
+          
+          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             Transformamos complejidad en ejecución concreta y valor sostenible. 
             Cerramos la brecha entre las ideas estratégicas y los resultados que efectivamente ocurren.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             <Button variant="hero" size="lg">
               Agendar una call
               <ArrowRight className="ml-2" size={20} />
