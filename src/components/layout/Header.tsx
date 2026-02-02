@@ -31,13 +31,13 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-24">
-          {/* Logo - más grande */}
+        <div className="flex items-center justify-between h-28 md:h-32">
+          {/* Logo - grande */}
           <a href="#inicio" className="flex items-center">
             <img 
               src={magnoLogoFull} 
               alt="MAGNO Partners - Strategy. Execution. Impact." 
-              className="h-16 md:h-20 w-auto object-contain" 
+              className="h-20 md:h-24 lg:h-28 w-auto object-contain" 
             />
           </a>
 
