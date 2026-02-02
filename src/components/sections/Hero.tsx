@@ -12,22 +12,50 @@ const Hero = () => {
       <div className="absolute bottom-20 left-0 w-[400px] h-[400px] rounded-full bg-blob-secondary opacity-50 blur-3xl animate-float-slow" />
       <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] rounded-full bg-blob-accent blur-2xl animate-pulse-soft" />
       
-      {/* Decorative Lines */}
+      {/* Decorative Curved Lines - matching logo style */}
       <svg
-        className="absolute right-10 top-1/3 w-[400px] h-[200px] opacity-30"
-        viewBox="0 0 400 200"
+        className="absolute right-10 top-1/4 w-[500px] h-[400px] opacity-40"
+        viewBox="0 0 500 400"
         fill="none"
       >
+        {/* Multiple curved arcs like the logo */}
         <path
-          d="M0 100 Q 100 50, 200 100 T 400 100"
-          stroke="hsl(var(--secondary))"
-          strokeWidth="2"
-          strokeDasharray="8 4"
+          d="M 450 50 Q 500 150, 400 250 Q 300 350, 150 350"
+          stroke="url(#warmGradient1)"
+          strokeWidth="8"
+          strokeLinecap="round"
           className="animate-pulse-soft"
         />
-        <circle cx="100" cy="75" r="8" fill="hsl(var(--secondary))" />
-        <circle cx="250" cy="90" r="6" fill="hsl(var(--primary))" />
-        <circle cx="350" cy="105" r="8" fill="hsl(var(--secondary))" />
+        <path
+          d="M 480 80 Q 520 180, 420 280 Q 320 380, 180 370"
+          stroke="url(#warmGradient2)"
+          strokeWidth="6"
+          strokeLinecap="round"
+          className="animate-pulse-soft"
+          style={{ animationDelay: '0.2s' }}
+        />
+        <path
+          d="M 420 30 Q 470 120, 380 220 Q 280 320, 120 330"
+          stroke="url(#warmGradient3)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          className="animate-pulse-soft"
+          style={{ animationDelay: '0.4s' }}
+        />
+        <defs>
+          <linearGradient id="warmGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(25 100% 63%)" />
+            <stop offset="100%" stopColor="hsl(358 100% 68%)" />
+          </linearGradient>
+          <linearGradient id="warmGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(358 100% 68%)" />
+            <stop offset="100%" stopColor="hsl(350 50% 35%)" />
+          </linearGradient>
+          <linearGradient id="warmGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(25 100% 70%)" />
+            <stop offset="100%" stopColor="hsl(358 80% 60%)" />
+          </linearGradient>
+        </defs>
       </svg>
 
       <div className="container mx-auto px-4 relative z-10">
