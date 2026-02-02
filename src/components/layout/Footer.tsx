@@ -1,3 +1,5 @@
+import magnoLogo from "@/assets/magno-logo.png";
+
 const Footer = () => {
   return (
     <footer className="bg-foreground py-12">
@@ -5,9 +7,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-display font-bold text-xl">M</span>
-            </div>
+            <img src={magnoLogo} alt="Magno Logo" className="w-10 h-10 object-contain bg-white rounded-lg p-1" />
             <span className="font-display font-bold text-xl text-background">
               Magno
             </span>
