@@ -4,117 +4,123 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* Design System - MAGNO PARTNERS Official Brand */
+/* Design System - MAGNO PARTNERS Official Brand
+   Palette based on logo: 
+   - Charcoal/Dark Gray: #3D4048 (text, footer)
+   - Orange: #F47B4B (accent curves)
+   - Coral: #E85D50 (accent curves)
+   - Burgundy/Dark Red: #8B3A3A (dark curves)
+*/
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 15 20% 12%;
+    --foreground: 220 10% 25%;
 
     --card: 0 0% 100%;
-    --card-foreground: 15 20% 12%;
+    --card-foreground: 220 10% 25%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 15 20% 12%;
+    --popover-foreground: 220 10% 25%;
 
-    /* Deep Burgundy/Red - Primary */
-    --primary: 350 65% 28%;
+    /* Charcoal Dark - Primary (for footer, dark sections) */
+    --primary: 225 8% 25%;
     --primary-foreground: 0 0% 100%;
 
-    /* Vibrant Orange - #FF8C42 */
-    --secondary: 25 100% 60%;
+    /* Vibrant Orange - #F47B4B */
+    --secondary: 18 88% 62%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Coral Red - #FF5A5F */
-    --coral: 5 100% 65%;
+    /* Coral Red - #E85D50 */
+    --coral: 6 78% 61%;
     --coral-foreground: 0 0% 100%;
 
-    /* Warm tones */
-    --muted: 25 20% 96%;
-    --muted-foreground: 15 15% 40%;
+    /* Warm neutral tones */
+    --muted: 30 15% 96%;
+    --muted-foreground: 220 8% 45%;
 
-    --accent: 15 100% 95%;
-    --accent-foreground: 15 100% 45%;
+    --accent: 18 90% 95%;
+    --accent-foreground: 18 88% 50%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 25 15% 90%;
-    --input: 25 15% 90%;
-    --ring: 25 100% 60%;
+    --border: 30 10% 90%;
+    --input: 30 10% 90%;
+    --ring: 18 88% 62%;
 
     --radius: 0.5rem;
 
-    /* Custom tokens - Orange/Red warm gradient palette */
-    --gradient-primary: linear-gradient(135deg, hsl(350 65% 28%) 0%, hsl(350 55% 22%) 100%);
-    --gradient-warm: linear-gradient(135deg, hsl(30 100% 60%) 0%, hsl(15 100% 60%) 50%, hsl(350 65% 35%) 100%);
-    --gradient-coral: linear-gradient(135deg, hsl(30 100% 58%) 0%, hsl(5 100% 60%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(25 30% 98%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(30 40% 99%) 0%, hsl(15 30% 98%) 50%, hsl(5 50% 98%) 100%);
+    /* Custom tokens - Orange/Coral warm gradient palette */
+    --gradient-primary: linear-gradient(135deg, hsl(225 8% 25%) 0%, hsl(225 8% 18%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(18 88% 62%) 0%, hsl(6 78% 61%) 50%, hsl(350 50% 35%) 100%);
+    --gradient-coral: linear-gradient(135deg, hsl(18 88% 60%) 0%, hsl(6 78% 58%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(30 20% 98%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(30 30% 99%) 0%, hsl(20 20% 98%) 50%, hsl(10 30% 98%) 100%);
     
-    --shadow-soft: 0 4px 20px -4px hsl(15 40% 20% / 0.08);
-    --shadow-medium: 0 8px 30px -8px hsl(15 40% 20% / 0.15);
-    --shadow-glow: 0 0 40px -10px hsl(25 100% 60% / 0.5);
-    --shadow-coral: 0 0 40px -10px hsl(5 100% 60% / 0.4);
+    --shadow-soft: 0 4px 20px -4px hsl(220 10% 20% / 0.08);
+    --shadow-medium: 0 8px 30px -8px hsl(220 10% 20% / 0.15);
+    --shadow-glow: 0 0 40px -10px hsl(18 88% 62% / 0.5);
+    --shadow-coral: 0 0 40px -10px hsl(6 78% 61% / 0.4);
     
-    --blob-primary: hsl(30 100% 95%);
-    --blob-secondary: hsl(5 90% 95%);
-    --blob-accent: hsl(350 60% 85% / 0.2);
+    --blob-primary: hsl(30 80% 95%);
+    --blob-secondary: hsl(10 70% 95%);
+    --blob-accent: hsl(18 80% 85% / 0.2);
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 15 15% 30%;
-    --sidebar-primary: 350 65% 28%;
+    --sidebar-foreground: 220 10% 30%;
+    --sidebar-primary: 225 8% 25%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 25 40% 95%;
-    --sidebar-accent-foreground: 350 60% 25%;
-    --sidebar-border: 25 15% 91%;
-    --sidebar-ring: 25 100% 60%;
+    --sidebar-accent: 30 30% 95%;
+    --sidebar-accent-foreground: 225 8% 25%;
+    --sidebar-border: 30 10% 91%;
+    --sidebar-ring: 18 88% 62%;
   }
 
   .dark {
-    --background: 350 20% 8%;
+    --background: 225 10% 10%;
     --foreground: 0 0% 98%;
 
-    --card: 350 15% 12%;
+    --card: 225 10% 14%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 350 15% 12%;
+    --popover: 225 10% 14%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 0 0% 98%;
-    --primary-foreground: 350 50% 25%;
+    --primary-foreground: 225 8% 20%;
 
-    --secondary: 25 100% 63%;
+    --secondary: 18 88% 62%;
     --secondary-foreground: 0 0% 100%;
 
-    --coral: 358 100% 68%;
+    --coral: 6 78% 61%;
     --coral-foreground: 0 0% 100%;
 
-    --muted: 350 15% 15%;
+    --muted: 225 10% 18%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 25 60% 18%;
-    --accent-foreground: 25 100% 75%;
+    --accent: 18 60% 20%;
+    --accent-foreground: 18 88% 75%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 350 15% 18%;
-    --input: 350 15% 18%;
-    --ring: 25 100% 63%;
+    --border: 225 10% 20%;
+    --input: 225 10% 20%;
+    --ring: 18 88% 62%;
 
-    --blob-primary: hsl(25 70% 15%);
-    --blob-secondary: hsl(350 40% 12%);
-    --blob-accent: hsl(25 100% 63% / 0.2);
+    --blob-primary: hsl(18 60% 15%);
+    --blob-secondary: hsl(6 50% 12%);
+    --blob-accent: hsl(18 88% 62% / 0.2);
 
-    --sidebar-background: 350 20% 10%;
+    --sidebar-background: 225 10% 12%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 25 100% 63%;
+    --sidebar-primary: 18 88% 62%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 350 15% 15%;
+    --sidebar-accent: 225 10% 18%;
     --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 350 15% 18%;
-    --sidebar-ring: 25 100% 63%;
+    --sidebar-border: 225 10% 20%;
+    --sidebar-ring: 18 88% 62%;
   }
 }
 

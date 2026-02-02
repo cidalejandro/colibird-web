@@ -65,16 +65,16 @@ const Services = () => {
         />
         <defs>
           <linearGradient id="serviceGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(30 100% 60%)" />
-            <stop offset="100%" stopColor="hsl(350 65% 35%)" />
+            <stop offset="0%" stopColor="hsl(18 88% 62%)" />
+            <stop offset="100%" stopColor="hsl(225 8% 40%)" />
           </linearGradient>
           <linearGradient id="serviceGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(15 100% 60%)" />
-            <stop offset="100%" stopColor="hsl(5 100% 55%)" />
+            <stop offset="0%" stopColor="hsl(18 88% 65%)" />
+            <stop offset="100%" stopColor="hsl(6 78% 58%)" />
           </linearGradient>
           <linearGradient id="serviceGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(5 100% 65%)" />
-            <stop offset="100%" stopColor="hsl(350 65% 40%)" />
+            <stop offset="0%" stopColor="hsl(6 78% 61%)" />
+            <stop offset="100%" stopColor="hsl(225 8% 35%)" />
           </linearGradient>
         </defs>
       </svg>

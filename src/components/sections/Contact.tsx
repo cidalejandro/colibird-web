@@ -27,27 +27,27 @@ const Contact = () => {
         />
         <defs>
           <linearGradient id="contactGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(30 100% 60%)" />
-            <stop offset="50%" stopColor="hsl(5 100% 60%)" />
-            <stop offset="100%" stopColor="hsl(350 65% 35%)" />
+            <stop offset="0%" stopColor="hsl(18 88% 62%)" />
+            <stop offset="50%" stopColor="hsl(6 78% 61%)" />
+            <stop offset="100%" stopColor="hsl(225 8% 40%)" />
           </linearGradient>
           <linearGradient id="contactGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(15 100% 65%)" />
-            <stop offset="100%" stopColor="hsl(350 60% 45%)" />
+            <stop offset="0%" stopColor="hsl(18 88% 65%)" />
+            <stop offset="100%" stopColor="hsl(225 8% 45%)" />
           </linearGradient>
         </defs>
       </svg>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-primary via-primary to-secondary/80 rounded-2xl p-8 md:p-12 text-center shadow-medium">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4 tracking-tight">
+          <div className="bg-gradient-to-br from-secondary via-coral to-secondary rounded-2xl p-8 md:p-12 text-center shadow-medium">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
               ¿Listo para acelerar valor?
             </h2>
-            <p className="text-primary-foreground/80 text-lg mb-4 max-w-2xl mx-auto">
+            <p className="text-white/90 text-lg mb-4 max-w-2xl mx-auto">
               Si algo de lo que leíste conecta con una necesidad, hipótesis o intuición:
             </p>
-            <p className="text-primary-foreground font-medium text-lg mb-8">
+            <p className="text-white font-medium text-lg mb-8">
               Agendemos una call y definamos dónde podemos acelerar valor primero.
             </p>
             <Button
