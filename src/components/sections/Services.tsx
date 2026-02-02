@@ -36,8 +36,48 @@ const services = [
 const Services = () => {
   return (
     <section id="servicios" className="py-24 bg-muted/30 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-blob-primary opacity-40 blur-3xl -translate-y-1/2 translate-x-1/2" />
+      {/* Background decoration - curved arcs */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-blob-primary opacity-50 blur-3xl -translate-y-1/2 translate-x-1/2" />
+      
+      <svg
+        className="absolute right-0 bottom-0 w-[400px] h-[500px] opacity-25"
+        viewBox="0 0 400 500"
+        fill="none"
+      >
+        <path
+          d="M 450 100 Q 350 200, 400 300 Q 450 400, 350 480"
+          stroke="url(#serviceGrad1)"
+          strokeWidth="8"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 480 130 Q 380 230, 430 330 Q 480 430, 380 500"
+          stroke="url(#serviceGrad2)"
+          strokeWidth="5"
+          strokeLinecap="round"
+          strokeDasharray="12 6"
+        />
+        <path
+          d="M 420 70 Q 320 170, 370 270 Q 420 370, 320 450"
+          stroke="url(#serviceGrad3)"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+        <defs>
+          <linearGradient id="serviceGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(30 100% 60%)" />
+            <stop offset="100%" stopColor="hsl(350 65% 35%)" />
+          </linearGradient>
+          <linearGradient id="serviceGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(15 100% 60%)" />
+            <stop offset="100%" stopColor="hsl(5 100% 55%)" />
+          </linearGradient>
+          <linearGradient id="serviceGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(5 100% 65%)" />
+            <stop offset="100%" stopColor="hsl(350 65% 40%)" />
+          </linearGradient>
+        </defs>
+      </svg>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
@@ -56,8 +96,8 @@ const Services = () => {
               key={service.title}
               className="group bg-card rounded-xl p-8 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-2 border border-border/50"
             >
-              <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center mb-6 group-hover:bg-secondary transition-all duration-300">
-                <service.icon className="w-6 h-6 text-primary-foreground" />
+              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-secondary to-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300">
+                <service.icon className="w-6 h-6 text-white" />
               </div>
               <h3 className="font-bold text-xl text-foreground mb-3">
                 {service.title}
