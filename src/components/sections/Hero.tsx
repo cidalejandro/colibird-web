@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import magnoLogoFull from "@/assets/magno-logo-full.png";
 
 const Hero = () => {
   return (
@@ -60,20 +59,17 @@ const Hero = () => {
       </svg>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl">
-          {/* Full Logo with tagline */}
-          <img 
-            src={magnoLogoFull} 
-            alt="MAGNO PARTNERS - Strategy. Execution. Impact." 
-            className="w-full max-w-2xl mb-10 animate-fade-in-up"
-          />
+        <div className="max-w-3xl">
+          <p className="text-gradient text-xl md:text-2xl font-semibold mb-6 animate-fade-in-up">
+            Where strategy becomes execution.
+          </p>
           
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             Transformamos complejidad en ejecución concreta y valor sostenible. 
             Cerramos la brecha entre las ideas estratégicas y los resultados que efectivamente ocurren.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <Button variant="hero" size="lg">
               Agendar una call
               <ArrowRight className="ml-2" size={20} />
