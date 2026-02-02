@@ -60,9 +60,6 @@ export default {
           secondary: "var(--blob-secondary)",
           accent: "var(--blob-accent)",
         },
-          secondary: "var(--blob-secondary)",
-          accent: "var(--blob-accent)",
-        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

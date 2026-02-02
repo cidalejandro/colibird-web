@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import magnoLogo from "@/assets/magno-logo.png";
+import magnoLogoFull from "@/assets/magno-logo-full.png";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,11 +33,12 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#inicio" className="flex items-center gap-3">
-            <img src={magnoLogo} alt="MAGNO Partners Logo" className="w-10 h-10 object-contain" />
-            <span className="font-bold text-xl text-foreground tracking-tight">
-              MAGNO
-            </span>
+          <a href="#inicio" className="flex items-center">
+            <img 
+              src={magnoLogoFull} 
+              alt="MAGNO Partners - Strategy. Execution. Impact." 
+              className="h-12 md:h-14 w-auto object-contain" 
+            />
           </a>
 
           {/* Desktop Navigation */}
