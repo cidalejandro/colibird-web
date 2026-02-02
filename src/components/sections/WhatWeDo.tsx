@@ -1,4 +1,4 @@
-import { Lightbulb, Target, Package, TrendingUp, Shield } from "lucide-react";
+import { Lightbulb, Target, Package, TrendingUp, Shield, Zap, Users, Layers, Globe, Award } from "lucide-react";
 
 const pillars = [
   { icon: Lightbulb, label: "Business Discovery & Blueprint" },
@@ -9,11 +9,31 @@ const pillars = [
 ];
 
 const howWeWork = [
-  "Execution First: La estrategia solo es valiosa si se implementa",
-  "Skin in the Game: Nos involucramos como parte del equipo",
-  "Rigor + Pragmatismo: Frameworks sólidos, decisiones prácticas",
-  "Ecosystem Mindset: Pensamos en plataformas, partners y escalabilidad",
-  "Long-Term Value: Impacto sostenible por sobre resultados cosméticos",
+  { 
+    icon: Zap, 
+    title: "Execution First", 
+    description: "La estrategia solo es valiosa si se implementa" 
+  },
+  { 
+    icon: Users, 
+    title: "Skin in the Game", 
+    description: "Nos involucramos como parte del equipo" 
+  },
+  { 
+    icon: Layers, 
+    title: "Rigor + Pragmatismo", 
+    description: "Frameworks sólidos, decisiones prácticas" 
+  },
+  { 
+    icon: Globe, 
+    title: "Ecosystem Mindset", 
+    description: "Pensamos en plataformas, partners y escalabilidad" 
+  },
+  { 
+    icon: Award, 
+    title: "Long-Term Value", 
+    description: "Impacto sostenible por sobre resultados cosméticos" 
+  },
 ];
 
 const WhatWeDo = () => {
@@ -60,18 +80,22 @@ const WhatWeDo = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold text-foreground mb-8 text-center tracking-tight">
+        {/* Nuestro ADN - Cards */}
+        <div className="max-w-5xl mx-auto">
+          <h3 className="text-2xl font-bold text-foreground mb-10 text-center tracking-tight">
             Nuestro ADN
           </h3>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {howWeWork.map((item, index) => (
               <div
                 key={index}
-                className="flex items-start gap-3 p-4 bg-card rounded-xl border border-border/50"
+                className="group p-6 bg-card rounded-2xl border border-border/50 shadow-soft hover:shadow-medium hover:border-secondary/30 transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0" />
-                <p className="text-foreground">{item}</p>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <item.icon className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="font-bold text-foreground text-lg mb-2">{item.title}</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
