@@ -9,66 +9,66 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 350 25% 15%;
+    --foreground: 15 20% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 350 25% 15%;
+    --card-foreground: 15 20% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 350 25% 15%;
+    --popover-foreground: 15 20% 12%;
 
-    /* Burgundy - Primary */
-    --primary: 350 50% 30%;
+    /* Deep Burgundy/Red - Primary */
+    --primary: 350 65% 28%;
     --primary-foreground: 0 0% 100%;
 
     /* Vibrant Orange - #FF8C42 */
-    --secondary: 25 100% 63%;
+    --secondary: 25 100% 60%;
     --secondary-foreground: 0 0% 100%;
 
     /* Coral Red - #FF5A5F */
-    --coral: 358 100% 68%;
+    --coral: 5 100% 65%;
     --coral-foreground: 0 0% 100%;
 
     /* Warm tones */
-    --muted: 20 15% 96%;
-    --muted-foreground: 350 15% 40%;
+    --muted: 25 20% 96%;
+    --muted-foreground: 15 15% 40%;
 
-    --accent: 25 100% 95%;
-    --accent-foreground: 25 100% 45%;
+    --accent: 15 100% 95%;
+    --accent-foreground: 15 100% 45%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 20 10% 90%;
-    --input: 20 10% 90%;
-    --ring: 25 100% 63%;
+    --border: 25 15% 90%;
+    --input: 25 15% 90%;
+    --ring: 25 100% 60%;
 
     --radius: 0.5rem;
 
-    /* Custom tokens - Warm gradient palette */
-    --gradient-primary: linear-gradient(135deg, hsl(350 50% 30%) 0%, hsl(350 40% 20%) 100%);
-    --gradient-warm: linear-gradient(135deg, hsl(25 100% 63%) 0%, hsl(358 100% 68%) 50%, hsl(350 50% 35%) 100%);
-    --gradient-coral: linear-gradient(135deg, hsl(25 100% 60%) 0%, hsl(358 100% 60%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(25 20% 98%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(25 30% 99%) 0%, hsl(0 0% 98%) 50%, hsl(358 40% 98%) 100%);
+    /* Custom tokens - Orange/Red warm gradient palette */
+    --gradient-primary: linear-gradient(135deg, hsl(350 65% 28%) 0%, hsl(350 55% 22%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(30 100% 60%) 0%, hsl(15 100% 60%) 50%, hsl(350 65% 35%) 100%);
+    --gradient-coral: linear-gradient(135deg, hsl(30 100% 58%) 0%, hsl(5 100% 60%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(25 30% 98%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(30 40% 99%) 0%, hsl(15 30% 98%) 50%, hsl(5 50% 98%) 100%);
     
-    --shadow-soft: 0 4px 20px -4px hsl(350 30% 20% / 0.08);
-    --shadow-medium: 0 8px 30px -8px hsl(350 30% 20% / 0.12);
-    --shadow-glow: 0 0 40px -10px hsl(25 100% 63% / 0.4);
-    --shadow-coral: 0 0 40px -10px hsl(358 100% 68% / 0.3);
+    --shadow-soft: 0 4px 20px -4px hsl(15 40% 20% / 0.08);
+    --shadow-medium: 0 8px 30px -8px hsl(15 40% 20% / 0.15);
+    --shadow-glow: 0 0 40px -10px hsl(25 100% 60% / 0.5);
+    --shadow-coral: 0 0 40px -10px hsl(5 100% 60% / 0.4);
     
-    --blob-primary: hsl(25 100% 96%);
-    --blob-secondary: hsl(358 80% 96%);
-    --blob-accent: hsl(350 50% 80% / 0.15);
+    --blob-primary: hsl(30 100% 95%);
+    --blob-secondary: hsl(5 90% 95%);
+    --blob-accent: hsl(350 60% 85% / 0.2);
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 350 15% 30%;
-    --sidebar-primary: 350 50% 30%;
+    --sidebar-foreground: 15 15% 30%;
+    --sidebar-primary: 350 65% 28%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 25 30% 95%;
-    --sidebar-accent-foreground: 350 50% 25%;
-    --sidebar-border: 20 10% 91%;
-    --sidebar-ring: 25 100% 63%;
+    --sidebar-accent: 25 40% 95%;
+    --sidebar-accent-foreground: 350 60% 25%;
+    --sidebar-border: 25 15% 91%;
+    --sidebar-ring: 25 100% 60%;
   }
 
   .dark {

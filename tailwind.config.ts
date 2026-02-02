@@ -51,8 +51,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        coral: {
+          DEFAULT: "hsl(var(--coral))",
+          foreground: "hsl(var(--coral-foreground))",
+        },
         blob: {
           primary: "var(--blob-primary)",
+          secondary: "var(--blob-secondary)",
+          accent: "var(--blob-accent)",
+        },
           secondary: "var(--blob-secondary)",
           accent: "var(--blob-accent)",
         },
