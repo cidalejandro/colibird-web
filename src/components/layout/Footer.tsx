@@ -1,21 +1,17 @@
-import magnoLogo from "@/assets/magno-logo.png";
+import magnoLogoFull from "@/assets/magno-logo-full.png";
 
 const Footer = () => {
   return (
     <footer className="bg-primary py-12">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <img src={magnoLogo} alt="MAGNO Partners Logo" className="w-10 h-10 object-contain bg-white rounded-lg p-1" />
-            <div>
-              <span className="font-bold text-xl text-primary-foreground tracking-tight">
-                MAGNO PARTNERS
-              </span>
-              <p className="text-primary-foreground/60 text-sm">
-                Where strategy becomes execution.
-              </p>
-            </div>
+          {/* Logo completo */}
+          <div className="flex items-center">
+            <img 
+              src={magnoLogoFull} 
+              alt="MAGNO Partners - Strategy. Execution. Impact." 
+              className="h-16 md:h-20 w-auto object-contain bg-white rounded-lg p-2" 
+            />
           </div>
 
           {/* Links */}
