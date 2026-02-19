@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -40,27 +39,7 @@ const Contact = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-secondary via-coral to-secondary rounded-2xl p-8 md:p-12 text-center shadow-medium">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
-              ¿Listo para acelerar valor?
-            </h2>
-            <p className="text-white/90 text-lg mb-4 max-w-2xl mx-auto">
-              Si algo de lo que leíste conecta con una necesidad, hipótesis o intuición:
-            </p>
-            <p className="text-white font-medium text-lg mb-8">
-              Agendemos una call y definamos dónde podemos acelerar valor primero.
-            </p>
-            <Button
-              variant="heroOutline"
-              size="lg"
-              className="bg-card text-foreground border-0 hover:bg-card/90"
-            >
-              Agendar reunión
-              <ArrowRight className="ml-2" size={20} />
-            </Button>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 mt-12">
+          <div className="grid md:grid-cols-3 gap-6">
             <a
               href="mailto:contacto@magnopartners.com"
               className="flex items-center gap-4 p-6 bg-card rounded-xl shadow-soft hover:shadow-medium transition-all duration-300 group border border-border/50"
