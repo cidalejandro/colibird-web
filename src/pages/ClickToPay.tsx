@@ -10,12 +10,13 @@ import {
 import type { Variants } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 
-// ─── Design tokens (all inline, navy/electric-blue palette) ──────────────────
-const navy = "#0F1C3F";
-const blue = "#0066FF";
-const blueMid = "#0052CC";
-const softGray = "#F5F7FA";
+// ─── Design tokens — Colibird palette ────────────────────────────────────────
+const navy = "#1A0A2E";           // deep violet-dark background
+const blue = "#7B2FFF";           // colibird violet (primary)
+const blueMid = "#E91E8C";        // colibird magenta
+const softGray = "#F5F3FF";       // violet-tinted light gray
 const white = "#FFFFFF";
+const colibirdOrange = "#FF7A00"; // colibird orange
 
 // ─── Framer variants ──────────────────────────────────────────────────────────
 const fadeUp: Variants = {
@@ -26,8 +27,8 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.12 } },
 };
 const cardHover = {
-  rest: { y: 0, boxShadow: "0 4px 24px 0 rgba(0,102,255,0.08)" },
-  hover: { y: -8, boxShadow: "0 20px 48px 0 rgba(0,102,255,0.22)", transition: { duration: 0.3 } },
+  rest: { y: 0, boxShadow: "0 4px 24px 0 rgba(123,47,255,0.10)" },
+  hover: { y: -8, boxShadow: "0 20px 48px 0 rgba(123,47,255,0.28)", transition: { duration: 0.3 } },
 };
 
 // ─── Animated Counter ─────────────────────────────────────────────────────────
@@ -75,7 +76,7 @@ function Section({ children, className = "", style = {} }: { children: React.Rea
 function Tag({ label }: { label: string }) {
   return (
     <span style={{
-      background: "rgba(0,102,255,0.10)",
+      background: "rgba(123,47,255,0.12)",
       color: blue,
       borderRadius: 9999,
       padding: "2px 12px",
@@ -154,13 +155,13 @@ export default function ClickToPay() {
       tags: ["EMVCo", "Tokenización", "Visa SRC", "Certificación"],
     },
     {
-      icon: <Kanban size={32} color={blue} />,
+      icon: <Kanban size={32} color={blueMid} />,
       role: "Product Manager de Pagos",
       desc: "PMs especializados en productos de pagos digitales. Lideramos discovery, roadmap, alineación de stakeholders y sprints de entrega ágil — siempre con la experiencia del cliente en el centro.",
       tags: ["Agile", "Product Discovery", "Customer Journey", "Roadmap"],
     },
     {
-      icon: <Atom size={32} color={blue} />,
+      icon: <Atom size={32} color={colibirdOrange} />,
       role: "Developer React — Checkout Specialist",
       desc: "Engineers React especializados en integración del botón Click to Pay, manejo del SRCI SDK, UI de tarjetas tokenizadas y optimización de la conversión en el checkout.",
       tags: ["React", "SRCI SDK", "TypeScript", "Checkout UX"],
@@ -237,7 +238,7 @@ export default function ClickToPay() {
           cx={`${(i * 37 + 11) % 100}%`}
           cy={`${(i * 29 + 7) % 100}%`}
           r={i % 3 === 0 ? 3 : i % 3 === 1 ? 5 : 2}
-          fill={i % 2 === 0 ? blue : "#4DA3FF"}
+          fill={i % 3 === 0 ? blue : i % 3 === 1 ? blueMid : colibirdOrange}
           animate={{ y: [0, -18, 0], opacity: [0.3, 0.8, 0.3] }}
           transition={{ duration: 3 + (i % 4), repeat: Infinity, delay: i * 0.3 }}
         />
@@ -248,7 +249,7 @@ export default function ClickToPay() {
           x={`${(i * 53 + 5) % 92}%`}
           y={`${(i * 41 + 10) % 85}%`}
           width={24} height={16} rx={3}
-          stroke={blue} strokeWidth={1} fill="none" opacity={0.3}
+          stroke={i % 2 === 0 ? blue : blueMid} strokeWidth={1} fill="none" opacity={0.3}
           animate={{ rotate: [0, 10, 0], opacity: [0.2, 0.5, 0.2] }}
           transition={{ duration: 4 + i, repeat: Infinity, delay: i * 0.5 }}
         />
@@ -262,7 +263,7 @@ export default function ClickToPay() {
       {/* ══════════════════════ HERO ══════════════════════════════════════════ */}
       <section
         style={{
-          background: `linear-gradient(135deg, ${navy} 0%, #0A2463 60%, #1a3a6e 100%)`,
+          background: `linear-gradient(135deg, ${navy} 0%, #2D0A5E 55%, #3D1070 100%)`,
           position: "relative",
           overflow: "hidden",
           minHeight: "100vh",
@@ -272,11 +273,25 @@ export default function ClickToPay() {
       >
         <ParticleBg />
         {/* Glow orbs */}
-        <div style={{ position: "absolute", top: "20%", left: "60%", width: 480, height: 480, borderRadius: "50%", background: `radial-gradient(circle, ${blue}22 0%, transparent 70%)`, pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: "10%", left: "5%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, #4DA3FF18 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: "15%", left: "60%", width: 500, height: 500, borderRadius: "50%", background: `radial-gradient(circle, ${blue}30 0%, transparent 70%)`, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: "10%", left: "5%", width: 350, height: 350, borderRadius: "50%", background: `radial-gradient(circle, ${blueMid}20 0%, transparent 70%)`, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: "60%", right: "10%", width: 250, height: 250, borderRadius: "50%", background: `radial-gradient(circle, ${colibirdOrange}15 0%, transparent 70%)`, pointerEvents: "none" }} />
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 text-center">
           <motion.div variants={stagger} initial="hidden" animate="visible">
+            {/* Colibird badge */}
+            <motion.div variants={fadeUp} className="flex justify-center mb-6">
+              <span style={{
+                background: `linear-gradient(135deg, ${blue}, ${blueMid}, ${colibirdOrange})`,
+                color: white,
+                borderRadius: 9999,
+                padding: "6px 18px",
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: "0.06em",
+              }}>UN PRODUCTO DE COLIBIRD</span>
+            </motion.div>
+
             {/* Badge row */}
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-2 mb-8">
               {["EMVCo Certified", "Visa", "Mastercard", "Amex", "Agile Delivery", "UX-First"].map((b) => (
@@ -299,7 +314,7 @@ export default function ClickToPay() {
               style={{ color: white, fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, lineHeight: 1.12, marginBottom: 24, letterSpacing: "-0.03em" }}
             >
               Implementá Click to Pay.<br />
-              <span style={{ background: `linear-gradient(90deg, #4DA3FF, ${blue})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: `linear-gradient(90deg, ${blue}, ${blueMid}, ${colibirdOrange})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Rápido, experto y centrado en el cliente.
               </span>
             </motion.h1>
@@ -322,14 +337,14 @@ export default function ClickToPay() {
                   fontWeight: 700,
                   fontSize: 16,
                   textDecoration: "none",
-                  boxShadow: `0 8px 32px ${blue}55`,
+                  boxShadow: `0 8px 32px ${blue}66`,
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
                   transition: "transform 0.2s, box-shadow 0.2s",
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = `0 12px 40px ${blue}77`; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 32px ${blue}55`; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = `0 12px 40px ${blue}88`; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 32px ${blue}66`; }}
               >
                 Hablar con un Experto <ArrowRight size={18} />
               </a>
@@ -392,8 +407,8 @@ export default function ClickToPay() {
                     position: "relative",
                   }}
                 >
-                  <div style={{ width: 48, height: 48, borderRadius: "50%", background: `${blue}22`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", color: "#4DA3FF" }}>{s.icon}</div>
-                  <div style={{ width: 24, height: 24, borderRadius: "50%", background: blue, color: white, fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px" }}>{i + 1}</div>
+                  <div style={{ width: 48, height: 48, borderRadius: "50%", background: `${blue}25`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", color: "#A97BFF" }}>{s.icon}</div>
+                  <div style={{ width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${blue}, ${blueMid})`, color: white, fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px" }}>{i + 1}</div>
                   <p style={{ color: "rgba(255,255,255,0.80)", fontSize: 13, lineHeight: 1.5 }}>{s.label}</p>
                 </motion.div>
               ))}
@@ -429,11 +444,19 @@ export default function ClickToPay() {
                     borderRadius: 20,
                     padding: "40px 32px",
                     textAlign: "center",
-                    border: `1px solid rgba(0,102,255,0.10)`,
-                    boxShadow: "0 4px 24px rgba(0,102,255,0.07)",
+                    border: `1px solid rgba(123,47,255,0.12)`,
+                    boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                   }}
                 >
-                  <div style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)", fontWeight: 900, color: blue, marginBottom: 12, letterSpacing: "-0.03em" }}>
+                  <div style={{
+                    fontSize: "clamp(2.5rem, 6vw, 4rem)",
+                    fontWeight: 900,
+                    background: `linear-gradient(135deg, ${blue}, ${blueMid})`,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    marginBottom: 12,
+                    letterSpacing: "-0.03em"
+                  }}>
                     <AnimatedCounter target={s.number} suffix={s.suffix} />
                   </div>
                   <p style={{ color: navy, fontSize: 15, fontWeight: 600, marginBottom: 10, lineHeight: 1.5 }}>{s.label}</p>
@@ -465,14 +488,14 @@ export default function ClickToPay() {
                 whileHover="hover"
                 initial="rest"
                 style={{
-                  background: `linear-gradient(135deg, ${navy} 0%, #0A2463 100%)`,
+                  background: `linear-gradient(135deg, ${navy} 0%, #2D0A5E 100%)`,
                   borderRadius: 24,
                   padding: "40px 36px",
-                  border: `2px solid ${blue}33`,
+                  border: `2px solid ${blue}44`,
                 }}
               >
-                <div style={{ width: 56, height: 56, borderRadius: 14, background: `${blue}22`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
-                  <Building2 size={28} color="#4DA3FF" />
+                <div style={{ width: 56, height: 56, borderRadius: 14, background: `${blue}25`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
+                  <Building2 size={28} color="#A97BFF" />
                 </div>
                 <h3 style={{ color: white, fontSize: 22, fontWeight: 800, marginBottom: 12 }}>Para Emisores</h3>
                 <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 14, marginBottom: 24, lineHeight: 1.6 }}>
@@ -481,11 +504,11 @@ export default function ClickToPay() {
                 <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10 }}>
                   {emisoresPains.map((p) => (
                     <li key={p} style={{ color: "rgba(255,255,255,0.80)", fontSize: 14, display: "flex", alignItems: "flex-start", gap: 10 }}>
-                      <CheckCircle2 size={16} color="#4DA3FF" style={{ flexShrink: 0, marginTop: 2 }} />{p}
+                      <CheckCircle2 size={16} color="#A97BFF" style={{ flexShrink: 0, marginTop: 2 }} />{p}
                     </li>
                   ))}
                 </ul>
-                <a href="#contacto" style={{ color: "#4DA3FF", fontWeight: 700, fontSize: 15, textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}>
+                <a href="#contacto" style={{ color: "#A97BFF", fontWeight: 700, fontSize: 15, textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}>
                   Ver solución para emisores <ArrowRight size={16} />
                 </a>
               </motion.div>
@@ -496,14 +519,14 @@ export default function ClickToPay() {
                 whileHover="hover"
                 initial="rest"
                 style={{
-                  background: `linear-gradient(135deg, #064e3b 0%, #065f46 100%)`,
+                  background: `linear-gradient(135deg, #3D0A2E 0%, #5C1040 100%)`,
                   borderRadius: 24,
                   padding: "40px 36px",
-                  border: "2px solid #10b98133",
+                  border: `2px solid ${blueMid}44`,
                 }}
               >
-                <div style={{ width: 56, height: 56, borderRadius: 14, background: "rgba(16,185,129,0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
-                  <Store size={28} color="#34d399" />
+                <div style={{ width: 56, height: 56, borderRadius: 14, background: `${blueMid}20`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
+                  <Store size={28} color={blueMid} />
                 </div>
                 <h3 style={{ color: white, fontSize: 22, fontWeight: 800, marginBottom: 12 }}>Para Comercios y E-Commerce</h3>
                 <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 14, marginBottom: 24, lineHeight: 1.6 }}>
@@ -512,11 +535,11 @@ export default function ClickToPay() {
                 <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10 }}>
                   {comerciosPains.map((p) => (
                     <li key={p} style={{ color: "rgba(255,255,255,0.80)", fontSize: 14, display: "flex", alignItems: "flex-start", gap: 10 }}>
-                      <CheckCircle2 size={16} color="#34d399" style={{ flexShrink: 0, marginTop: 2 }} />{p}
+                      <CheckCircle2 size={16} color={blueMid} style={{ flexShrink: 0, marginTop: 2 }} />{p}
                     </li>
                   ))}
                 </ul>
-                <a href="#contacto" style={{ color: "#34d399", fontWeight: 700, fontSize: 15, textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}>
+                <a href="#contacto" style={{ color: blueMid, fontWeight: 700, fontSize: 15, textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}>
                   Ver solución para comercios <ArrowRight size={16} />
                 </a>
               </motion.div>
@@ -552,13 +575,13 @@ export default function ClickToPay() {
                     background: white,
                     borderRadius: 20,
                     padding: "36px 28px",
-                    border: "1px solid rgba(0,102,255,0.10)",
+                    border: "1px solid rgba(123,47,255,0.12)",
                     cursor: "default",
                     transition: "transform 0.3s, box-shadow 0.3s",
                   }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLElement).style.transform = "translateY(-8px)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 48px rgba(0,102,255,0.18)`;
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 48px rgba(123,47,255,0.18)`;
                   }}
                   onMouseLeave={e => {
                     (e.currentTarget as HTMLElement).style.transform = "";
@@ -599,7 +622,7 @@ export default function ClickToPay() {
                 left: "12.5%",
                 right: "12.5%",
                 height: 2,
-                background: `linear-gradient(90deg, ${blue}, #4DA3FF)`,
+                background: `linear-gradient(90deg, ${blue}, ${blueMid}, ${colibirdOrange})`,
                 zIndex: 0,
               }} />
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
@@ -609,17 +632,23 @@ export default function ClickToPay() {
                       width: 72,
                       height: 72,
                       borderRadius: "50%",
-                      background: `linear-gradient(135deg, ${blue}, ${blueMid})`,
+                      background: i === 0
+                        ? `linear-gradient(135deg, ${blue}, ${blue}CC)`
+                        : i === 1
+                        ? `linear-gradient(135deg, ${blue}CC, ${blueMid})`
+                        : i === 2
+                        ? `linear-gradient(135deg, ${blueMid}, ${blueMid}CC)`
+                        : `linear-gradient(135deg, ${blueMid}CC, ${colibirdOrange})`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       margin: "0 auto 20px",
                       color: white,
-                      boxShadow: `0 8px 24px ${blue}44`,
+                      boxShadow: `0 8px 24px ${i < 2 ? blue : blueMid}55`,
                     }}>
                       {s.icon}
                     </div>
-                    <div style={{ fontSize: 12, color: blue, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 6 }}>PASO {i + 1}</div>
+                    <div style={{ fontSize: 12, color: i < 2 ? blue : blueMid, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 6 }}>PASO {i + 1}</div>
                     <h3 style={{ color: navy, fontSize: 15, fontWeight: 800, marginBottom: 10 }}>{s.title}</h3>
                     <p style={{ color: "#64748b", fontSize: 13, lineHeight: 1.65 }}>{s.desc}</p>
                   </motion.div>
@@ -641,7 +670,7 @@ export default function ClickToPay() {
               Beneficios por segmento
             </motion.h2>
             {/* Tabs */}
-            <motion.div variants={fadeUp} style={{ display: "flex", justifyContent: "center", gap: 0, marginBottom: 40, background: "rgba(0,0,0,0.05)", borderRadius: 12, padding: 4, width: "fit-content", margin: "0 auto 40px" }}>
+            <motion.div variants={fadeUp} style={{ display: "flex", justifyContent: "center", gap: 0, marginBottom: 40, background: "rgba(123,47,255,0.08)", borderRadius: 12, padding: 4, width: "fit-content", margin: "0 auto 40px" }}>
               {(["emisores", "comercios"] as const).map((tab) => (
                 <button
                   key={tab}
@@ -654,7 +683,9 @@ export default function ClickToPay() {
                     fontWeight: 700,
                     fontSize: 15,
                     transition: "all 0.2s",
-                    background: activeTab === tab ? blue : "transparent",
+                    background: activeTab === tab
+                      ? `linear-gradient(135deg, ${blue}, ${blueMid})`
+                      : "transparent",
                     color: activeTab === tab ? white : "#64748b",
                     boxShadow: activeTab === tab ? `0 4px 16px ${blue}44` : "none",
                   }}
@@ -676,14 +707,14 @@ export default function ClickToPay() {
                   background: white,
                   borderRadius: 20,
                   padding: "36px 40px",
-                  border: "1px solid rgba(0,102,255,0.10)",
-                  boxShadow: "0 4px 24px rgba(0,102,255,0.07)",
+                  border: `1px solid rgba(123,47,255,0.12)`,
+                  boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                 }}
               >
                 <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px 32px" }} className="grid-cols-1 sm:grid-cols-2">
                   {(activeTab === "emisores" ? emisoresBenefits : comerciosBenefits).map((b) => (
                     <li key={b} style={{ display: "flex", alignItems: "flex-start", gap: 12, color: navy, fontSize: 15, lineHeight: 1.5 }}>
-                      <CheckCircle2 size={18} color={blue} style={{ flexShrink: 0, marginTop: 2 }} />{b}
+                      <CheckCircle2 size={18} color={activeTab === "emisores" ? blue : blueMid} style={{ flexShrink: 0, marginTop: 2 }} />{b}
                     </li>
                   ))}
                 </ul>
@@ -709,14 +740,14 @@ export default function ClickToPay() {
                   key={i}
                   variants={fadeUp}
                   style={{
-                    background: `linear-gradient(135deg, ${navy} 0%, #0A2463 100%)`,
+                    background: `linear-gradient(135deg, ${navy} 0%, #2D0A5E 100%)`,
                     borderRadius: 20,
                     padding: "36px 32px",
                     border: `1px solid ${blue}33`,
                   }}
                 >
                   <div style={{ display: "flex", gap: 4, marginBottom: 20 }}>
-                    {[...Array(5)].map((_, s) => <Star key={s} size={16} fill="#F59E0B" color="#F59E0B" />)}
+                    {[...Array(5)].map((_, s) => <Star key={s} size={16} fill={colibirdOrange} color={colibirdOrange} />)}
                   </div>
                   <p style={{ color: "rgba(255,255,255,0.85)", fontSize: 15, lineHeight: 1.7, fontStyle: "italic", marginBottom: 24 }}>
                     "{t.quote}"
@@ -750,7 +781,7 @@ export default function ClickToPay() {
                   style={{
                     background: white,
                     borderRadius: 16,
-                    border: openFaq === i ? `1.5px solid ${blue}` : "1.5px solid rgba(0,102,255,0.10)",
+                    border: openFaq === i ? `1.5px solid ${blue}` : "1.5px solid rgba(123,47,255,0.12)",
                     overflow: "hidden",
                     transition: "border-color 0.2s",
                   }}
@@ -797,8 +828,9 @@ export default function ClickToPay() {
       </section>
 
       {/* ══════════════════════ CONTACT ═══════════════════════════════════════ */}
-      <section id="contacto" style={{ background: `linear-gradient(135deg, ${navy} 0%, #0A2463 100%)`, padding: "88px 24px", position: "relative", overflow: "hidden" }}>
+      <section id="contacto" style={{ background: `linear-gradient(135deg, ${navy} 0%, #2D0A5E 60%, #3D1040 100%)`, padding: "88px 24px", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "-20%", right: "-10%", width: 500, height: 500, borderRadius: "50%", background: `radial-gradient(circle, ${blue}22 0%, transparent 70%)`, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: "-10%", left: "-5%", width: 350, height: 350, borderRadius: "50%", background: `radial-gradient(circle, ${blueMid}18 0%, transparent 70%)`, pointerEvents: "none" }} />
         <div className="max-w-2xl mx-auto relative z-10">
           <Section>
             <motion.h2
@@ -820,7 +852,7 @@ export default function ClickToPay() {
                 animate={{ scale: 1, opacity: 1 }}
                 style={{ background: "rgba(255,255,255,0.08)", borderRadius: 20, padding: "48px 32px", textAlign: "center", border: "1px solid rgba(255,255,255,0.15)" }}
               >
-                <CheckCircle2 size={56} color="#4DA3FF" style={{ margin: "0 auto 16px" }} />
+                <CheckCircle2 size={56} color={blue} style={{ margin: "0 auto 16px" }} />
                 <h3 style={{ color: white, fontSize: 22, fontWeight: 800, marginBottom: 8 }}>¡Scoping solicitado!</h3>
                 <p style={{ color: "rgba(255,255,255,0.65)" }}>Te contactaremos en menos de 48 horas con una propuesta inicial.</p>
               </motion.div>
