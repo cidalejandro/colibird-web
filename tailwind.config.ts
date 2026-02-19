@@ -55,6 +55,11 @@ export default {
           DEFAULT: "hsl(var(--coral))",
           foreground: "hsl(var(--coral-foreground))",
         },
+        colibird: {
+          violet: "hsl(var(--colibird-violet))",
+          magenta: "hsl(var(--colibird-magenta))",
+          orange: "hsl(var(--colibird-orange))",
+        },
         blob: {
           primary: "var(--blob-primary)",
           secondary: "var(--blob-secondary)",

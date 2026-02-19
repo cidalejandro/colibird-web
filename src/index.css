@@ -10,6 +10,9 @@
    - Orange: #F47B4B (accent curves)
    - Coral: #E85D50 (accent curves)
    - Burgundy/Dark Red: #8B3A3A (dark curves)
+   
+   Colibird Ecosystem Colors (products platform):
+   - Violet: #7B2FFF → Magenta: #E91E8C → Orange: #FF7A00
 */
 
 @layer base {
@@ -66,6 +69,13 @@
     --blob-primary: hsl(30 80% 95%);
     --blob-secondary: hsl(10 70% 95%);
     --blob-accent: hsl(18 80% 85% / 0.2);
+
+    /* Colibird ecosystem palette */
+    --colibird-violet: 271 100% 59%;
+    --colibird-magenta: 327 76% 51%;
+    --colibird-orange: 29 100% 50%;
+    --gradient-colibird: linear-gradient(135deg, hsl(271 100% 59%) 0%, hsl(327 76% 51%) 50%, hsl(29 100% 50%) 100%);
+    --gradient-colibird-soft: linear-gradient(135deg, hsl(271 100% 59% / 0.12) 0%, hsl(327 76% 51% / 0.10) 50%, hsl(29 100% 50% / 0.08) 100%);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 220 10% 30%;
@@ -146,6 +156,11 @@
     background-image: var(--gradient-coral);
   }
 
+  .text-gradient-colibird {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-colibird);
+  }
+
   .bg-gradient-primary {
     background-image: var(--gradient-primary);
   }
@@ -156,6 +171,14 @@
 
   .bg-gradient-hero {
     background-image: var(--gradient-hero);
+  }
+
+  .bg-gradient-colibird {
+    background-image: var(--gradient-colibird);
+  }
+
+  .bg-gradient-colibird-soft {
+    background-image: var(--gradient-colibird-soft);
   }
 
   .shadow-glow {
