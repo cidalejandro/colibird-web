@@ -22,6 +22,7 @@ const Header = () => {
     { label: "Por qué MAGNO", href: "#nosotros" },
   ];
 
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -52,6 +53,13 @@ const Header = () => {
                 {link.label}
               </a>
             ))}
+            <a
+              href="/click-to-pay"
+              className="flex items-center gap-1.5 text-sm font-semibold text-secondary border border-secondary/40 rounded-full px-4 py-1.5 hover:bg-secondary hover:text-secondary-foreground transition-all duration-200"
+            >
+              <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+              Click to Pay
+            </a>
           </nav>
 
           {/* CTA Button */}
