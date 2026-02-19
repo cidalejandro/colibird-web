@@ -54,10 +54,18 @@ const Header = () => {
               </a>
             ))}
             <a
-              href="/click-to-pay"
-              className="flex items-center gap-1.5 text-sm font-semibold text-secondary border border-secondary/40 rounded-full px-4 py-1.5 hover:bg-secondary hover:text-secondary-foreground transition-all duration-200"
+              href="https://colibird.com.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+              Colibird ↗
+            </a>
+            <a
+              href="/click-to-pay"
+              className="flex items-center gap-1.5 text-sm font-semibold rounded-full px-4 py-1.5 bg-gradient-colibird text-white hover:opacity-90 transition-all duration-200 shadow-sm"
+            >
+              <span className="w-2 h-2 rounded-full bg-white/70 animate-pulse" />
               Click to Pay
             </a>
           </nav>
@@ -92,7 +100,24 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <Button variant="hero" className="mt-4">
+              <a
+                href="https://colibird.com.ar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Colibird ↗
+              </a>
+              <a
+                href="/click-to-pay"
+                className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-gradient-colibird text-white font-semibold text-sm mt-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="w-2 h-2 rounded-full bg-white/70 animate-pulse" />
+                Click to Pay
+              </a>
+              <Button variant="hero" className="mt-2">
                 Agendar Call
               </Button>
             </nav>

@@ -28,6 +28,14 @@ const Footer = () => {
             <a href="#contacto" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
               Contacto
             </a>
+            <a
+              href="https://colibird.com.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              Colibird ↗
+            </a>
           </nav>
 
           {/* Copyright */}

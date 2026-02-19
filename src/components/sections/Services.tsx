@@ -109,31 +109,36 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Click to Pay CTA */}
+        {/* Colibird Ecosystem Banner */}
         <div className="mt-16 max-w-6xl mx-auto">
-          <a
-            href="/click-to-pay"
-            className="group flex flex-col md:flex-row items-center gap-6 bg-gradient-to-r from-[#0F1C3F] to-[#0052CC] rounded-2xl p-8 md:p-10 shadow-medium hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-          >
-            <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-              <CreditCard className="w-8 h-8 text-white" />
-            </div>
-            <div className="flex-1 text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
-                <span className="text-xs font-bold uppercase tracking-widest text-blue-300">Nuevo servicio</span>
-                <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+          <div className="rounded-2xl p-[1.5px] bg-gradient-colibird shadow-medium">
+            <a
+              href="/click-to-pay"
+              className="group flex flex-col md:flex-row items-center gap-6 bg-white rounded-2xl p-8 md:p-10 hover:bg-gradient-colibird-soft transition-all duration-300"
+            >
+              {/* Colibird gradient icon */}
+              <div className="w-16 h-16 rounded-xl bg-gradient-colibird flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <CreditCard className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                Click to Pay Implementation Consulting
-              </h3>
-              <p className="text-white/75 text-sm md:text-base max-w-2xl">
-                Ayudamos a emisores y comercios a integrar Click to Pay — el nuevo estándar global en checkout digital — con expertos en medios de pago, PMs y developers React especializados.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 text-white font-semibold whitespace-nowrap group-hover:gap-3 transition-all duration-200">
-              Ver servicio <ArrowRight className="w-5 h-5" />
-            </div>
-          </a>
+              <div className="flex-1 text-center md:text-left">
+                <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
+                  <span className="text-xs font-bold uppercase tracking-widest text-gradient-colibird">
+                    Producto Colibird
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-colibird-magenta animate-pulse" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+                  Click to Pay Implementation Consulting
+                </h3>
+                <p className="text-muted-foreground text-sm md:text-base max-w-2xl">
+                  Ayudamos a emisores y comercios a integrar Click to Pay — el nuevo estándar global en checkout digital — con expertos en medios de pago, PMs y developers React especializados.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 font-semibold text-gradient-colibird whitespace-nowrap group-hover:gap-3 transition-all duration-200">
+                Ver producto <ArrowRight className="w-5 h-5 text-colibird-magenta" />
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </section>
