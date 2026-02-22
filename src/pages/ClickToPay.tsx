@@ -390,9 +390,15 @@ export default function ClickToPay() {
             </motion.h2>
             <motion.p
               variants={fadeUp}
-              style={{ color: "rgba(255,255,255,0.70)", fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)", textAlign: "center", maxWidth: 680, margin: "0 auto 64px", lineHeight: 1.7 }}
+              style={{ color: "rgba(255,255,255,0.70)", fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)", textAlign: "center", maxWidth: 780, margin: "0 auto 40px", lineHeight: 1.7 }}
             >
-              Click to Pay es el nuevo estándar en el proceso de compra en línea. Una solución tokenizada que hace que pagar online sea tan fácil como pagar con contactless, pero en el mundo digital. Sin ingresar datos manualmente. Sin fricción.
+              <strong>Click To Pay</strong> (en adelante <strong>CTP</strong> o <strong style={{ color: colibirdOrange }}>C2P</strong> indistintamente) es una nueva solución de pago digital diseñada para hacer que las compras en línea sean más seguras y fáciles, eliminando la necesidad de que los consumidores ingresen el número de la tarjeta (PAN) al comprar en sitios de comercio electrónico, mejorando la experiencia de compra al agilizar el proceso de pago.
+            </motion.p>
+            <motion.p
+              variants={fadeUp}
+              style={{ color: "rgba(255,255,255,0.70)", fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)", textAlign: "center", maxWidth: 780, margin: "0 auto 64px", lineHeight: 1.7 }}
+            >
+              Este sistema se basa en la especificación EMV Secure Remote Commerce, utilizando tokens y criptogramas seguros para cada transacción, minimizando el fraude y mejorando las tasas de aprobación. Además, aborda problemas críticos como las altas tasas de abandono en el checkout y el fraude en línea.
             </motion.p>
 
             {/* Steps */}
