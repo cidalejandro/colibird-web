@@ -132,7 +132,7 @@ export default function ClickToPay() {
   ];
 
   const emisoresPains = [
-    "Enrola en forma rápida a todos tus tarjetahabientes y gestiona nuevos onboardings y reemplazos/reemisiones de tarjetas",
+    "Enrola en forma rápida a todos tus tarjetahabientes y gestiona nuevos onboardings y reemplazos/reemisiones de tarjetas.",
     "Gestión de tokens y credenciales de pago",
     "Integración API con la red Click to Pay (Visa SRC)",
     "Activación de la marca del emisor dentro del flujo de pago",
