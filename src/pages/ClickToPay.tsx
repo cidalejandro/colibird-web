@@ -429,11 +429,8 @@ export default function ClickToPay() {
               ))}
             </motion.div>
 
-            <motion.div variants={fadeUp} style={{ display: "flex", justifyContent: "center", marginTop: 8 }}>
-              <img src={c2pBrandsDark} alt="Click to Pay - Visa, Mastercard, American Express" style={{ height: 32, opacity: 0.85 }} />
-            </motion.div>
-            <motion.p variants={fadeUp} style={{ color: "rgba(255,255,255,0.45)", textAlign: "center", fontSize: 13, marginTop: 12 }}>
-              Estándar EMV®Co.
+            <motion.p variants={fadeUp} style={{ color: "rgba(255,255,255,0.45)", textAlign: "center", fontSize: 13 }}>
+              Disponible con Visa, Mastercard, American Express y Discover. Estándar EMV®Co.
             </motion.p>
           </Section>
         </div>
