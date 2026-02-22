@@ -413,7 +413,7 @@ export default function ClickToPay() {
             {/* Emisores Steps - placeholder */}
             <motion.div variants={stagger} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
               {[
-                { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Paso 1 — definir contenido" },
+                { icon: <img src={c2pHorizontalDark} alt="Click to Pay" style={{ width: "100%", maxWidth: 200 }} />, label: "Paso 1 — definir contenido", noCircle: true },
                 { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Paso 2 — definir contenido" },
                 { icon: <Mail size={40} strokeWidth={1.2} color="white" />, label: "Paso 3 — definir contenido" },
                 { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Paso 4 — definir contenido" },
@@ -431,7 +431,11 @@ export default function ClickToPay() {
                     position: "relative",
                   }}
                 >
-                  <div style={{ width: 48, height: 48, borderRadius: "50%", background: `${blue}25`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", color: "#A97BFF" }}>{s.icon}</div>
+                  {(s as any).noCircle ? (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", height: 48 }}>{s.icon}</div>
+                  ) : (
+                    <div style={{ width: 48, height: 48, borderRadius: "50%", background: `${blue}25`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", color: "#A97BFF" }}>{s.icon}</div>
+                  )}
                   <div style={{ width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${blue}, ${blueMid})`, color: white, fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px" }}>{i + 1}</div>
                   <p style={{ color: "rgba(255,255,255,0.80)", fontSize: 13, lineHeight: 1.5 }}>{s.label}</p>
                 </motion.div>
