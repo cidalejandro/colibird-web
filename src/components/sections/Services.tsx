@@ -131,7 +131,7 @@ const Services = () => {
                   Click to Pay Implementation Consulting
                 </h3>
                 <p className="text-muted-foreground text-sm md:text-base max-w-2xl">
-                  Ayudamos a emisores y sitios de comercio electrónico a integrar Click to Pay — el nuevo estándar global en checkout digital — con expertos en medios de pago, PMs y developers React especializados.
+                  Ayudamos a emisores y sitios de comercio electrónico a integrar Click to Pay — el nuevo estándar global en checkout digital — con Expertos en Medios de Pagos, PMs y developers React especializados.
                 </p>
               </div>
               <div className="flex items-center gap-2 font-semibold text-gradient-colibird whitespace-nowrap group-hover:gap-3 transition-all duration-200">
