@@ -405,7 +405,40 @@ export default function ClickToPay() {
               Este sistema se basa en la especificación EMV® Secure Remote Commerce, utilizando tokens y criptogramas seguros para cada transacción, minimizando el fraude y mejorando las tasas de aprobación. Además, aborda problemas críticos como las altas tasas de abandono en el checkout y el fraude en línea.
             </motion.p>
 
-            {/* Steps title */}
+            {/* Emisores title */}
+            <motion.h3 variants={fadeUp} style={{ color: white, fontSize: "clamp(1.3rem, 2.5vw, 1.6rem)", fontWeight: 800, textAlign: "center", marginBottom: 32 }}>
+              Para emisores
+            </motion.h3>
+
+            {/* Emisores Steps - placeholder */}
+            <motion.div variants={stagger} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+              {[
+                { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Paso 1 — definir contenido" },
+                { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Paso 2 — definir contenido" },
+                { icon: <Mail size={40} strokeWidth={1.2} color="white" />, label: "Paso 3 — definir contenido" },
+                { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Paso 4 — definir contenido" },
+              ].map((s, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid rgba(255,255,255,0.10)",
+                    borderRadius: 16,
+                    padding: "24px 16px",
+                    textAlign: "center",
+                    position: "relative",
+                  }}
+                >
+                  <div style={{ width: 48, height: 48, borderRadius: "50%", background: `${blue}25`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", color: "#A97BFF" }}>{s.icon}</div>
+                  <div style={{ width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${blue}, ${blueMid})`, color: white, fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px" }}>{i + 1}</div>
+                  <p style={{ color: "rgba(255,255,255,0.80)", fontSize: 13, lineHeight: 1.5 }}>{s.label}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Comercios title */}
             <motion.h3 variants={fadeUp} style={{ color: white, fontSize: "clamp(1.3rem, 2.5vw, 1.6rem)", fontWeight: 800, textAlign: "center", marginBottom: 32 }}>
               Para comercios en línea
             </motion.h3>
