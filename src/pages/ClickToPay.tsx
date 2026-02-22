@@ -139,6 +139,7 @@ export default function ClickToPay() {
     "Te ayudamos con el testing, la certificación y go-live con Visa/Mastercard.",
     "Te brandeamos la comunicación con el tarjetahabiente para activar el uso de C2P de tus tarjetas emitidas.",
     "Reducción de la proliferación de wallets y botones digitales",
+    "Sé compliance con los mandates de las marcas y evita multas o pedidos de waivers.",
   ];
 
   const comerciosPains = [
