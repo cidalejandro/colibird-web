@@ -137,7 +137,7 @@ export default function ClickToPay() {
     "Integrá C2P vía el SDK Issuer y conectaló con los SRC-I de las marcas (Visa y Mastercard).",
     "Activá el poder tu marca emisora dentro de los flujos de pagos adquirentes.",
     "Te ayudamos con el testing, la certificación y go-live con Visa/Mastercard.",
-    "Estrategia de comunicación al tarjetahabiente",
+    "Te brandeamos la comunicación con el tarjetahabiente para activar el uso de C2P de tus tarjetas emitidas.",
     "Reducción de la proliferación de wallets y botones digitales",
   ];
 
