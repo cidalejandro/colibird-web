@@ -151,8 +151,8 @@ export default function ClickToPay() {
     {
       icon: <ShieldCheck size={32} color={blue} />,
       role: "Especialista en Medios de Pago",
-      desc: "Expertise profundo en specs EMVCo de Click to Pay, reglas de esquemas (Visa SRC, Mastercard SRC), flujos de tokenización, conectividad emisor-adquirente y certificaciones de red.",
-      tags: ["EMVCo", "Tokenización", "Visa SRC", "Certificación"],
+      desc: "Expertise profundo en specs EMV®Co de Click to Pay, reglas de esquemas (Visa SRC, Mastercard SRC), flujos de tokenización, conectividad emisor-adquirente y certificaciones de red.",
+      tags: ["EMV®Co", "Tokenización", "Visa SRC", "Certificación"],
     },
     {
       icon: <Kanban size={32} color={blueMid} />,
@@ -196,7 +196,7 @@ export default function ClickToPay() {
   const faqs = [
     {
       q: "¿Qué es Click to Pay exactamente?",
-      a: "Click to Pay es el nuevo estándar global de pago digital en línea, basado en la especificación EMVCo. Reemplaza el ingreso manual de datos de tarjeta con un flujo tokenizado, seguro y de un clic. Participan Visa, Mastercard, Amex y Discover.",
+      a: "Click to Pay es el nuevo estándar global de pago digital en línea, basado en la especificación EMV®Co. Reemplaza el ingreso manual de datos de tarjeta con un flujo tokenizado, seguro y de un clic. Participan Visa, Mastercard, Amex y Discover.",
     },
     {
       q: "¿Cómo se beneficia un emisor implementando Click to Pay?",
@@ -402,7 +402,7 @@ export default function ClickToPay() {
               variants={fadeUp}
               style={{ color: "rgba(255,255,255,0.70)", fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)", textAlign: "center", maxWidth: 780, margin: "0 auto 64px", lineHeight: 1.7 }}
             >
-              Este sistema se basa en la especificación EMV Secure Remote Commerce, utilizando tokens y criptogramas seguros para cada transacción, minimizando el fraude y mejorando las tasas de aprobación. Además, aborda problemas críticos como las altas tasas de abandono en el checkout y el fraude en línea.
+              Este sistema se basa en la especificación EMV® Secure Remote Commerce, utilizando tokens y criptogramas seguros para cada transacción, minimizando el fraude y mejorando las tasas de aprobación. Además, aborda problemas críticos como las altas tasas de abandono en el checkout y el fraude en línea.
             </motion.p>
 
             {/* Steps */}
@@ -429,7 +429,7 @@ export default function ClickToPay() {
             </motion.div>
 
             <motion.p variants={fadeUp} style={{ color: "rgba(255,255,255,0.45)", textAlign: "center", fontSize: 13 }}>
-              Disponible con Visa, Mastercard, American Express y Discover. Estándar EMVCo.
+              Disponible con Visa, Mastercard, American Express y Discover. Estándar EMV®Co.
             </motion.p>
           </Section>
         </div>
