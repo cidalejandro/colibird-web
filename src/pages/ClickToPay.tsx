@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import type { Variants } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import c2pBrandsDark from "@/assets/c2p-brands-dark.svg";
 
 // ─── Design tokens — Colibird palette ────────────────────────────────────────
 const navy = "#1A0A2E";           // deep violet-dark background
@@ -428,8 +429,11 @@ export default function ClickToPay() {
               ))}
             </motion.div>
 
-            <motion.p variants={fadeUp} style={{ color: "rgba(255,255,255,0.45)", textAlign: "center", fontSize: 13 }}>
-              Disponible con Visa, Mastercard, American Express y Discover. Estándar EMV®Co.
+            <motion.div variants={fadeUp} style={{ display: "flex", justifyContent: "center", marginTop: 8 }}>
+              <img src={c2pBrandsDark} alt="Click to Pay - Visa, Mastercard, American Express" style={{ height: 32, opacity: 0.85 }} />
+            </motion.div>
+            <motion.p variants={fadeUp} style={{ color: "rgba(255,255,255,0.45)", textAlign: "center", fontSize: 13, marginTop: 12 }}>
+              Estándar EMV®Co.
             </motion.p>
           </Section>
         </div>
