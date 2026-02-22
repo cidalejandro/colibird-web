@@ -643,26 +643,30 @@ export default function ClickToPay() {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
                 {workSteps.map((s, i) => (
                   <motion.div key={i} variants={fadeUp} style={{ textAlign: "center" }}>
-                    <div style={{
-                      width: 72,
-                      height: 72,
-                      borderRadius: "50%",
-                      background: i === 0
-                        ? `linear-gradient(135deg, ${blue}, ${blue}CC)`
-                        : i === 1
-                        ? `linear-gradient(135deg, ${blue}CC, ${blueMid})`
-                        : i === 2
-                        ? `linear-gradient(135deg, ${blueMid}, ${blueMid}CC)`
-                        : `linear-gradient(135deg, ${blueMid}CC, ${colibirdOrange})`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      margin: "0 auto 20px",
-                      color: white,
-                      boxShadow: `0 8px 24px ${i < 2 ? blue : blueMid}55`,
-                    }}>
-                      {s.icon}
-                    </div>
+                    {i === 0 ? (
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px", height: 72 }}>
+                        <img src={c2pHorizontalDark} alt="Click to Pay" className="w-full max-w-[280px]" style={{ filter: "brightness(0)" }} />
+                      </div>
+                    ) : (
+                      <div style={{
+                        width: 72,
+                        height: 72,
+                        borderRadius: "50%",
+                        background: i === 1
+                          ? `linear-gradient(135deg, ${blue}CC, ${blueMid})`
+                          : i === 2
+                          ? `linear-gradient(135deg, ${blueMid}, ${blueMid}CC)`
+                          : `linear-gradient(135deg, ${blueMid}CC, ${colibirdOrange})`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        margin: "0 auto 20px",
+                        color: white,
+                        boxShadow: `0 8px 24px ${i < 2 ? blue : blueMid}55`,
+                      }}>
+                        {s.icon}
+                      </div>
+                    )}
                     <div style={{ fontSize: 12, color: i < 2 ? blue : blueMid, fontWeight: 700, letterSpacing: "0.08em", marginBottom: 6 }}>PASO {i + 1}</div>
                     <h3 style={{ color: navy, fontSize: 15, fontWeight: 800, marginBottom: 10 }}>{s.title}</h3>
                     <p style={{ color: "#64748b", fontSize: 13, lineHeight: 1.65 }}>{s.desc}</p>
