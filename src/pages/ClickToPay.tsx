@@ -565,7 +565,7 @@ export default function ClickToPay() {
                 </div>
                 <h3 style={{ color: white, fontSize: 22, fontWeight: 800, marginBottom: 12 }}>Para Emisores</h3>
                 <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 14, marginBottom: 24, lineHeight: 1.6 }}>
-                  Sé la opción de pago principal. Conservá el valor de tu marca y gestioná el ciclo de vida de tus tarjetahabientes en el entorno digital.
+                  Sé la opción de pago principal (¡asegúrate de que tu Banco o Fintech esté arriba!). Conservá el valor de tu marca y gestioná el ciclo de vida de tus tarjetahabientes en tu app.
                 </p>
                 <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10 }}>
                   {emisoresPains.map((p) => (
