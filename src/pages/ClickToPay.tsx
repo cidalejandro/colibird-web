@@ -10,6 +10,7 @@ import {
 import type { Variants } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import c2pHorizontalDark from "@/assets/c2p-horizontal-dark.svg";
+import c2pIconDark from "@/assets/c2p-icon-dark.svg";
 
 // ─── Design tokens — Colibird palette ────────────────────────────────────────
 const navy = "#1A0A2E";           // deep violet-dark background
@@ -413,7 +414,7 @@ export default function ClickToPay() {
             {/* Emisores Steps - placeholder */}
             <motion.div variants={stagger} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
               {[
-                { icon: <img src={c2pHorizontalDark} alt="Click to Pay" style={{ width: "100%", maxWidth: 200 }} />, label: "Paso 1 — definir contenido", noCircle: true },
+                { icon: <img src={c2pIconDark} alt="Click to Pay" style={{ width: 40, height: 40 }} />, label: "Paso 1 — definir contenido" },
                 { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Paso 2 — definir contenido" },
                 { icon: <Mail size={40} strokeWidth={1.2} color="white" />, label: "Paso 3 — definir contenido" },
                 { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Paso 4 — definir contenido" },
