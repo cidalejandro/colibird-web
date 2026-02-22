@@ -134,7 +134,7 @@ export default function ClickToPay() {
   const emisoresPains = [
     "Enrola en forma rápida a todos tus tarjetahabientes y gestiona nuevos onboardings y reemplazos/reemisiones de tarjetas.",
     "Gestiona tokens y criptogramas de XPay (Google Pay y Apple Pay) y C2P a través de un mismo certificado de seguridad.",
-    "Integración API con la red Click to Pay (Visa SRC)",
+    "Integrá C2P vía el SDK Issuer y conectaló con los SRC-I de las marcas (Visa y Mastercard).",
     "Activación de la marca del emisor dentro del flujo de pago",
     "Testing, certificación y go-live con Visa/MC",
     "Estrategia de comunicación al tarjetahabiente",
