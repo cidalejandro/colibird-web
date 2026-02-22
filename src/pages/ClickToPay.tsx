@@ -405,6 +405,11 @@ export default function ClickToPay() {
               Este sistema se basa en la especificación EMV® Secure Remote Commerce, utilizando tokens y criptogramas seguros para cada transacción, minimizando el fraude y mejorando las tasas de aprobación. Además, aborda problemas críticos como las altas tasas de abandono en el checkout y el fraude en línea.
             </motion.p>
 
+            {/* Steps title */}
+            <motion.h3 variants={fadeUp} style={{ color: white, fontSize: "clamp(1.3rem, 2.5vw, 1.6rem)", fontWeight: 800, textAlign: "center", marginBottom: 32 }}>
+              Para comercios en línea
+            </motion.h3>
+
             {/* Steps */}
             <motion.div variants={stagger} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
               {steps.map((s, i) => (
