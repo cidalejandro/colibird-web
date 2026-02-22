@@ -294,7 +294,7 @@ export default function ClickToPay() {
 
             {/* Badge row */}
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-2 mb-8">
-              {["EMVCo Certified", "Visa", "Mastercard", "Amex", "Agile Delivery", "UX-First"].map((b) => (
+              {["EMV®", "Visa", "Mastercard", "Amex", "Agile Delivery", "UX-First"].map((b) => (
                 <span key={b} style={{
                   background: "rgba(255,255,255,0.10)",
                   backdropFilter: "blur(8px)",
