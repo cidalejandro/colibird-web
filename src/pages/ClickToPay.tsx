@@ -327,7 +327,7 @@ export default function ClickToPay() {
               variants={fadeUp}
               style={{ color: "rgba(255,255,255,0.75)", fontSize: "clamp(1rem, 2vw, 1.2rem)", maxWidth: 700, margin: "0 auto 40px", lineHeight: 1.65 }}
             >
-              Ayudamos a emisores y sitios de comercio electrónico a integrar Click to Pay — el nuevo estándar global en el proceso de compra en línea — con expertos en medios de pago, Product Managers ágiles y developers React especializados.
+              Ayudamos a emisores y sitios de comercio electrónico a integrar Click to Pay — el nuevo estándar global en el proceso de compra en línea — con Expertos en Medios de Pagos, Product Managers ágiles y developers React especializados.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
