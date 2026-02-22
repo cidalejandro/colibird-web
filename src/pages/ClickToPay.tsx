@@ -118,8 +118,7 @@ export default function ClickToPay() {
     { icon: <img src={c2pHorizontalDark} alt="Click to Pay" className="w-96" />, label: "Encontrá el ícono de Click To Pay en el checkout de tu sitio de compra en línea favorito." },
     { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Selecciona la tarjeta con la que querés pagar." },
     { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Confirma que sos Vos completando el desafío (PassKey)." },
-    { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Elige su tarjeta preferida" },
-    { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Completa la compra. ¡Listo!" },
+    { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Finalizaste la compra así de fácil. ¡Listo!" },
   ];
 
   const stats = [
@@ -407,7 +406,7 @@ export default function ClickToPay() {
             </motion.p>
 
             {/* Steps */}
-            <motion.div variants={stagger} className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
+            <motion.div variants={stagger} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
               {steps.map((s, i) => (
                 <motion.div
                   key={i}
