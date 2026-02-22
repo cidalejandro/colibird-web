@@ -414,7 +414,7 @@ export default function ClickToPay() {
             {/* Emisores Steps - placeholder */}
             <motion.div variants={stagger} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
               {[
-                { icon: <img src={c2pIconDark} alt="Click to Pay" style={{ width: 40, height: 40 }} />, label: "Paso 1 — definir contenido" },
+                { icon: <img src={c2pIconDark} alt="Click to Pay" style={{ width: 40, height: 40 }} />, label: <>Crea el perfil de C2P de todos tus clientes y asociales las tarjetas que tu banco les emitió usando el Massive Push Provisioning -<em>bulk</em>-.</> },
                 { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Paso 2 — definir contenido" },
                 { icon: <Mail size={40} strokeWidth={1.2} color="white" />, label: "Paso 3 — definir contenido" },
                 { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Paso 4 — definir contenido" },
