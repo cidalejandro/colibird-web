@@ -415,7 +415,7 @@ export default function ClickToPay() {
             <motion.div variants={stagger} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
               {[
                 { icon: <img src={c2pIconDark} alt="Click to Pay" style={{ width: 40, height: 40 }} />, label: <>Crea el perfil de C2P de todos tus Clientes y asociales las tarjetas que tu Banco o Fintech les emitió usando el Massive Push Provisioning -<em>bulk</em>-.</> },
-                { icon: <Smartphone size={40} strokeWidth={1.2} color="white" />, label: "Integra el SDK de C2P Issuer en tu app." },
+                { icon: <Smartphone size={40} strokeWidth={1.2} color="white" />, label: "Integra el SDK de C2P Issuer en tu app. Genera la experiencia de Usuario para que pueda administrar su perfil y tarjetas en C2P." },
                 { icon: <Mail size={40} strokeWidth={1.2} color="white" />, label: "Paso 3 — definir contenido" },
                 { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Paso 4 — definir contenido" },
               ].map((s, i) => (
