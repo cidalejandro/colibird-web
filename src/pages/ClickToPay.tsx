@@ -420,7 +420,7 @@ export default function ClickToPay() {
                 { icon: <img src={c2pIconDark} alt="Click to Pay" style={{ width: 40, height: 40 }} />, label: <>Crea el perfil de C2P de todos tus Clientes y asociales las tarjetas que tu Banco o Fintech les emitió usando el Massive Push Provisioning.</> },
                 { icon: <Smartphone size={40} strokeWidth={1.2} color="white" />, label: "Integra el SDK de C2P Issuer en tu app. Genera la experiencia de Usuario para que tus Clientes puedan administrar su perfil y tarjetas en C2P." },
                 { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Asegurate de cumplir con los mandatos de las marcas y hace que tus Clientes acepten los términos y condiciones de C2P. Utiliza 2FA para hacer todo el proceso más seguro." },
-                { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Sé la opción de pago principal (¡asegúrate de que tu Banco o Fintech esté arriba!). Conservá el valor de tu marca y gestioná el ciclo de vida de tus tarjetahabientes en tu app." },
+                { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Tus Clientes pueden gestionar el E2E del proceso de negocio de C2P desde tu app. ¡Listo!" },
               ].map((s, i) => (
                 <motion.div
                   key={i}
