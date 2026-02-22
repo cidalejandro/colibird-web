@@ -116,7 +116,7 @@ export default function ClickToPay() {
 
   const steps = [
     { icon: <img src={c2pHorizontalDark} alt="Click to Pay" className="w-96" />, label: "Encontrá el ícono de Click To Pay en el checkout de tu sitio de compra en línea favorito." },
-    { icon: <Mail size={40} strokeWidth={1.2} color="white" />, label: "Selecciona la tarjeta con la que querés pagar." },
+    { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Selecciona la tarjeta con la que querés pagar." },
     { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Confirma su identidad" },
     { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Elige su tarjeta preferida" },
     { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Completa la compra. ¡Listo!" },
