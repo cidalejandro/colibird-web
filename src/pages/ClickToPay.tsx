@@ -127,7 +127,7 @@ export default function ClickToPay() {
     { number: 89, suffix: "%", label: "de los clientes percibieron Click to Pay igual o mejor que otros métodos digitales", source: "Investigación IPSOS 2023 · UK & España" },
     { number: 4.3, suffix: "%", label: "de aumento promedio en tasa de autorización vs transacciones con PAN tradicional", source: "VisaNet · Oct–Dic 2023 · CNP global" },
     { number: 65, suffix: "+", label: "mercados donde Click to Pay está disponible — ¡y seguimos creciendo!", source: "Mastercard MDES · 2025" },
-    { number: 3, suffix: "-6 ppt", label: "de mejora en tasas de aprobación en transacciones tokenizadas vs PAN", source: "Mastercard Datawarehouse · Dic 2024 · MDES for Merchants · CNP first attempt" },
+    { number: 3, suffix: "-6 ppt", label: "de mejora en tasas de aprobación en transacciones tokenizadas vs ingreso manual de PAN, Fecha de vencimiento y CVV", source: "Mastercard Datawarehouse · Dic 2024 · MDES for Merchants · CNP first attempt" },
     { number: 50, suffix: "%", label: "de reducción en contracargos", source: "Just Eat Takeaway.com & Mastercard · Abr 2025" },
   ];
 
