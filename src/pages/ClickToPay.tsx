@@ -126,6 +126,7 @@ export default function ClickToPay() {
     { number: 128, suffix: "%", label: "Crecimiento interanual en transacciones tokenizadas con Click to Pay", source: "VisaNet · Q3 FY2023 vs Q3 FY2024" },
     { number: 89, suffix: "%", label: "de los clientes percibieron Click to Pay igual o mejor que otros métodos digitales", source: "Investigación IPSOS 2023 · UK & España" },
     { number: 4.3, suffix: "%", label: "de aumento promedio en tasa de autorización vs transacciones con PAN tradicional", source: "VisaNet · Oct–Dic 2023 · CNP global" },
+    { number: 65, suffix: "+", label: "mercados donde Click to Pay está disponible — ¡y seguimos creciendo!", source: "Mastercard Developers · 2025" },
   ];
 
   const emisoresPains = [
