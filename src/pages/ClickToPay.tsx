@@ -114,7 +114,7 @@ export default function ClickToPay() {
   };
 
   const steps = [
-    { icon: <Globe size={22} />, label: "Ve el ícono Click to Pay en el checkout" },
+    { icon: <Globe size={22} />, label: "Encontrá el ícono de Click To Pay en el checkout de tu sitio de compra en línea favorito" },
     { icon: <Mail size={22} />, label: "Ingresa su email" },
     { icon: <ShieldCheck size={22} />, label: "Confirma su identidad" },
     { icon: <CreditCard size={22} />, label: "Elige su tarjeta preferida" },
