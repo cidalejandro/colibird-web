@@ -422,7 +422,13 @@ export default function ClickToPay() {
                     position: "relative",
                   }}
                 >
-                  <div style={{ width: 48, height: 48, borderRadius: "50%", background: `${blue}25`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", color: "#A97BFF" }}>{s.icon}</div>
+                  {i === 0 ? (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", height: 48 }}>
+                      <img src={c2pHorizontalDark} alt="Click to Pay" style={{ width: "100%", maxWidth: 200 }} />
+                    </div>
+                  ) : (
+                    <div style={{ width: 48, height: 48, borderRadius: "50%", background: `${blue}25`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", color: "#A97BFF" }}>{s.icon}</div>
+                  )}
                   <div style={{ width: 24, height: 24, borderRadius: "50%", background: `linear-gradient(135deg, ${blue}, ${blueMid})`, color: white, fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px" }}>{i + 1}</div>
                   <p style={{ color: "rgba(255,255,255,0.80)", fontSize: 13, lineHeight: 1.5 }}>{s.label}</p>
                 </motion.div>
