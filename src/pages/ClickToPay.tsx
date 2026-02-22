@@ -323,7 +323,7 @@ export default function ClickToPay() {
               variants={fadeUp}
               style={{ color: "rgba(255,255,255,0.75)", fontSize: "clamp(1rem, 2vw, 1.2rem)", maxWidth: 700, margin: "0 auto 40px", lineHeight: 1.65 }}
             >
-              Ayudamos a emisores y comercios a integrar Click to Pay — el nuevo estándar global en el proceso de compra en línea — con expertos en medios de pago, Product Managers ágiles y developers React especializados.
+              Ayudamos a emisores y sitios de comercio electrónico a integrar Click to Pay — el nuevo estándar global en el proceso de compra en línea — con expertos en medios de pago, Product Managers ágiles y developers React especializados.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
@@ -528,7 +528,7 @@ export default function ClickToPay() {
                 <div style={{ width: 56, height: 56, borderRadius: 14, background: `${blueMid}20`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
                   <Store size={28} color={blueMid} />
                 </div>
-                <h3 style={{ color: white, fontSize: 22, fontWeight: 800, marginBottom: 12 }}>Para Comercios y E-Commerce</h3>
+                <h3 style={{ color: white, fontSize: 22, fontWeight: 800, marginBottom: 12 }}>Para Sitios de Comercio Electrónico</h3>
                 <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 14, marginBottom: 24, lineHeight: 1.6 }}>
                   Convertí visitantes en compradores. Reducí el abandono del carrito y mejorá tus tasas de conversión con una experiencia de checkout sin fricciones.
                 </p>
@@ -540,7 +540,7 @@ export default function ClickToPay() {
                   ))}
                 </ul>
                 <a href="#contacto" style={{ color: blueMid, fontWeight: 700, fontSize: 15, textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}>
-                  Ver solución para comercios <ArrowRight size={16} />
+                  Ver solución para e-commerce <ArrowRight size={16} />
                 </a>
               </motion.div>
             </motion.div>
@@ -691,7 +691,7 @@ export default function ClickToPay() {
                   }}
                   aria-label={`Ver beneficios para ${tab}`}
                 >
-                  {tab === "emisores" ? "Emisores" : "Comercios"}
+                  {tab === "emisores" ? "Emisores" : "E-Commerce"}
                 </button>
               ))}
             </motion.div>
