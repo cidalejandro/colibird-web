@@ -136,7 +136,7 @@ export default function ClickToPay() {
     "Gestiona tokens y criptogramas de XPay (Google Pay y Apple Pay) y C2P a través de un mismo certificado de seguridad.",
     "Integrá C2P vía el SDK Issuer y conectaló con los SRC-I de las marcas (Visa y Mastercard).",
     "Activá el poder tu marca emisora dentro de los flujos de pagos adquirentes.",
-    "Testing, certificación y go-live con Visa/MC",
+    "Te ayudamos con el testing, la certificación y go-live con Visa/Mastercard.",
     "Estrategia de comunicación al tarjetahabiente",
     "Reducción de la proliferación de wallets y botones digitales",
   ];
