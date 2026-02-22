@@ -117,7 +117,7 @@ export default function ClickToPay() {
 
   const steps = [
     { icon: <img src={c2pHorizontalDark} alt="Click to Pay" className="w-96" />, label: "Integra el ícono de Click To Pay en el checkout de tu sitio de compra en línea y agiliza el proceso de pago." },
-    { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Selecciona la tarjeta con la que querés pagar." },
+    { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Permití que tus Clientes paguen sin fricción y seleccionen la tarjeta con la que quieren pagar sin ingresar PAN, Fecha de vencimiento ni CVV2." },
     { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Confirma que sos Vos completando el desafío (PassKey)." },
     { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Finalizaste la compra así de fácil. ¡Listo!" },
   ];
