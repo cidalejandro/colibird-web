@@ -396,7 +396,7 @@ export default function ClickToPay() {
               variants={fadeUp}
               style={{ color: "rgba(255,255,255,0.70)", fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)", textAlign: "center", maxWidth: 780, margin: "0 auto 40px", lineHeight: 1.7 }}
             >
-              <strong>Click To Pay</strong> (<strong>CTP</strong> ó <strong style={{ color: colibirdOrange }}>C2P</strong>) es una nueva solución de pago digital diseñada para hacer que las compras en línea sean más seguras y fáciles, eliminando la necesidad de que los consumidores ingresen el número de la tarjeta (PAN) al comprar en sitios de comercio electrónico, mejorando la experiencia de compra al agilizar el proceso de pago.
+              <strong>Click To Pay</strong> (<strong>CTP</strong> ó <strong>C2P</strong>) es una nueva solución de pago digital diseñada para hacer que las compras en línea sean más seguras y fáciles, eliminando la necesidad de que los consumidores ingresen el número de la tarjeta (PAN) al comprar en sitios de comercio electrónico, mejorando la experiencia de compra al agilizar el proceso de pago.
             </motion.p>
             <motion.p
               variants={fadeUp}
