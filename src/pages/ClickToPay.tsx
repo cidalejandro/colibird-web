@@ -511,14 +511,15 @@ export default function ClickToPay() {
               {/* EDITOR MODE TOGGLE */}
               {(() => {
                 const [editorMode, setEditorMode] = useState(false);
+                const [selectedKey, setSelectedKey] = useState<string | null>(null);
                 const [positions, setPositions] = useState({
-                  consumer: { x: -97, y: 194 },
-                  integrator: { x: 264, y: 199 },
-                  unified: { x: 464, y: 13 },
-                  mastercard: { x: 466, y: 404 },
-                  c2p: { x: 505, y: 184 },
-                  dcf: { x: 710, y: 156 },
-                  issuer: { x: 711, y: 240 },
+                  consumer: { x: -97, y: 194, scale: 1 },
+                  integrator: { x: 264, y: 199, scale: 1 },
+                  unified: { x: 464, y: 13, scale: 1 },
+                  mastercard: { x: 466, y: 404, scale: 1 },
+                  c2p: { x: 505, y: 184, scale: 1 },
+                  dcf: { x: 710, y: 156, scale: 1 },
+                  issuer: { x: 711, y: 240, scale: 1 },
                   arrowConsInt: { x: 125, y: 236, w: 140, h: 20 },
                   arrowIntUp: { x: 344, y: 48, w: 120, h: 160 },
                   arrowIntDown: { x: 347, y: 289, w: 120, h: 160 },
@@ -528,25 +529,49 @@ export default function ClickToPay() {
                   arrowIssuer: { x: 569, y: 296, w: 20, h: 120 },
                 });
                 const [dragging, setDragging] = useState<string | null>(null);
+                const [resizing, setResizing] = useState<string | null>(null);
                 const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
                 const containerRef = useRef<HTMLDivElement>(null);
 
                 const handleMouseDown = (key: string, e: React.MouseEvent) => {
                   if (!editorMode) return;
                   e.preventDefault();
+                  e.stopPropagation();
                   const rect = containerRef.current?.getBoundingClientRect();
                   if (!rect) return;
                   setDragging(key);
+                  setSelectedKey(key);
                   setDragOffset({ x: e.clientX - rect.left - positions[key].x, y: e.clientY - rect.top - positions[key].y });
                 };
 
-                const handleMouseMove = (e: React.MouseEvent) => {
-                  if (!dragging || !containerRef.current) return;
-                  const rect = containerRef.current.getBoundingClientRect();
-                  setPositions(prev => ({ ...prev, [dragging]: { ...prev[dragging], x: Math.round(e.clientX - rect.left - dragOffset.x), y: Math.round(e.clientY - rect.top - dragOffset.y) } }));
+                const handleResizeDown = (key: string, e: React.MouseEvent) => {
+                  if (!editorMode) return;
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setResizing(key);
+                  setSelectedKey(key);
                 };
 
-                const handleMouseUp = () => setDragging(null);
+                const handleMouseMove = (e: React.MouseEvent) => {
+                  if (!containerRef.current) return;
+                  const rect = containerRef.current.getBoundingClientRect();
+                  if (dragging) {
+                    setPositions(prev => ({ ...prev, [dragging]: { ...prev[dragging], x: Math.round(e.clientX - rect.left - dragOffset.x), y: Math.round(e.clientY - rect.top - dragOffset.y) } }));
+                  } else if (resizing) {
+                    const pos = positions[resizing];
+                    if ('w' in pos) {
+                      const newW = Math.max(20, Math.round(e.clientX - rect.left - pos.x));
+                      const newH = Math.max(20, Math.round(e.clientY - rect.top - pos.y));
+                      setPositions(prev => ({ ...prev, [resizing]: { ...prev[resizing], w: newW, h: newH } }));
+                    } else if ('scale' in pos) {
+                      const dx = e.clientX - rect.left - pos.x;
+                      const newScale = Math.max(0.5, Math.min(2, Math.round(dx / 100 * 10) / 10));
+                      setPositions(prev => ({ ...prev, [resizing]: { ...prev[resizing], scale: newScale } }));
+                    }
+                  }
+                };
+
+                const handleMouseUp = () => { setDragging(null); setResizing(null); };
 
                 const copyPositions = () => {
                   navigator.clipboard.writeText(JSON.stringify(positions, null, 2));
@@ -555,128 +580,179 @@ export default function ClickToPay() {
 
                 const p = positions;
 
+                const nodeLabel = (key: string) => {
+                  const pos = p[key];
+                  if ('w' in pos) return `${key} (${pos.x}, ${pos.y}) ${pos.w}×${pos.h}`;
+                  if ('scale' in pos) return `${key} (${pos.x}, ${pos.y}) s:${pos.scale}`;
+                  return `${key} (${pos.x}, ${pos.y})`;
+                };
+
+                const resizeHandle = (key: string) => editorMode && (
+                  <div
+                    onMouseDown={(e) => handleResizeDown(key, e)}
+                    style={{ position: "absolute", right: -6, bottom: -6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }}
+                  />
+                );
+
+                const nodeStyle = (key: string): React.CSSProperties => ({
+                  position: "absolute",
+                  left: p[key].x,
+                  top: p[key].y,
+                  cursor: editorMode ? "grab" : "default",
+                  transform: 'scale' in p[key] ? `scale(${(p[key] as any).scale})` : undefined,
+                  transformOrigin: "top left",
+                });
+
                 return (
                   <>
-                    <div className="flex justify-center mb-4 gap-2">
-                      <button onClick={() => setEditorMode(!editorMode)} style={{ padding: "8px 16px", borderRadius: 8, background: editorMode ? "#ef4444" : blue, color: white, fontWeight: 700, fontSize: 13 }}>
-                        {editorMode ? "✕ Salir editor" : "✏️ Modo editor"}
-                      </button>
-                      {editorMode && <button onClick={copyPositions} style={{ padding: "8px 16px", borderRadius: 8, background: "#22c55e", color: white, fontWeight: 700, fontSize: 13 }}>📋 Copiar JSON</button>}
-                    </div>
+                    {editorMode && (
+                      <div className="flex justify-center mb-4 gap-2 flex-wrap">
+                        <button onClick={() => setEditorMode(false)} style={{ padding: "8px 16px", borderRadius: 8, background: "#ef4444", color: white, fontWeight: 700, fontSize: 13 }}>
+                          ✕ Salir editor
+                        </button>
+                        <button onClick={copyPositions} style={{ padding: "8px 16px", borderRadius: 8, background: "#22c55e", color: white, fontWeight: 700, fontSize: 13 }}>📋 Copiar JSON</button>
+                        {selectedKey && (
+                          <span style={{ padding: "8px 16px", borderRadius: 8, background: "#1e293b", color: white, fontSize: 12, fontFamily: "monospace" }}>
+                            {nodeLabel(selectedKey)}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    {!editorMode && (
+                      <div className="flex justify-center mb-4">
+                        <button onClick={() => setEditorMode(true)} style={{ padding: "8px 16px", borderRadius: 8, background: blue, color: white, fontWeight: 700, fontSize: 13 }}>
+                          ✏️ Modo editor
+                        </button>
+                      </div>
+                    )}
 
                     <div className="hidden md:block" style={{ paddingLeft: 100 }}>
-                      <div ref={containerRef} className="relative" style={{ minHeight: 520, cursor: editorMode ? "crosshair" : "default" }} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
+                      <div ref={containerRef} className="relative" style={{ minHeight: 520, cursor: editorMode ? (dragging ? "grabbing" : resizing ? "nwse-resize" : "crosshair") : "default" }} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
 
                         {/* Consumer */}
-                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.consumer.x, top: p.consumer.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("consumer", e)}>
-                          <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 14, minWidth: 180 }}>
+                        <div style={nodeStyle("consumer")} onMouseDown={(e) => handleMouseDown("consumer", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode && selectedKey === "consumer" ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 14, minWidth: 180 }}>
                             <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}><Smartphone size={24} color={white} strokeWidth={1.5} /></div>
                             <div><p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Consumer</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>(Performs checkout)</p></div>
                           </div>
-                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>consumer ({p.consumer.x}, {p.consumer.y})</span>}
-                        </motion.div>
+                          {resizeHandle("consumer")}
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700, whiteSpace: "nowrap" }}>{nodeLabel("consumer")}</span>}
+                        </div>
 
                         {/* Arrow Consumer → Integrator */}
                         <svg style={{ position: "absolute", left: p.arrowConsInt.x, top: p.arrowConsInt.y, cursor: editorMode ? "grab" : "default" }} width={p.arrowConsInt.w} height={p.arrowConsInt.h} onMouseDown={(e) => handleMouseDown("arrowConsInt", e as any)}>
-                          <line x1="0" y1="10" x2={p.arrowConsInt.w - 10} y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                          <polygon points={`${p.arrowConsInt.w - 10},5 ${p.arrowConsInt.w},10 ${p.arrowConsInt.w - 10},15`} fill={blue} />
-                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                          <line x1="0" y1={p.arrowConsInt.h / 2} x2={p.arrowConsInt.w - 10} y2={p.arrowConsInt.h / 2} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points={`${p.arrowConsInt.w - 10},${p.arrowConsInt.h / 2 - 5} ${p.arrowConsInt.w},${p.arrowConsInt.h / 2} ${p.arrowConsInt.w - 10},${p.arrowConsInt.h / 2 + 5}`} fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill={selectedKey === "arrowConsInt" ? "rgba(59,130,246,0.15)" : "rgba(239,68,68,0.05)"} stroke={selectedKey === "arrowConsInt" ? "#3b82f6" : "#ef4444"} strokeWidth="1" />}
                         </svg>
+                        {editorMode && <div onMouseDown={(e) => handleResizeDown("arrowConsInt", e)} style={{ position: "absolute", left: p.arrowConsInt.x + p.arrowConsInt.w - 6, top: p.arrowConsInt.y + p.arrowConsInt.h - 6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }} />}
 
                         {/* Integrator */}
-                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.integrator.x, top: p.integrator.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("integrator", e)}>
-                          <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 14, minWidth: 160 }}>
+                        <div style={nodeStyle("integrator")} onMouseDown={(e) => handleMouseDown("integrator", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode && selectedKey === "integrator" ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 14, minWidth: 160 }}>
                             <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}><Code2 size={24} color={white} strokeWidth={1.5} /></div>
                             <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Integrator</p>
                           </div>
-                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>integrator ({p.integrator.x}, {p.integrator.y})</span>}
-                        </motion.div>
+                          {resizeHandle("integrator")}
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700, whiteSpace: "nowrap" }}>{nodeLabel("integrator")}</span>}
+                        </div>
 
                         {/* Arrow Integrator → Unified (curveUp) */}
                         <svg style={{ position: "absolute", left: p.arrowIntUp.x, top: p.arrowIntUp.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowIntUp.w} height={p.arrowIntUp.h} onMouseDown={(e) => handleMouseDown("arrowIntUp", e as any)}>
                           <path d={`M0,${p.arrowIntUp.h} L0,60 Q0,0 60,0 L${p.arrowIntUp.w - 12},0`} fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
                           <polygon points={`${p.arrowIntUp.w - 12},-5 ${p.arrowIntUp.w},0 ${p.arrowIntUp.w - 12},5`} fill={blue} />
-                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                          {editorMode && <rect width="100%" height="100%" fill={selectedKey === "arrowIntUp" ? "rgba(59,130,246,0.15)" : "rgba(239,68,68,0.05)"} stroke={selectedKey === "arrowIntUp" ? "#3b82f6" : "#ef4444"} strokeWidth="1" />}
                         </svg>
+                        {editorMode && <div onMouseDown={(e) => handleResizeDown("arrowIntUp", e)} style={{ position: "absolute", left: p.arrowIntUp.x + p.arrowIntUp.w - 6, top: p.arrowIntUp.y + p.arrowIntUp.h - 6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }} />}
 
-                        {/* Arrow Integrator → Mastercard (curveDown) */}
+                        {/* Arrow Integrator → Brand (curveDown) */}
                         <svg style={{ position: "absolute", left: p.arrowIntDown.x, top: p.arrowIntDown.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowIntDown.w} height={p.arrowIntDown.h} onMouseDown={(e) => handleMouseDown("arrowIntDown", e as any)}>
                           <path d={`M0,0 L0,100 Q0,${p.arrowIntDown.h} 60,${p.arrowIntDown.h} L${p.arrowIntDown.w - 12},${p.arrowIntDown.h}`} fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
                           <polygon points={`${p.arrowIntDown.w - 12},${p.arrowIntDown.h - 5} ${p.arrowIntDown.w},${p.arrowIntDown.h} ${p.arrowIntDown.w - 12},${p.arrowIntDown.h + 5}`} fill={blue} />
-                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                          {editorMode && <rect width="100%" height="100%" fill={selectedKey === "arrowIntDown" ? "rgba(59,130,246,0.15)" : "rgba(239,68,68,0.05)"} stroke={selectedKey === "arrowIntDown" ? "#3b82f6" : "#ef4444"} strokeWidth="1" />}
                         </svg>
+                        {editorMode && <div onMouseDown={(e) => handleResizeDown("arrowIntDown", e)} style={{ position: "absolute", left: p.arrowIntDown.x + p.arrowIntDown.w - 6, top: p.arrowIntDown.y + p.arrowIntDown.h - 6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }} />}
 
                         {/* Unified Checkout Solutions */}
-                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.unified.x, top: p.unified.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("unified", e)}>
-                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
+                        <div style={nodeStyle("unified")} onMouseDown={(e) => handleMouseDown("unified", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode && selectedKey === "unified" ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
                             <div style={{ width: 44, height: 44, borderRadius: 10, background: "linear-gradient(135deg, #0D7C5F, #15A87C)", display: "flex", alignItems: "center", justifyContent: "center" }}><Globe size={22} color={white} strokeWidth={1.5} /></div>
                             <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Unified Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
                           </div>
-                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>unified ({p.unified.x}, {p.unified.y})</span>}
-                        </motion.div>
+                          {resizeHandle("unified")}
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700, whiteSpace: "nowrap" }}>{nodeLabel("unified")}</span>}
+                        </div>
 
                         {/* Brand Checkout Solutions */}
-                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.mastercard.x, top: p.mastercard.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("mastercard", e)}>
-                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
+                        <div style={nodeStyle("mastercard")} onMouseDown={(e) => handleMouseDown("mastercard", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode && selectedKey === "mastercard" ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
                             <div style={{ width: 44, height: 44, borderRadius: 10, background: "linear-gradient(135deg, #0D7C5F, #15A87C)", display: "flex", alignItems: "center", justifyContent: "center" }}><Globe size={22} color={white} strokeWidth={1.5} /></div>
                             <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Brand Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
                           </div>
-                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>mastercard ({p.mastercard.x}, {p.mastercard.y})</span>}
-                        </motion.div>
+                          {resizeHandle("mastercard")}
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700, whiteSpace: "nowrap" }}>{nodeLabel("mastercard")}</span>}
+                        </div>
 
                         {/* Arrow DCF → C2P (down) */}
                         <svg style={{ position: "absolute", left: p.arrowDCF.x, top: p.arrowDCF.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowDCF.w} height={p.arrowDCF.h} onMouseDown={(e) => handleMouseDown("arrowDCF", e as any)}>
-                          <line x1="20" y1="0" x2="20" y2={p.arrowDCF.h - 10} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                          <polygon points={`15,${p.arrowDCF.h - 10} 20,${p.arrowDCF.h} 25,${p.arrowDCF.h - 10}`} fill={blue} />
-                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                          <line x1={p.arrowDCF.w / 2} y1="0" x2={p.arrowDCF.w / 2} y2={p.arrowDCF.h - 10} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points={`${p.arrowDCF.w / 2 - 5},${p.arrowDCF.h - 10} ${p.arrowDCF.w / 2},${p.arrowDCF.h} ${p.arrowDCF.w / 2 + 5},${p.arrowDCF.h - 10}`} fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill={selectedKey === "arrowDCF" ? "rgba(59,130,246,0.15)" : "rgba(239,68,68,0.05)"} stroke={selectedKey === "arrowDCF" ? "#3b82f6" : "#ef4444"} strokeWidth="1" />}
                         </svg>
+                        {editorMode && <div onMouseDown={(e) => handleResizeDown("arrowDCF", e)} style={{ position: "absolute", left: p.arrowDCF.x + p.arrowDCF.w - 6, top: p.arrowDCF.y + p.arrowDCF.h - 6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }} />}
 
                         {/* Arrow Issuer → C2P (up) */}
                         <svg style={{ position: "absolute", left: p.arrowIssuer.x, top: p.arrowIssuer.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowIssuer.w} height={p.arrowIssuer.h} onMouseDown={(e) => handleMouseDown("arrowIssuer", e as any)}>
-                          <line x1="10" y1={p.arrowIssuer.h} x2="10" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                          <polygon points="5,10 10,0 15,10" fill={blue} />
-                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                          <line x1={p.arrowIssuer.w / 2} y1={p.arrowIssuer.h} x2={p.arrowIssuer.w / 2} y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points={`${p.arrowIssuer.w / 2 - 5},10 ${p.arrowIssuer.w / 2},0 ${p.arrowIssuer.w / 2 + 5},10`} fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill={selectedKey === "arrowIssuer" ? "rgba(59,130,246,0.15)" : "rgba(239,68,68,0.05)"} stroke={selectedKey === "arrowIssuer" ? "#3b82f6" : "#ef4444"} strokeWidth="1" />}
                         </svg>
+                        {editorMode && <div onMouseDown={(e) => handleResizeDown("arrowIssuer", e)} style={{ position: "absolute", left: p.arrowIssuer.x + p.arrowIssuer.w - 6, top: p.arrowIssuer.y + p.arrowIssuer.h - 6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }} />}
 
                         {/* Arrow Unified → C2P (left) */}
                         <svg style={{ position: "absolute", left: p.arrowUnifiedC2P.x, top: p.arrowUnifiedC2P.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowUnifiedC2P.w} height={p.arrowUnifiedC2P.h} onMouseDown={(e) => handleMouseDown("arrowUnifiedC2P", e as any)}>
                           <line x1={p.arrowUnifiedC2P.w} y1={p.arrowUnifiedC2P.h / 2} x2="10" y2={p.arrowUnifiedC2P.h / 2} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
                           <polygon points={`10,${p.arrowUnifiedC2P.h / 2 - 5} 0,${p.arrowUnifiedC2P.h / 2} 10,${p.arrowUnifiedC2P.h / 2 + 5}`} fill={blue} />
-                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                          {editorMode && <rect width="100%" height="100%" fill={selectedKey === "arrowUnifiedC2P" ? "rgba(59,130,246,0.15)" : "rgba(239,68,68,0.05)"} stroke={selectedKey === "arrowUnifiedC2P" ? "#3b82f6" : "#ef4444"} strokeWidth="1" />}
                         </svg>
+                        {editorMode && <div onMouseDown={(e) => handleResizeDown("arrowUnifiedC2P", e)} style={{ position: "absolute", left: p.arrowUnifiedC2P.x + p.arrowUnifiedC2P.w - 6, top: p.arrowUnifiedC2P.y + p.arrowUnifiedC2P.h - 6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }} />}
 
-                        {/* Arrow Mastercard → C2P (left) */}
+                        {/* Arrow Brand → C2P (left) */}
                         <svg style={{ position: "absolute", left: p.arrowMcC2P.x, top: p.arrowMcC2P.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowMcC2P.w} height={p.arrowMcC2P.h} onMouseDown={(e) => handleMouseDown("arrowMcC2P", e as any)}>
                           <line x1={p.arrowMcC2P.w} y1={p.arrowMcC2P.h / 2} x2="10" y2={p.arrowMcC2P.h / 2} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
                           <polygon points={`10,${p.arrowMcC2P.h / 2 - 5} 0,${p.arrowMcC2P.h / 2} 10,${p.arrowMcC2P.h / 2 + 5}`} fill={blue} />
-                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                          {editorMode && <rect width="100%" height="100%" fill={selectedKey === "arrowMcC2P" ? "rgba(59,130,246,0.15)" : "rgba(239,68,68,0.05)"} stroke={selectedKey === "arrowMcC2P" ? "#3b82f6" : "#ef4444"} strokeWidth="1" />}
                         </svg>
+                        {editorMode && <div onMouseDown={(e) => handleResizeDown("arrowMcC2P", e)} style={{ position: "absolute", left: p.arrowMcC2P.x + p.arrowMcC2P.w - 6, top: p.arrowMcC2P.y + p.arrowMcC2P.h - 6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }} />}
 
                         {/* Click to Pay */}
-                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.c2p.x, top: p.c2p.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("c2p", e)}>
-                          <div style={{ background: white, borderRadius: 20, padding: "24px 28px", boxShadow: "0 8px 40px rgba(123,47,255,0.15)", border: `2px solid ${editorMode ? "#ef4444" : blue + "30"}`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140 }}>
+                        <div style={nodeStyle("c2p")} onMouseDown={(e) => handleMouseDown("c2p", e)}>
+                          <div style={{ background: white, borderRadius: 20, padding: "24px 28px", boxShadow: "0 8px 40px rgba(123,47,255,0.15)", border: `2px solid ${editorMode && selectedKey === "c2p" ? "#ef4444" : blue + "30"}`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140 }}>
                             <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 20, maxWidth: "100%" }} />
                           </div>
-                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>c2p ({p.c2p.x}, {p.c2p.y})</span>}
-                        </motion.div>
+                          {resizeHandle("c2p")}
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700, whiteSpace: "nowrap" }}>{nodeLabel("c2p")}</span>}
+                        </div>
 
                         {/* Digital Card Facilitator */}
-                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.dcf.x, top: p.dcf.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("dcf", e)}>
-                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12 }}>
+                        <div style={nodeStyle("dcf")} onMouseDown={(e) => handleMouseDown("dcf", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode && selectedKey === "dcf" ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12 }}>
                             <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}><CreditCard size={22} color={white} strokeWidth={1.5} /></div>
                             <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Digital Card</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Facilitator</p></div>
                           </div>
-                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>dcf ({p.dcf.x}, {p.dcf.y})</span>}
-                        </motion.div>
+                          {resizeHandle("dcf")}
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700, whiteSpace: "nowrap" }}>{nodeLabel("dcf")}</span>}
+                        </div>
 
                         {/* Participating Issuer */}
-                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.issuer.x, top: p.issuer.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("issuer", e)}>
-                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12 }}>
+                        <div style={nodeStyle("issuer")} onMouseDown={(e) => handleMouseDown("issuer", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode && selectedKey === "issuer" ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12 }}>
                             <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}><Building2 size={22} color={white} strokeWidth={1.5} /></div>
                             <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Participating</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Issuer</p></div>
                           </div>
-                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>issuer ({p.issuer.x}, {p.issuer.y})</span>}
-                        </motion.div>
+                          {resizeHandle("issuer")}
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700, whiteSpace: "nowrap" }}>{nodeLabel("issuer")}</span>}
+                        </div>
 
                       </div>
                     </div>
