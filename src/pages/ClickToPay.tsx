@@ -521,9 +521,7 @@ export default function ClickToPay() {
                 type NodeData = { x: number; y: number; scale: number; label: string; sub?: string; template: string; icon: string };
                 type ArrowData = { x: number; y: number; w: number; h: number; type: "right" | "left" | "down" | "up" | "curveUp" | "curveDown" };
 
-                const [editorMode, setEditorMode] = useState(false);
-                const [selectedKey, setSelectedKey] = useState<string | null>(null);
-                const [copiedNodeKey, setCopiedNodeKey] = useState<string | null>(null);
+                const editorMode = false;
 
                 const [nodes, setNodes] = useState<Record<string, NodeData>>({
                   consumer: { x: -97, y: 194, scale: 1, label: "Consumer", sub: "(Performs checkout)", template: "violet", icon: "Smartphone" },
@@ -545,11 +543,6 @@ export default function ClickToPay() {
                   arrowDcfC2p: { x: 691, y: 227, w: 65, h: 20, type: "left" },
                 });
 
-                const [dragging, setDragging] = useState<{ key: string; kind: "node" | "arrow" } | null>(null);
-                const [resizingState, setResizingState] = useState<{ key: string; kind: "node" | "arrow" } | null>(null);
-                const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-                const [counters, setCounters] = useState({ arrow: 1, node: 1 });
-                const containerRef2 = useRef<HTMLDivElement>(null);
 
                 const iconMap: Record<string, React.ReactNode> = {
                   Smartphone: <Smartphone size={24} color={white} strokeWidth={1.5} />,
@@ -562,77 +555,8 @@ export default function ClickToPay() {
                   Star: <Star size={22} color={white} strokeWidth={1.5} />,
                 };
 
-                const handleMouseDown2 = (key: string, kind: "node" | "arrow", e: React.MouseEvent) => {
-                  if (!editorMode) return;
-                  e.preventDefault(); e.stopPropagation();
-                  const rect = containerRef2.current?.getBoundingClientRect();
-                  if (!rect) return;
-                  const pos = kind === "node" ? nodes[key] : arrowsState[key];
-                  setDragging({ key, kind });
-                  setSelectedKey(key);
-                  setDragOffset({ x: e.clientX - rect.left - pos.x, y: e.clientY - rect.top - pos.y });
-                };
-
-                const handleResizeDown2 = (key: string, kind: "node" | "arrow", e: React.MouseEvent) => {
-                  if (!editorMode) return;
-                  e.preventDefault(); e.stopPropagation();
-                  setResizingState({ key, kind });
-                  setSelectedKey(key);
-                };
-
-                const handleMouseMove2 = (e: React.MouseEvent) => {
-                  if (!containerRef2.current) return;
-                  const rect = containerRef2.current.getBoundingClientRect();
-                  if (dragging) {
-                    const nx = Math.round(e.clientX - rect.left - dragOffset.x);
-                    const ny = Math.round(e.clientY - rect.top - dragOffset.y);
-                    if (dragging.kind === "node") setNodes(prev => ({ ...prev, [dragging.key]: { ...prev[dragging.key], x: nx, y: ny } }));
-                    else setArrowsState(prev => ({ ...prev, [dragging.key]: { ...prev[dragging.key], x: nx, y: ny } }));
-                  } else if (resizingState) {
-                    if (resizingState.kind === "arrow") {
-                      const a = arrowsState[resizingState.key];
-                      setArrowsState(prev => ({ ...prev, [resizingState.key]: { ...prev[resizingState.key], w: Math.max(20, Math.round(e.clientX - rect.left - a.x)), h: Math.max(20, Math.round(e.clientY - rect.top - a.y)) } }));
-                    } else {
-                      const n = nodes[resizingState.key];
-                      const dx = e.clientX - rect.left - n.x;
-                      setNodes(prev => ({ ...prev, [resizingState.key]: { ...prev[resizingState.key], scale: Math.max(0.5, Math.min(2, Math.round(dx / 100 * 10) / 10)) } }));
-                    }
-                  }
-                };
-
-                const handleMouseUp2 = () => { setDragging(null); setResizingState(null); };
-
-                const copyAll = () => { navigator.clipboard.writeText(JSON.stringify({ nodes, arrows: arrowsState }, null, 2)); alert("JSON copiado"); };
-
-                const deleteSelected = () => {
-                  if (!selectedKey) return;
-                  if (selectedKey in arrowsState) setArrowsState(prev => { const n = { ...prev }; delete n[selectedKey]; return n; });
-                  else if (selectedKey in nodes) setNodes(prev => { const n = { ...prev }; delete n[selectedKey]; return n; });
-                  setSelectedKey(null);
-                };
-
-                const addArrow = (type: ArrowData["type"]) => {
-                  const id = `arrow_${counters.arrow}`;
-                  setCounters(c => ({ ...c, arrow: c.arrow + 1 }));
-                  const defs: Record<string, { w: number; h: number }> = { right: { w: 120, h: 20 }, left: { w: 120, h: 20 }, up: { w: 20, h: 100 }, down: { w: 20, h: 100 }, curveUp: { w: 120, h: 160 }, curveDown: { w: 120, h: 160 } };
-                  setArrowsState(prev => ({ ...prev, [id]: { x: 300, y: 200, ...defs[type], type } }));
-                  setSelectedKey(id);
-                };
-
-                const duplicateNode = () => {
-                  const src = copiedNodeKey || selectedKey;
-                  if (!src || !(src in nodes)) return;
-                  const s = nodes[src];
-                  const id = `node_${counters.node}`;
-                  setCounters(c => ({ ...c, node: c.node + 1 }));
-                  setNodes(prev => ({ ...prev, [id]: { ...s, x: s.x + 30, y: s.y + 30, label: `${s.label} (copy)` } }));
-                  setSelectedKey(id);
-                };
-
-                const copyFormat = () => { if (selectedKey && selectedKey in nodes) setCopiedNodeKey(selectedKey); };
 
                 const renderArrow = (key: string, a: ArrowData) => {
-                  const sel = selectedKey === key;
                   let content: React.ReactNode;
                   switch (a.type) {
                     case "right": content = <><line x1="0" y1={a.h / 2} x2={a.w - 10} y2={a.h / 2} stroke={blue} strokeWidth="2" strokeDasharray="6 4" /><polygon points={`${a.w - 10},${a.h / 2 - 5} ${a.w},${a.h / 2} ${a.w - 10},${a.h / 2 + 5}`} fill={blue} /></>; break;
@@ -643,29 +567,23 @@ export default function ClickToPay() {
                     case "curveDown": content = <><path d={`M0,0 L0,${a.h - 60} Q0,${a.h} 60,${a.h} L${a.w - 12},${a.h}`} fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" /><polygon points={`${a.w - 12},${a.h - 5} ${a.w},${a.h} ${a.w - 12},${a.h + 5}`} fill={blue} /></>; break;
                   }
                   return (
-                    <React.Fragment key={key}>
-                      <svg style={{ position: "absolute", left: a.x, top: a.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={a.w} height={a.h} onMouseDown={(e) => handleMouseDown2(key, "arrow", e)}>
-                        {content}
-                        {editorMode && <rect width="100%" height="100%" fill={sel ? "rgba(59,130,246,0.15)" : "rgba(239,68,68,0.05)"} stroke={sel ? "#3b82f6" : "#ef4444"} strokeWidth="1" />}
-                      </svg>
-                      {editorMode && <div onMouseDown={(e) => handleResizeDown2(key, "arrow", e)} style={{ position: "absolute", left: a.x + a.w - 6, top: a.y + a.h - 6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }} />}
-                      {editorMode && sel && <span style={{ position: "absolute", left: a.x, top: a.y - 16, fontSize: 10, color: "#3b82f6", fontWeight: 700, whiteSpace: "nowrap", zIndex: 20 }}>{key} ({a.x},{a.y}) {a.w}×{a.h} [{a.type}]</span>}
-                    </React.Fragment>
+                    <svg key={key} style={{ position: "absolute", left: a.x, top: a.y, overflow: "visible" }} width={a.w} height={a.h}>
+                      {content}
+                    </svg>
                   );
                 };
 
                 const renderNode = (key: string, n: NodeData) => {
-                  const sel = selectedKey === key;
                   const tmpl = nodeTemplates[n.template as keyof typeof nodeTemplates] || nodeTemplates.violet;
                   const isC2P = n.template === "c2pTmpl";
                   return (
-                    <div key={key} style={{ position: "absolute", left: n.x, top: n.y, cursor: editorMode ? "grab" : "default", transform: `scale(${n.scale})`, transformOrigin: "top left" }} onMouseDown={(e) => handleMouseDown2(key, "node", e)}>
+                    <div key={key} style={{ position: "absolute", left: n.x, top: n.y, transform: `scale(${n.scale})`, transformOrigin: "top left" }}>
                       {isC2P ? (
-                        <div style={{ background: white, borderRadius: 20, padding: "24px 28px", boxShadow: "0 8px 40px rgba(123,47,255,0.15)", border: `2px solid ${sel && editorMode ? "#ef4444" : blue + "30"}`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140 }}>
+                        <div style={{ background: white, borderRadius: 20, padding: "24px 28px", boxShadow: "0 8px 40px rgba(123,47,255,0.15)", border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140 }}>
                           <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 20, maxWidth: "100%" }} />
                         </div>
                       ) : (
-                        <div style={{ background: white, borderRadius: (tmpl as any).borderRadius, padding: (tmpl as any).padding, boxShadow: (tmpl as any).boxShadow, border: `1px solid ${sel && editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 160, width: (key === "dcf" || key === "issuer") ? 200 : undefined }}>
+                        <div style={{ background: white, borderRadius: (tmpl as any).borderRadius, padding: (tmpl as any).padding, boxShadow: (tmpl as any).boxShadow, border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 160, width: (key === "dcf" || key === "issuer") ? 200 : undefined }}>
                           <div style={{ width: (tmpl as any).iconSize || 44, height: (tmpl as any).iconSize || 44, borderRadius: (tmpl as any).iconRadius || 10, background: (tmpl as any).gradient, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                             {iconMap[n.icon] || <Star size={22} color={white} />}
                           </div>
@@ -675,44 +593,14 @@ export default function ClickToPay() {
                           </div>
                         </div>
                       )}
-                      {editorMode && <div onMouseDown={(e) => handleResizeDown2(key, "node", e)} style={{ position: "absolute", right: -6, bottom: -6, width: 12, height: 12, background: "#3b82f6", borderRadius: 2, cursor: "nwse-resize", border: "2px solid white", zIndex: 10 }} />}
-                      {editorMode && sel && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700, whiteSpace: "nowrap" }}>{key} ({n.x},{n.y}) s:{n.scale} [{n.template}]</span>}
                     </div>
                   );
                 };
 
                 return (
                   <>
-                    {editorMode && (
-                      <div className="flex flex-col items-center gap-2 mb-4">
-                        <div className="flex justify-center gap-2 flex-wrap">
-                          <button onClick={() => setEditorMode(false)} style={{ padding: "6px 14px", borderRadius: 8, background: "#ef4444", color: white, fontWeight: 700, fontSize: 12 }}>✕ Salir</button>
-                          <button onClick={copyAll} style={{ padding: "6px 14px", borderRadius: 8, background: "#22c55e", color: white, fontWeight: 700, fontSize: 12 }}>📋 JSON</button>
-                          <button onClick={deleteSelected} disabled={!selectedKey} style={{ padding: "6px 14px", borderRadius: 8, background: selectedKey ? "#ef4444" : "#94a3b8", color: white, fontWeight: 700, fontSize: 12 }}>🗑 Eliminar</button>
-                          <button onClick={copyFormat} disabled={!(selectedKey && selectedKey in nodes)} style={{ padding: "6px 14px", borderRadius: 8, background: "#8b5cf6", color: white, fontWeight: 700, fontSize: 12 }}>📑 Copiar fmt</button>
-                          <button onClick={duplicateNode} disabled={!copiedNodeKey && !(selectedKey && selectedKey in nodes)} style={{ padding: "6px 14px", borderRadius: 8, background: "#6366f1", color: white, fontWeight: 700, fontSize: 12 }}>✚ Duplicar</button>
-                        </div>
-                        <div className="flex justify-center gap-1 flex-wrap">
-                          <span style={{ fontSize: 11, color: "#64748b", padding: "4px 8px" }}>+ Flecha:</span>
-                          {(["right", "left", "up", "down", "curveUp", "curveDown"] as const).map(t => (
-                            <button key={t} onClick={() => addArrow(t)} style={{ padding: "4px 10px", borderRadius: 6, background: "#1e293b", color: white, fontWeight: 600, fontSize: 11 }}>{t}</button>
-                          ))}
-                        </div>
-                        {(selectedKey || copiedNodeKey) && (
-                          <span style={{ padding: "4px 12px", borderRadius: 6, background: "#1e293b", color: "#93c5fd", fontSize: 11, fontFamily: "monospace" }}>
-                            {selectedKey ? `sel: ${selectedKey}` : ""} {copiedNodeKey ? `| fmt: ${copiedNodeKey}` : ""}
-                          </span>
-                        )}
-                      </div>
-                    )}
-                    {!editorMode && (
-                      <div className="flex justify-center mb-4">
-                        <button onClick={() => setEditorMode(true)} style={{ padding: "8px 16px", borderRadius: 8, background: blue, color: white, fontWeight: 700, fontSize: 13 }}>✏️ Modo editor</button>
-                      </div>
-                    )}
-
                     <div className="hidden md:block" style={{ paddingLeft: 100 }}>
-                      <div ref={containerRef2} className="relative" style={{ minHeight: 520, cursor: editorMode ? (dragging ? "grabbing" : resizingState ? "nwse-resize" : "crosshair") : "default" }} onMouseMove={handleMouseMove2} onMouseUp={handleMouseUp2} onMouseLeave={handleMouseUp2}>
+                      <div className="relative" style={{ minHeight: 520 }}>
                         {Object.entries(arrowsState).map(([k, a]) => renderArrow(k, a))}
                         {Object.entries(nodes).map(([k, n]) => renderNode(k, n))}
                       </div>
