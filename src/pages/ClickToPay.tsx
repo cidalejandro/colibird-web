@@ -671,7 +671,7 @@ export default function ClickToPay() {
                 },
                 {
                   title: "Participating Issuer",
-                  text: "Permite la inscripción de los consumidores en Click to Pay mediante la integración con las APIs de inscripción del emisor.",
+                  text: "Permite el enrolamiento de los consumidores en Click to Pay mediante la integración con las APIs de enrolamiento del emisor.",
                   icon: <Building2 size={22} color={white} strokeWidth={1.5} />,
                   gradient: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`,
                 },
