@@ -759,6 +759,42 @@ export default function ClickToPay() {
                 ))}
               </div>
             </div>
+
+            {/* Descriptions below diagram */}
+            <motion.div variants={stagger} className="max-w-4xl mx-auto mt-16 flex flex-col gap-8">
+              {[
+                {
+                  title: "Integrator",
+                  text: "Un comercio que utiliza un Proveedor de Servicios de Pago (PSP) para integrarse con Mastercard Checkout Solutions, o un comercio, PSP, gateway o adquirente que se integra directamente con Unified Checkout Solutions.",
+                },
+                {
+                  title: "Integration Solution",
+                  text: "Unified Checkout Solutions: Click to Pay para todas las redes participantes.\n\nBrand Checkout Solutions: Click to Pay para tarjetas de cada brand en particular.\n\nPara cada marca de tarjetas, se deben completar las tareas de integración específicas de cada red participante.",
+                },
+                {
+                  title: "Click to Pay",
+                  text: "Pago y proceso de compra en línea seguros.",
+                },
+                {
+                  title: "Participating Issuer",
+                  text: "Permite la inscripción de los consumidores en Click to Pay mediante la integración con las APIs de inscripción del emisor.",
+                },
+                {
+                  title: "Digital Card Facilitator (DCF)",
+                  text: "Enrola a los consumidores y almacena la tarjeta digital.",
+                },
+              ].map((item, i) => (
+                <motion.div key={i} variants={fadeUp} className="flex gap-4 items-start">
+                  <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 16, marginTop: 5, flexShrink: 0 }} />
+                  <div>
+                    <p style={{ fontWeight: 700, fontSize: 16, color: navy, marginBottom: 4 }}>{item.title}</p>
+                    {item.text.split("\n\n").map((paragraph, pi) => (
+                      <p key={pi} style={{ fontSize: 14, color: "rgba(26,10,46,0.7)", lineHeight: 1.6, marginBottom: pi < item.text.split("\n\n").length - 1 ? 8 : 0 }}>{paragraph}</p>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </Section>
         </div>
       </section>
