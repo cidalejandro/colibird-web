@@ -142,7 +142,7 @@ export default function ClickToPay() {
     "Sé compliance con los mandatos de las marcas y evita multas o pedidos de waivers.",
     "Activá el poder tu marca emisora dentro de los flujos de pagos adquirentes.",
     "Te brandeamos la comunicación con el tarjetahabiente para activar el uso de C2P de tus tarjetas emitidas.",
-    "Reducción de la proliferación de wallets y botones digitales",
+    "Reducí la proliferación de wallets y botones digitales",
   ];
 
   const comerciosPains = [
