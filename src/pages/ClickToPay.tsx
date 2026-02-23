@@ -182,21 +182,21 @@ export default function ClickToPay() {
   ];
 
   const emisoresBenefits = [
-    "Ser la opción de pago principal y más elegida",
-    "Fortalecer la relación con el tarjetahabiente",
-    "Activación de marca dentro del flujo de pago digital",
-    "Inscripción automática de tarjetas al emitir",
-    "Administración del ciclo de vida de credenciales",
-    "Mantenerse a la vanguardia frente a wallets y botones de terceros",
+    "Ser la opción de pago principal y más elegida.",
+    "Fortalecer la relación con el tarjetahabiente.",
+    "Activación de marca dentro del flujo de pago digital.",
+    "Inscripción automática de tarjetas al emitir.",
+    "Administración del ciclo de vida de credenciales.",
+    "Mantenerse a la vanguardia frente a wallets y botones de terceros.",
   ];
 
   const comerciosBenefits = [
-    "Reducir abandono del carrito en guest checkout",
-    "Aumentar tasa de autorización en +4.3% promedio",
-    "Minimizar fraude con tokenización",
-    "Reducir alcance PCI-DSS",
-    "Integración no invasiva en el checkout existente",
-    "Credenciales siempre actualizadas (menos rechazos falsos)",
+    "Reducir abandono del carrito en guest checkout.",
+    "Aumentar tasa de autorización en +4.3% promedio.",
+    "Minimizar fraude con tokenización.",
+    "Reducir alcance PCI-DSS.",
+    "Integración no invasiva en el checkout existente.",
+    "Credenciales siempre actualizadas (menos rechazos falsos).",
   ];
 
   const faqs = [
