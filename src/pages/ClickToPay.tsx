@@ -542,6 +542,7 @@ export default function ClickToPay() {
                   arrowMcC2P: { x: 649, y: 239, w: 60, h: 80, type: "left" },
                   arrowDCF: { x: 553, y: 83, w: 40, h: 100, type: "down" },
                   arrowIssuer: { x: 569, y: 296, w: 20, h: 120, type: "up" },
+                  arrowDcfC2p: { x: 645, y: 172, w: 65, h: 20, type: "left" },
                 });
 
                 const [dragging, setDragging] = useState<{ key: string; kind: "node" | "arrow" } | null>(null);
