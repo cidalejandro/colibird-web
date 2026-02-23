@@ -654,7 +654,7 @@ export default function ClickToPay() {
               {[
                 {
                   title: "Integrator",
-                  text: "Un comercio que utiliza un Proveedor de Servicios de Pago (PSP) para integrarse con Mastercard Checkout Solutions, o un comercio, PSP, gateway o adquirente que se integra directamente con Unified Checkout Solutions.",
+                  text: "Un comercio que utiliza un Proveedor de Servicios de Pago (PSP) para integrarse con Visa/Mastercard Checkout Solutions, o un comercio, PSP, gateway o adquirente que se integra directamente con Unified Checkout Solutions.",
                   icon: <Code2 size={22} color={white} strokeWidth={1.5} />,
                   gradient: `linear-gradient(135deg, ${blue}, ${blueMid})`,
                 },
