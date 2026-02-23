@@ -588,7 +588,7 @@ export default function ClickToPay() {
                   {/* Click to Pay */}
                   <motion.div variants={fadeUp} style={{ position: "absolute", left: 505, top: 184 }}>
                     <div style={{ background: white, borderRadius: 20, padding: "24px 28px", boxShadow: "0 8px 40px rgba(123,47,255,0.15)", border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140 }}>
-                      <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 32, maxWidth: "100%" }} />
+                      <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 20, maxWidth: "100%" }} />
                     </div>
                   </motion.div>
 
@@ -632,7 +632,7 @@ export default function ClickToPay() {
                         background: white, borderRadius: 16, padding: "20px 24px", boxShadow: `0 8px 32px rgba(123,47,255,0.15)`,
                         border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
                       }}>
-                        <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 28, maxWidth: "100%" }} />
+                        <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 18, maxWidth: "100%" }} />
                       </div>
                     ) : (
                       <div style={{
