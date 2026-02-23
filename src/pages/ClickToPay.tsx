@@ -11,6 +11,8 @@ import type { Variants } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import c2pHorizontalDark from "@/assets/c2p-horizontal-dark.svg";
 import c2pIconDark from "@/assets/c2p-icon-dark.svg";
+import visaLogo from "@/assets/visa-logo.svg";
+import mastercardLogo from "@/assets/mastercard-logo.svg";
 
 // ─── Design tokens — Colibird palette ────────────────────────────────────────
 const navy = "#1A0A2E";           // deep violet-dark background
@@ -495,7 +497,7 @@ export default function ClickToPay() {
           <Section>
             <motion.h2
               variants={fadeUp}
-              style={{ color: navy, fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", fontWeight: 800, textAlign: "center", marginBottom: 48 }}
+              style={{ color: navy, fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", fontWeight: 800, textAlign: "center", marginBottom: 56 }}
             >
               ¿Cómo funciona{" "}
               <svg width="1.2em" height="0.75em" viewBox="0 0 26 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "inline-block", verticalAlign: "middle", marginRight: "0.15em" }}>
@@ -503,6 +505,207 @@ export default function ClickToPay() {
               </svg>
               Click to Pay?
             </motion.h2>
+
+            {/* Flow diagram */}
+            <div className="relative max-w-5xl mx-auto">
+              {/* Desktop layout */}
+              <div className="hidden md:block">
+                <div className="relative" style={{ minHeight: 480 }}>
+                  {/* ── Row: Consumer ── */}
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)" }}>
+                    <div style={{
+                      background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
+                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 180,
+                    }}>
+                      <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <Smartphone size={24} color={white} strokeWidth={1.5} />
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Consumer</p>
+                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>(Performs checkout)</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* ── Arrow Consumer → Integrator ── */}
+                  <svg style={{ position: "absolute", left: 190, top: "50%", transform: "translateY(-50%)" }} width="60" height="20">
+                    <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="48,5 58,10 48,15" fill={blue} />
+                  </svg>
+
+                  {/* ── Integrator ── */}
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 260, top: "50%", transform: "translateY(-50%)" }}>
+                    <div style={{
+                      background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
+                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 160,
+                    }}>
+                      <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <Code2 size={24} color={white} strokeWidth={1.5} />
+                      </div>
+                      <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Integrator</p>
+                    </div>
+                  </motion.div>
+
+                  {/* ── Arrow Integrator → Unified (up) ── */}
+                  <svg style={{ position: "absolute", left: 340, top: 60 }} width="120" height="130">
+                    <path d="M0,130 L0,60 Q0,0 60,0 L108,0" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="108,-5 118,0 108,5" fill={blue} />
+                  </svg>
+
+                  {/* ── Arrow Integrator → Mastercard (down) ── */}
+                  <svg style={{ position: "absolute", left: 340, top: "50%", marginTop: 24 }} width="120" height="130">
+                    <path d="M0,0 L0,70 Q0,130 60,130 L108,130" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="108,125 118,130 108,135" fill={blue} />
+                  </svg>
+
+                  {/* ── Unified Checkout Solutions ── */}
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 460, top: 20 }}>
+                    <div style={{
+                      background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
+                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190,
+                    }}>
+                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, #0D7C5F, #15A87C)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <Globe size={22} color={white} strokeWidth={1.5} />
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Unified Checkout</p>
+                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* ── Mastercard Checkout Solutions ── */}
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 460, bottom: 20 }}>
+                    <div style={{
+                      background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
+                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190,
+                    }}>
+                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, #0D7C5F, #15A87C)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <Globe size={22} color={white} strokeWidth={1.5} />
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Mastercard Checkout</p>
+                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* ── Arrow Unified → Click to Pay ── */}
+                  <svg style={{ position: "absolute", left: 660, top: 45 }} width="60" height="20">
+                    <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="48,5 58,10 48,15" fill={blue} />
+                  </svg>
+
+                  {/* ── Arrow Mastercard → Click to Pay ── */}
+                  <svg style={{ position: "absolute", left: 660, bottom: 45 }} width="60" height="20">
+                    <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="48,5 58,10 48,15" fill={blue} />
+                  </svg>
+
+                  {/* ── Click to Pay (center-right) ── */}
+                  <motion.div variants={fadeUp} style={{ position: "absolute", right: 160, top: "50%", transform: "translateY(-50%)" }}>
+                    <div style={{
+                      background: white, borderRadius: 20, padding: "24px 28px", boxShadow: `0 8px 40px rgba(123,47,255,0.15)`,
+                      border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140,
+                    }}>
+                      <div className="flex items-center gap-3">
+                        <img src={visaLogo} alt="Visa" style={{ height: 28 }} />
+                        <img src={mastercardLogo} alt="Mastercard" style={{ height: 28 }} />
+                      </div>
+                      <p style={{ fontWeight: 800, fontSize: 15, color: navy }}>Click to Pay</p>
+                    </div>
+                  </motion.div>
+
+                  {/* ── Arrow DCF → Click to Pay ── */}
+                  <svg style={{ position: "absolute", right: 155, top: 55 }} width="20" height="60">
+                    <line x1="10" y1="0" x2="10" y2="48" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="5,48 10,58 15,48" fill={blue} />
+                  </svg>
+
+                  {/* ── Arrow Issuer → Click to Pay ── */}
+                  <svg style={{ position: "absolute", right: 155, bottom: 55 }} width="20" height="60">
+                    <line x1="10" y1="60" x2="10" y2="12" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="5,12 10,2 15,12" fill={blue} />
+                  </svg>
+
+                  {/* ── Digital Card Facilitator ── */}
+                  <motion.div variants={fadeUp} style={{ position: "absolute", right: 0, top: 10 }}>
+                    <div style={{
+                      background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
+                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12,
+                    }}>
+                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <CreditCard size={22} color={white} strokeWidth={1.5} />
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Digital Card</p>
+                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Facilitator</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* ── Participating Issuer ── */}
+                  <motion.div variants={fadeUp} style={{ position: "absolute", right: 0, bottom: 10 }}>
+                    <div style={{
+                      background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
+                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12,
+                    }}>
+                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <Building2 size={22} color={white} strokeWidth={1.5} />
+                      </div>
+                      <div>
+                        <p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Participating</p>
+                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Issuer</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Mobile layout - vertical flow */}
+              <div className="md:hidden flex flex-col items-center gap-4">
+                {[
+                  { icon: <Smartphone size={24} color={white} />, title: "Consumer", sub: "(Performs checkout)", gradient: `linear-gradient(135deg, ${blue}, ${blueMid})` },
+                  { icon: <Code2 size={24} color={white} />, title: "Integrator", sub: "", gradient: `linear-gradient(135deg, ${blue}, ${blueMid})` },
+                  { icon: <Globe size={22} color={white} />, title: "Unified Checkout Solutions", sub: "", gradient: "linear-gradient(135deg, #0D7C5F, #15A87C)" },
+                  { icon: <Globe size={22} color={white} />, title: "Mastercard Checkout Solutions", sub: "", gradient: "linear-gradient(135deg, #0D7C5F, #15A87C)" },
+                  { isC2P: true },
+                  { icon: <CreditCard size={22} color={white} />, title: "Digital Card Facilitator", sub: "", gradient: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)` },
+                  { icon: <Building2 size={22} color={white} />, title: "Participating Issuer", sub: "", gradient: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)` },
+                ].map((item: any, i) => (
+                  <motion.div key={i} variants={fadeUp} className="w-full max-w-xs">
+                    {i > 0 && (
+                      <div className="flex justify-center mb-3">
+                        <svg width="20" height="28"><line x1="10" y1="0" x2="10" y2="18" stroke={blue} strokeWidth="2" strokeDasharray="5 3" /><polygon points="5,18 10,28 15,18" fill={blue} /></svg>
+                      </div>
+                    )}
+                    {item.isC2P ? (
+                      <div style={{
+                        background: white, borderRadius: 16, padding: "20px 24px", boxShadow: `0 8px 32px rgba(123,47,255,0.15)`,
+                        border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
+                      }}>
+                        <div className="flex items-center gap-3">
+                          <img src={visaLogo} alt="Visa" style={{ height: 24 }} />
+                          <img src={mastercardLogo} alt="Mastercard" style={{ height: 24 }} />
+                        </div>
+                        <p style={{ fontWeight: 800, fontSize: 15, color: navy }}>Click to Pay</p>
+                      </div>
+                    ) : (
+                      <div style={{
+                        background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
+                        border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12,
+                      }}>
+                        <div style={{ width: 44, height: 44, borderRadius: 10, background: item.gradient, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{item.icon}</div>
+                        <div>
+                          <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>{item.title}</p>
+                          {item.sub && <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>{item.sub}</p>}
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </Section>
         </div>
       </section>
