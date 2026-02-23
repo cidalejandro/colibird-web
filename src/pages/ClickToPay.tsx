@@ -509,7 +509,7 @@ export default function ClickToPay() {
 
             {/* Flow diagram */}
             <div className="relative max-w-5xl mx-auto">
-              <div className="hidden md:block">
+              <div className="hidden md:block" style={{ paddingLeft: 100 }}>
                 <div className="relative" style={{ minHeight: 520 }}>
 
                   {/* Consumer */}
