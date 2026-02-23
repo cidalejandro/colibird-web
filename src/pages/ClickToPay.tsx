@@ -177,7 +177,7 @@ export default function ClickToPay() {
   const workSteps = [
     { icon: <Search size={28} />, title: "Discovery & Assessment", desc: "Mapeamos tu checkout actual, stack tecnológico, relación con esquemas y objetivos de negocio. Definimos el alcance exacto de la implementación." },
     { icon: <PenLine size={28} />, title: "UX Design & Architecture", desc: "Diseñamos el journey de Click to Pay centrado en tu Cliente. Blueprint técnico de integración: SDK, flujos de autenticación y tokenización." },
-    { icon: <Code2 size={28} />, title: "Agile Build & Integration", desc: "Sprints ágiles. Componentes React. Integración API. Cobertura de testing completa. Revisiones continuas con tu equipo." },
+    { icon: <Code2 size={28} />, title: "Agile Build & Integration", desc: "Sprints ágiles. Componentes React. Integración SDK. Cobertura de testing completa. Revisiones continuas con tu equipo." },
     { icon: <Rocket size={28} />, title: "Certificación, Launch & Optimize", desc: "Acompañamiento en la certificación con Visa/Mastercard. Go-live support. Analytics de conversión y mejora continua de la UX post-lanzamiento." },
   ];
 
