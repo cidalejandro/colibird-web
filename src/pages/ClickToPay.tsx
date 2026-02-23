@@ -161,7 +161,7 @@ export default function ClickToPay() {
       icon: <ShieldCheck size={32} color={blue} />,
       role: "Especialista en Medios de Pago",
       desc: "Expertise profundo en specs EMV®Co de Click to Pay, reglas de esquemas (Visa SRC, Mastercard SRC), flujos de tokenización, conectividad emisor-adquirente y certificaciones de red.",
-      tags: ["EMV®Co", "Tokenización", "Visa SRC", "Certificación"],
+      tags: ["EMV®Co", "Tokenización", "Visa SRC", "MA SRC", "Certificación"],
     },
     {
       icon: <Kanban size={32} color={blueMid} />,
