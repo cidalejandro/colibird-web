@@ -143,13 +143,14 @@ export default function ClickToPay() {
   ];
 
   const comerciosPains = [
-    "Integración del botón Click to Pay en web y mobile",
-    "Implementación React del SRCI SDK",
-    "Optimización UX/UI para maximizar conversión",
-    "Reducción del alcance PCI-DSS mediante tokenización",
-    "Eliminación del guest checkout manual",
-    "A/B testing de flujos de pago",
-    "Mejora de tasas de autorización con tokens Visa",
+    "Integrá el botón de Click to Pay en el checkout de tu web y mobile.",
+    "Gestioná el perfil de tus Clientes y el enrolamiento de sus tarjetas en Click To Pay.",
+    "Implementá el SDK del SRC-A de las marcas (Visa y Mastercard) en forma sencilla.",
+    "Te ayudamos con el A/B testing de flujos de pago.",
+    "Optimizá tu UX/UI para maximizar conversión a ventas.",
+    "Reducí el alcance de PCI-DSS mediante tokenización (VTS Visa, MDES Mastercard).",
+    "Eliminá el guest checkout manual.",
+    "Mejorá las tasas de autorización para Visa y Mastercard.",
   ];
 
   const teamCards = [
@@ -597,7 +598,7 @@ export default function ClickToPay() {
                 </div>
                 <h3 style={{ color: white, fontSize: 22, fontWeight: 800, marginBottom: 12 }}>Para Sitios de Comercio Electrónico</h3>
                 <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 14, marginBottom: 24, lineHeight: 1.6 }}>
-                  Convertí visitantes en compradores. Reducí el abandono del carrito y mejorá tus tasas de conversión con una experiencia de checkout sin fricciones.
+                  Convertí visitantes en compradores. Reducí el abandono del carrito de compras y mejorá tus tasas de conversión con una experiencia de checkout ágil, segura y sin fricciones.
                 </p>
                 <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10 }}>
                   {comerciosPains.map((p) => (
