@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   ShieldCheck, CreditCard, Search,
@@ -91,60 +91,6 @@ function Tag({ label }: { label: string }) {
   );
 }
 
-// ─── Draggable element for editor mode ────────────────────────────────────────
-function Draggable({ id, initialX, initialY, children, onMove }: {
-  id: string; initialX: number; initialY: number;
-  children: React.ReactNode;
-  onMove: (id: string, x: number, y: number) => void;
-}) {
-  const [pos, setPos] = useState({ x: initialX, y: initialY });
-  const dragging = useRef(false);
-  const offset = useRef({ x: 0, y: 0 });
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    dragging.current = true;
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    offset.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    e.preventDefault();
-  };
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!dragging.current) return;
-      const parent = document.getElementById("flow-diagram-container");
-      if (!parent) return;
-      const parentRect = parent.getBoundingClientRect();
-      const x = e.clientX - parentRect.left - offset.current.x;
-      const y = e.clientY - parentRect.top - offset.current.y;
-      setPos({ x, y });
-      onMove(id, Math.round(x), Math.round(y));
-    };
-    const handleMouseUp = () => { dragging.current = false; };
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [id, onMove]);
-
-  return (
-    <div
-      onMouseDown={handleMouseDown}
-      style={{
-        position: "absolute",
-        left: pos.x,
-        top: pos.y,
-        cursor: "grab",
-        userSelect: "none",
-        zIndex: 2,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
 // ═════════════════════════════════════════════════════════════════════════════
 export default function ClickToPay() {
   const { toast } = useToast();
@@ -160,29 +106,6 @@ export default function ClickToPay() {
 
   // ── FAQ STATE ──
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  // ── DIAGRAM POSITIONS STATE ──
-  const [diagramPositions, setDiagramPositions] = useState<Record<string, { x: number; y: number }>>({
-    consumer: { x: 0, y: 200 },
-    integrator: { x: 300, y: 200 },
-    unified: { x: 500, y: 20 },
-    mastercard: { x: 500, y: 370 },
-    arrowConsInt: { x: 114, y: 210 },
-    arrowIntUp: { x: 420, y: 60 },
-    arrowIntDown: { x: 420, y: 260 },
-    arrowUnifiedC2P: { x: 700, y: 45 },
-    arrowMcC2P: { x: 700, y: 395 },
-    c2p: { x: 730, y: 180 },
-    arrowDCF: { x: 810, y: 55 },
-    arrowIssuer: { x: 810, y: 355 },
-    dcf: { x: 850, y: 10 },
-    issuer: { x: 850, y: 380 },
-  });
-  const [showPositions, setShowPositions] = useState(true);
-
-  const handleDiagramMove = useCallback((id: string, x: number, y: number) => {
-    setDiagramPositions(prev => ({ ...prev, [id]: { x, y } }));
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -585,32 +508,12 @@ export default function ClickToPay() {
 
             {/* Flow diagram */}
             <div className="relative max-w-5xl mx-auto">
-              {/* Position debug panel */}
-              {showPositions && (
-                <div style={{
-                  position: "fixed", top: 10, right: 10, zIndex: 9999, background: "rgba(0,0,0,0.9)",
-                  color: "#0f0", fontSize: 11, padding: 12, borderRadius: 8, maxHeight: "50vh", overflowY: "auto",
-                  fontFamily: "monospace", minWidth: 260,
-                }}>
-                  <div style={{ marginBottom: 8, fontWeight: 700, color: "#fff" }}>📐 Posiciones del diagrama</div>
-                  {Object.entries(diagramPositions).map(([k, v]) => (
-                    <div key={k}>{k}: x={v.x}, y={v.y}</div>
-                  ))}
-                  <button onClick={() => {
-                    navigator.clipboard.writeText(JSON.stringify(diagramPositions, null, 2));
-                    toast({ title: "Posiciones copiadas al clipboard" });
-                  }} style={{ marginTop: 8, background: blue, color: "#fff", border: "none", borderRadius: 4, padding: "4px 12px", cursor: "pointer" }}>
-                    📋 Copiar JSON
-                  </button>
-                </div>
-              )}
-
-              {/* Desktop layout - DRAGGABLE */}
+              {/* Desktop layout */}
               <div className="hidden md:block">
-                <div id="flow-diagram-container" className="relative" style={{ minHeight: 480 }}>
+                <div className="relative" style={{ minHeight: 480 }}>
 
                   {/* ── Consumer ── */}
-                  <Draggable id="consumer" initialX={diagramPositions.consumer.x} initialY={diagramPositions.consumer.y} onMove={handleDiagramMove}>
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: -96, top: 197 }}>
                     <div style={{
                       background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                       border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 180,
@@ -623,18 +526,16 @@ export default function ClickToPay() {
                         <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>(Performs checkout)</p>
                       </div>
                     </div>
-                  </Draggable>
+                  </motion.div>
 
                   {/* ── Arrow Consumer → Integrator ── */}
-                  <Draggable id="arrowConsInt" initialX={diagramPositions.arrowConsInt.x} initialY={diagramPositions.arrowConsInt.y} onMove={handleDiagramMove}>
-                    <svg width="180" height="20" style={{ overflow: "visible" }}>
-                      <line x1="0" y1="10" x2="160" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                      <polygon points="160,5 170,10 160,15" fill={blue} />
-                    </svg>
-                  </Draggable>
+                  <svg style={{ position: "absolute", left: 125, top: 232 }} width="180" height="20">
+                    <line x1="0" y1="10" x2="160" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="160,5 170,10 160,15" fill={blue} />
+                  </svg>
 
                   {/* ── Integrator ── */}
-                  <Draggable id="integrator" initialX={diagramPositions.integrator.x} initialY={diagramPositions.integrator.y} onMove={handleDiagramMove}>
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 296, top: 200 }}>
                     <div style={{
                       background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                       border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 160,
@@ -644,26 +545,22 @@ export default function ClickToPay() {
                       </div>
                       <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Integrator</p>
                     </div>
-                  </Draggable>
+                  </motion.div>
 
                   {/* ── Arrow Integrator → Unified (up) ── */}
-                  <Draggable id="arrowIntUp" initialX={diagramPositions.arrowIntUp.x} initialY={diagramPositions.arrowIntUp.y} onMove={handleDiagramMove}>
-                    <svg width="120" height="160" style={{ overflow: "visible" }}>
-                      <path d="M0,150 L0,60 Q0,0 60,0 L108,0" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                      <polygon points="108,-5 118,0 108,5" fill={blue} />
-                    </svg>
-                  </Draggable>
+                  <svg style={{ position: "absolute", left: 388, top: 51 }} width="120" height="160">
+                    <path d="M0,150 L0,60 Q0,0 60,0 L108,0" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="108,-5 118,0 108,5" fill={blue} />
+                  </svg>
 
                   {/* ── Arrow Integrator → Mastercard (down) ── */}
-                  <Draggable id="arrowIntDown" initialX={diagramPositions.arrowIntDown.x} initialY={diagramPositions.arrowIntDown.y} onMove={handleDiagramMove}>
-                    <svg width="120" height="160" style={{ overflow: "visible" }}>
-                      <path d="M0,0 L0,90 Q0,150 60,150 L108,150" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                      <polygon points="108,145 118,150 108,155" fill={blue} />
-                    </svg>
-                  </Draggable>
+                  <svg style={{ position: "absolute", left: 390, top: 288 }} width="120" height="160">
+                    <path d="M0,0 L0,90 Q0,150 60,150 L108,150" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="108,145 118,150 108,155" fill={blue} />
+                  </svg>
 
                   {/* ── Unified Checkout Solutions ── */}
-                  <Draggable id="unified" initialX={diagramPositions.unified.x} initialY={diagramPositions.unified.y} onMove={handleDiagramMove}>
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 506, top: 12 }}>
                     <div style={{
                       background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                       border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190,
@@ -676,10 +573,10 @@ export default function ClickToPay() {
                         <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p>
                       </div>
                     </div>
-                  </Draggable>
+                  </motion.div>
 
                   {/* ── Mastercard Checkout Solutions ── */}
-                  <Draggable id="mastercard" initialX={diagramPositions.mastercard.x} initialY={diagramPositions.mastercard.y} onMove={handleDiagramMove}>
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 510, top: 396 }}>
                     <div style={{
                       background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                       border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190,
@@ -692,26 +589,22 @@ export default function ClickToPay() {
                         <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p>
                       </div>
                     </div>
-                  </Draggable>
+                  </motion.div>
 
                   {/* ── Arrow Unified → Click to Pay ── */}
-                  <Draggable id="arrowUnifiedC2P" initialX={diagramPositions.arrowUnifiedC2P.x} initialY={diagramPositions.arrowUnifiedC2P.y} onMove={handleDiagramMove}>
-                    <svg width="60" height="20" style={{ overflow: "visible" }}>
-                      <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                      <polygon points="48,5 58,10 48,15" fill={blue} />
-                    </svg>
-                  </Draggable>
+                  <svg style={{ position: "absolute", left: 692, top: 205 }} width="60" height="20">
+                    <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="48,5 58,10 48,15" fill={blue} />
+                  </svg>
 
                   {/* ── Arrow Mastercard → Click to Pay ── */}
-                  <Draggable id="arrowMcC2P" initialX={diagramPositions.arrowMcC2P.x} initialY={diagramPositions.arrowMcC2P.y} onMove={handleDiagramMove}>
-                    <svg width="60" height="20" style={{ overflow: "visible" }}>
-                      <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                      <polygon points="48,5 58,10 48,15" fill={blue} />
-                    </svg>
-                  </Draggable>
+                  <svg style={{ position: "absolute", left: 695, top: 259 }} width="60" height="20">
+                    <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="48,5 58,10 48,15" fill={blue} />
+                  </svg>
 
                   {/* ── Click to Pay ── */}
-                  <Draggable id="c2p" initialX={diagramPositions.c2p.x} initialY={diagramPositions.c2p.y} onMove={handleDiagramMove}>
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 546, top: 186 }}>
                     <div style={{
                       background: white, borderRadius: 20, padding: "24px 28px", boxShadow: `0 8px 40px rgba(123,47,255,0.15)`,
                       border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140,
@@ -722,26 +615,22 @@ export default function ClickToPay() {
                       </div>
                       <p style={{ fontWeight: 800, fontSize: 15, color: navy }}>Click to Pay</p>
                     </div>
-                  </Draggable>
+                  </motion.div>
 
                   {/* ── Arrow DCF → Click to Pay ── */}
-                  <Draggable id="arrowDCF" initialX={diagramPositions.arrowDCF.x} initialY={diagramPositions.arrowDCF.y} onMove={handleDiagramMove}>
-                    <svg width="20" height="80" style={{ overflow: "visible" }}>
-                      <line x1="10" y1="0" x2="10" y2="65" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                      <polygon points="5,65 10,75 15,65" fill={blue} />
-                    </svg>
-                  </Draggable>
+                  <svg style={{ position: "absolute", left: 605, top: 93 }} width="20" height="80">
+                    <line x1="10" y1="0" x2="10" y2="65" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="5,65 10,75 15,65" fill={blue} />
+                  </svg>
 
                   {/* ── Arrow Issuer → Click to Pay ── */}
-                  <Draggable id="arrowIssuer" initialX={diagramPositions.arrowIssuer.x} initialY={diagramPositions.arrowIssuer.y} onMove={handleDiagramMove}>
-                    <svg width="20" height="80" style={{ overflow: "visible" }}>
-                      <line x1="10" y1="80" x2="10" y2="15" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                      <polygon points="5,15 10,5 15,15" fill={blue} />
-                    </svg>
-                  </Draggable>
+                  <svg style={{ position: "absolute", left: 617, top: 316 }} width="20" height="80">
+                    <line x1="10" y1="80" x2="10" y2="15" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="5,15 10,5 15,15" fill={blue} />
+                  </svg>
 
                   {/* ── Digital Card Facilitator ── */}
-                  <Draggable id="dcf" initialX={diagramPositions.dcf.x} initialY={diagramPositions.dcf.y} onMove={handleDiagramMove}>
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 753, top: 155 }}>
                     <div style={{
                       background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                       border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12,
@@ -754,10 +643,10 @@ export default function ClickToPay() {
                         <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Facilitator</p>
                       </div>
                     </div>
-                  </Draggable>
+                  </motion.div>
 
                   {/* ── Participating Issuer ── */}
-                  <Draggable id="issuer" initialX={diagramPositions.issuer.x} initialY={diagramPositions.issuer.y} onMove={handleDiagramMove}>
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 754, top: 249 }}>
                     <div style={{
                       background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                       border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12,
@@ -770,7 +659,7 @@ export default function ClickToPay() {
                         <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Issuer</p>
                       </div>
                     </div>
-                  </Draggable>
+                  </motion.div>
 
                 </div>
               </div>
