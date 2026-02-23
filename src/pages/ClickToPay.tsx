@@ -615,11 +615,11 @@ export default function ClickToPay() {
                           {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>unified ({p.unified.x}, {p.unified.y})</span>}
                         </motion.div>
 
-                        {/* Mastercard Checkout Solutions */}
+                        {/* Brand Checkout Solutions */}
                         <motion.div variants={fadeUp} style={{ position: "absolute", left: p.mastercard.x, top: p.mastercard.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("mastercard", e)}>
                           <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
                             <div style={{ width: 44, height: 44, borderRadius: 10, background: "linear-gradient(135deg, #0D7C5F, #15A87C)", display: "flex", alignItems: "center", justifyContent: "center" }}><Globe size={22} color={white} strokeWidth={1.5} /></div>
-                            <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Mastercard Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
+                            <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Brand Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
                           </div>
                           {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>mastercard ({p.mastercard.x}, {p.mastercard.y})</span>}
                         </motion.div>
@@ -689,7 +689,7 @@ export default function ClickToPay() {
                   { icon: <Smartphone size={24} color={white} />, title: "Consumer", sub: "(Performs checkout)", gradient: `linear-gradient(135deg, ${blue}, ${blueMid})` },
                   { icon: <Code2 size={24} color={white} />, title: "Integrator", sub: "", gradient: `linear-gradient(135deg, ${blue}, ${blueMid})` },
                   { icon: <Globe size={22} color={white} />, title: "Unified Checkout Solutions", sub: "", gradient: "linear-gradient(135deg, #0D7C5F, #15A87C)" },
-                  { icon: <Globe size={22} color={white} />, title: "Mastercard Checkout Solutions", sub: "", gradient: "linear-gradient(135deg, #0D7C5F, #15A87C)" },
+                  { icon: <Globe size={22} color={white} />, title: "Brand Checkout Solutions", sub: "", gradient: "linear-gradient(135deg, #0D7C5F, #15A87C)" },
                   { isC2P: true },
                   { icon: <CreditCard size={22} color={white} />, title: "Digital Card Facilitator", sub: "", gradient: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)` },
                   { icon: <Building2 size={22} color={white} />, title: "Participating Issuer", sub: "", gradient: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)` },
