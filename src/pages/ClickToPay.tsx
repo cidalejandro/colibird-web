@@ -766,29 +766,46 @@ export default function ClickToPay() {
                 {
                   title: "Integrator",
                   text: "Un comercio que utiliza un Proveedor de Servicios de Pago (PSP) para integrarse con Mastercard Checkout Solutions, o un comercio, PSP, gateway o adquirente que se integra directamente con Unified Checkout Solutions.",
+                  icon: <Code2 size={22} color={white} strokeWidth={1.5} />,
+                  gradient: `linear-gradient(135deg, ${blue}, ${blueMid})`,
                 },
                 {
                   title: "Integration Solution",
                   text: "Unified Checkout Solutions: Click to Pay para todas las redes participantes.\n\nBrand Checkout Solutions: Click to Pay para tarjetas de cada brand en particular.\n\nPara cada marca de tarjetas, se deben completar las tareas de integración específicas de cada red participante.",
+                  icon: <Globe size={22} color={white} strokeWidth={1.5} />,
+                  gradient: "linear-gradient(135deg, #0D7C5F, #15A87C)",
                 },
                 {
                   title: "Click to Pay",
                   text: "Pago y proceso de compra en línea seguros.",
+                  isC2P: true,
                 },
                 {
                   title: "Participating Issuer",
                   text: "Permite la inscripción de los consumidores en Click to Pay mediante la integración con las APIs de inscripción del emisor.",
+                  icon: <Building2 size={22} color={white} strokeWidth={1.5} />,
+                  gradient: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`,
                 },
                 {
                   title: "Digital Card Facilitator (DCF)",
                   text: "Enrola a los consumidores y almacena la tarjeta digital.",
+                  icon: <CreditCard size={22} color={white} strokeWidth={1.5} />,
+                  gradient: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`,
                 },
-              ].map((item, i) => (
+              ].map((item: any, i) => (
                 <motion.div key={i} variants={fadeUp} className="flex gap-4 items-start">
-                  <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 16, marginTop: 5, flexShrink: 0 }} />
+                  {item.isC2P ? (
+                    <div style={{ width: 40, height: 40, borderRadius: 10, background: white, border: `2px solid ${blue}30`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
+                      <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 14 }} />
+                    </div>
+                  ) : (
+                    <div style={{ width: 40, height: 40, borderRadius: 10, background: item.gradient, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
+                      {item.icon}
+                    </div>
+                  )}
                   <div>
                     <p style={{ fontWeight: 700, fontSize: 16, color: navy, marginBottom: 4 }}>{item.title}</p>
-                    {item.text.split("\n\n").map((paragraph, pi) => (
+                    {item.text.split("\n\n").map((paragraph: string, pi: number) => (
                       <p key={pi} style={{ fontSize: 14, color: "rgba(26,10,46,0.7)", lineHeight: 1.6, marginBottom: pi < item.text.split("\n\n").length - 1 ? 8 : 0 }}>{paragraph}</p>
                     ))}
                   </div>
