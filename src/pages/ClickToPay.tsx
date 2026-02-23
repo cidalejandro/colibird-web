@@ -529,20 +529,19 @@ export default function ClickToPay() {
                   integrator: { x: 264, y: 199, scale: 1, label: "Integrator", sub: "", template: "violet", icon: "Code2" },
                   unified: { x: 464, y: 13, scale: 1, label: "Unified Checkout", sub: "Solutions", template: "green", icon: "Globe" },
                   mastercard: { x: 466, y: 404, scale: 1, label: "Brand Checkout", sub: "Solutions", template: "green", icon: "Globe" },
-                  c2p: { x: 505, y: 184, scale: 1, label: "Click to Pay", sub: "", template: "c2pTmpl", icon: "c2p" },
-                  dcf: { x: 710, y: 156, scale: 1, label: "Digital Card", sub: "Facilitator", template: "orange", icon: "CreditCard" },
-                  issuer: { x: 711, y: 240, scale: 1, label: "Participating", sub: "Issuer", template: "orange", icon: "Building2" },
+                  c2p: { x: 450, y: 212, scale: 1, label: "Click to Pay", sub: "", template: "c2pTmpl", icon: "c2p" },
+                  dcf: { x: 756, y: 168, scale: 1, label: "Digital Card", sub: "Facilitator", template: "orange", icon: "CreditCard" },
+                  issuer: { x: 751, y: 257, scale: 1, label: "Participating", sub: "Issuer", template: "orange", icon: "Building2" },
                 });
 
                 const [arrowsState, setArrowsState] = useState<Record<string, ArrowData>>({
                   arrowConsInt: { x: 125, y: 236, w: 140, h: 20, type: "right" },
                   arrowIntUp: { x: 344, y: 48, w: 120, h: 160, type: "curveUp" },
                   arrowIntDown: { x: 347, y: 289, w: 120, h: 160, type: "curveDown" },
-                  arrowUnifiedC2P: { x: 649, y: 155, w: 80, h: 90, type: "left" },
-                  arrowMcC2P: { x: 649, y: 239, w: 60, h: 80, type: "left" },
-                  arrowDCF: { x: 553, y: 83, w: 40, h: 100, type: "down" },
-                  arrowIssuer: { x: 569, y: 296, w: 20, h: 120, type: "up" },
-                  arrowDcfC2p: { x: 645, y: 172, w: 65, h: 20, type: "left" },
+                  arrowMcC2P: { x: 689, y: 227, w: 60, h: 80, type: "left" },
+                  arrowDCF: { x: 554, y: 93, w: 43, h: 119, type: "down" },
+                  arrowIssuer: { x: 568, y: 283, w: 20, h: 120, type: "up" },
+                  arrowDcfC2p: { x: 691, y: 227, w: 65, h: 20, type: "left" },
                 });
 
                 const [dragging, setDragging] = useState<{ key: string; kind: "node" | "arrow" } | null>(null);
