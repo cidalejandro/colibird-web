@@ -11,8 +11,7 @@ import type { Variants } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import c2pHorizontalDark from "@/assets/c2p-horizontal-dark.svg";
 import c2pIconDark from "@/assets/c2p-icon-dark.svg";
-import visaLogo from "@/assets/visa-logo.svg";
-import mastercardLogo from "@/assets/mastercard-logo.svg";
+import c2pHorizontalMarkLight from "@/assets/c2p-horizontal-mark-light.svg";
 
 // ─── Design tokens — Colibird palette ────────────────────────────────────────
 const navy = "#1A0A2E";           // deep violet-dark background
@@ -589,8 +588,7 @@ export default function ClickToPay() {
                   {/* Click to Pay */}
                   <motion.div variants={fadeUp} style={{ position: "absolute", left: 505, top: 184 }}>
                     <div style={{ background: white, borderRadius: 20, padding: "24px 28px", boxShadow: "0 8px 40px rgba(123,47,255,0.15)", border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140 }}>
-                      <div className="flex items-center gap-3"><img src={visaLogo} alt="Visa" style={{ height: 28 }} /><img src={mastercardLogo} alt="Mastercard" style={{ height: 28 }} /></div>
-                      <p style={{ fontWeight: 800, fontSize: 15, color: navy }}>Click to Pay</p>
+                      <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 32, maxWidth: "100%" }} />
                     </div>
                   </motion.div>
 
@@ -634,11 +632,7 @@ export default function ClickToPay() {
                         background: white, borderRadius: 16, padding: "20px 24px", boxShadow: `0 8px 32px rgba(123,47,255,0.15)`,
                         border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
                       }}>
-                        <div className="flex items-center gap-3">
-                          <img src={visaLogo} alt="Visa" style={{ height: 24 }} />
-                          <img src={mastercardLogo} alt="Mastercard" style={{ height: 24 }} />
-                        </div>
-                        <p style={{ fontWeight: 800, fontSize: 15, color: navy }}>Click to Pay</p>
+                        <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 28, maxWidth: "100%" }} />
                       </div>
                     ) : (
                       <div style={{
