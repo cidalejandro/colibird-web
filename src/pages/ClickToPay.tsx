@@ -508,108 +508,181 @@ export default function ClickToPay() {
 
             {/* Flow diagram */}
             <div className="relative max-w-5xl mx-auto">
-              <div className="hidden md:block" style={{ paddingLeft: 100 }}>
-                <div className="relative" style={{ minHeight: 520 }}>
+              {/* EDITOR MODE TOGGLE */}
+              {(() => {
+                const [editorMode, setEditorMode] = useState(false);
+                const [positions, setPositions] = useState({
+                  consumer: { x: -97, y: 194 },
+                  integrator: { x: 264, y: 199 },
+                  unified: { x: 464, y: 13 },
+                  mastercard: { x: 466, y: 404 },
+                  c2p: { x: 505, y: 184 },
+                  dcf: { x: 710, y: 156 },
+                  issuer: { x: 711, y: 240 },
+                  arrowConsInt: { x: 125, y: 236, w: 140, h: 20 },
+                  arrowIntUp: { x: 344, y: 48, w: 120, h: 160 },
+                  arrowIntDown: { x: 347, y: 289, w: 120, h: 160 },
+                  arrowUnifiedC2P: { x: 649, y: 155, w: 80, h: 90 },
+                  arrowMcC2P: { x: 649, y: 239, w: 60, h: 80 },
+                  arrowDCF: { x: 553, y: 83, w: 40, h: 100 },
+                  arrowIssuer: { x: 569, y: 296, w: 20, h: 120 },
+                });
+                const [dragging, setDragging] = useState<string | null>(null);
+                const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+                const containerRef = useRef<HTMLDivElement>(null);
 
-                  {/* Consumer */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: -97, top: 194 }}>
-                    <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 180 }}>
-                      <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}><Smartphone size={24} color={white} strokeWidth={1.5} /></div>
-                      <div><p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Consumer</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>(Performs checkout)</p></div>
+                const handleMouseDown = (key: string, e: React.MouseEvent) => {
+                  if (!editorMode) return;
+                  e.preventDefault();
+                  const rect = containerRef.current?.getBoundingClientRect();
+                  if (!rect) return;
+                  setDragging(key);
+                  setDragOffset({ x: e.clientX - rect.left - positions[key].x, y: e.clientY - rect.top - positions[key].y });
+                };
+
+                const handleMouseMove = (e: React.MouseEvent) => {
+                  if (!dragging || !containerRef.current) return;
+                  const rect = containerRef.current.getBoundingClientRect();
+                  setPositions(prev => ({ ...prev, [dragging]: { ...prev[dragging], x: Math.round(e.clientX - rect.left - dragOffset.x), y: Math.round(e.clientY - rect.top - dragOffset.y) } }));
+                };
+
+                const handleMouseUp = () => setDragging(null);
+
+                const copyPositions = () => {
+                  navigator.clipboard.writeText(JSON.stringify(positions, null, 2));
+                  alert("Posiciones copiadas al portapapeles");
+                };
+
+                const p = positions;
+
+                return (
+                  <>
+                    <div className="flex justify-center mb-4 gap-2">
+                      <button onClick={() => setEditorMode(!editorMode)} style={{ padding: "8px 16px", borderRadius: 8, background: editorMode ? "#ef4444" : blue, color: white, fontWeight: 700, fontSize: 13 }}>
+                        {editorMode ? "✕ Salir editor" : "✏️ Modo editor"}
+                      </button>
+                      {editorMode && <button onClick={copyPositions} style={{ padding: "8px 16px", borderRadius: 8, background: "#22c55e", color: white, fontWeight: 700, fontSize: 13 }}>📋 Copiar JSON</button>}
                     </div>
-                  </motion.div>
 
-                  {/* Arrow Consumer → Integrator */}
-                  <svg style={{ position: "absolute", left: 125, top: 236 }} width="140" height="20">
-                    <line x1="0" y1="10" x2="130" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="130,5 140,10 130,15" fill={blue} />
-                  </svg>
+                    <div className="hidden md:block" style={{ paddingLeft: 100 }}>
+                      <div ref={containerRef} className="relative" style={{ minHeight: 520, cursor: editorMode ? "crosshair" : "default" }} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
 
-                  {/* Integrator */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 264, top: 199 }}>
-                    <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 160 }}>
-                      <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}><Code2 size={24} color={white} strokeWidth={1.5} /></div>
-                      <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Integrator</p>
+                        {/* Consumer */}
+                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.consumer.x, top: p.consumer.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("consumer", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 14, minWidth: 180 }}>
+                            <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}><Smartphone size={24} color={white} strokeWidth={1.5} /></div>
+                            <div><p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Consumer</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>(Performs checkout)</p></div>
+                          </div>
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>consumer ({p.consumer.x}, {p.consumer.y})</span>}
+                        </motion.div>
+
+                        {/* Arrow Consumer → Integrator */}
+                        <svg style={{ position: "absolute", left: p.arrowConsInt.x, top: p.arrowConsInt.y, cursor: editorMode ? "grab" : "default" }} width={p.arrowConsInt.w} height={p.arrowConsInt.h} onMouseDown={(e) => handleMouseDown("arrowConsInt", e as any)}>
+                          <line x1="0" y1="10" x2={p.arrowConsInt.w - 10} y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points={`${p.arrowConsInt.w - 10},5 ${p.arrowConsInt.w},10 ${p.arrowConsInt.w - 10},15`} fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                        </svg>
+
+                        {/* Integrator */}
+                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.integrator.x, top: p.integrator.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("integrator", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 14, minWidth: 160 }}>
+                            <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}><Code2 size={24} color={white} strokeWidth={1.5} /></div>
+                            <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Integrator</p>
+                          </div>
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>integrator ({p.integrator.x}, {p.integrator.y})</span>}
+                        </motion.div>
+
+                        {/* Arrow Integrator → Unified (curveUp) */}
+                        <svg style={{ position: "absolute", left: p.arrowIntUp.x, top: p.arrowIntUp.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowIntUp.w} height={p.arrowIntUp.h} onMouseDown={(e) => handleMouseDown("arrowIntUp", e as any)}>
+                          <path d={`M0,${p.arrowIntUp.h} L0,60 Q0,0 60,0 L${p.arrowIntUp.w - 12},0`} fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points={`${p.arrowIntUp.w - 12},-5 ${p.arrowIntUp.w},0 ${p.arrowIntUp.w - 12},5`} fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                        </svg>
+
+                        {/* Arrow Integrator → Mastercard (curveDown) */}
+                        <svg style={{ position: "absolute", left: p.arrowIntDown.x, top: p.arrowIntDown.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowIntDown.w} height={p.arrowIntDown.h} onMouseDown={(e) => handleMouseDown("arrowIntDown", e as any)}>
+                          <path d={`M0,0 L0,100 Q0,${p.arrowIntDown.h} 60,${p.arrowIntDown.h} L${p.arrowIntDown.w - 12},${p.arrowIntDown.h}`} fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points={`${p.arrowIntDown.w - 12},${p.arrowIntDown.h - 5} ${p.arrowIntDown.w},${p.arrowIntDown.h} ${p.arrowIntDown.w - 12},${p.arrowIntDown.h + 5}`} fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                        </svg>
+
+                        {/* Unified Checkout Solutions */}
+                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.unified.x, top: p.unified.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("unified", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
+                            <div style={{ width: 44, height: 44, borderRadius: 10, background: "linear-gradient(135deg, #0D7C5F, #15A87C)", display: "flex", alignItems: "center", justifyContent: "center" }}><Globe size={22} color={white} strokeWidth={1.5} /></div>
+                            <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Unified Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
+                          </div>
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>unified ({p.unified.x}, {p.unified.y})</span>}
+                        </motion.div>
+
+                        {/* Mastercard Checkout Solutions */}
+                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.mastercard.x, top: p.mastercard.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("mastercard", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
+                            <div style={{ width: 44, height: 44, borderRadius: 10, background: "linear-gradient(135deg, #0D7C5F, #15A87C)", display: "flex", alignItems: "center", justifyContent: "center" }}><Globe size={22} color={white} strokeWidth={1.5} /></div>
+                            <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Mastercard Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
+                          </div>
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>mastercard ({p.mastercard.x}, {p.mastercard.y})</span>}
+                        </motion.div>
+
+                        {/* Arrow DCF → C2P (down) */}
+                        <svg style={{ position: "absolute", left: p.arrowDCF.x, top: p.arrowDCF.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowDCF.w} height={p.arrowDCF.h} onMouseDown={(e) => handleMouseDown("arrowDCF", e as any)}>
+                          <line x1="20" y1="0" x2="20" y2={p.arrowDCF.h - 10} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points={`15,${p.arrowDCF.h - 10} 20,${p.arrowDCF.h} 25,${p.arrowDCF.h - 10}`} fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                        </svg>
+
+                        {/* Arrow Issuer → C2P (up) */}
+                        <svg style={{ position: "absolute", left: p.arrowIssuer.x, top: p.arrowIssuer.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowIssuer.w} height={p.arrowIssuer.h} onMouseDown={(e) => handleMouseDown("arrowIssuer", e as any)}>
+                          <line x1="10" y1={p.arrowIssuer.h} x2="10" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points="5,10 10,0 15,10" fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                        </svg>
+
+                        {/* Arrow Unified → C2P (left) */}
+                        <svg style={{ position: "absolute", left: p.arrowUnifiedC2P.x, top: p.arrowUnifiedC2P.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowUnifiedC2P.w} height={p.arrowUnifiedC2P.h} onMouseDown={(e) => handleMouseDown("arrowUnifiedC2P", e as any)}>
+                          <line x1={p.arrowUnifiedC2P.w} y1={p.arrowUnifiedC2P.h / 2} x2="10" y2={p.arrowUnifiedC2P.h / 2} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points={`10,${p.arrowUnifiedC2P.h / 2 - 5} 0,${p.arrowUnifiedC2P.h / 2} 10,${p.arrowUnifiedC2P.h / 2 + 5}`} fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                        </svg>
+
+                        {/* Arrow Mastercard → C2P (left) */}
+                        <svg style={{ position: "absolute", left: p.arrowMcC2P.x, top: p.arrowMcC2P.y, overflow: "visible", cursor: editorMode ? "grab" : "default" }} width={p.arrowMcC2P.w} height={p.arrowMcC2P.h} onMouseDown={(e) => handleMouseDown("arrowMcC2P", e as any)}>
+                          <line x1={p.arrowMcC2P.w} y1={p.arrowMcC2P.h / 2} x2="10" y2={p.arrowMcC2P.h / 2} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                          <polygon points={`10,${p.arrowMcC2P.h / 2 - 5} 0,${p.arrowMcC2P.h / 2} 10,${p.arrowMcC2P.h / 2 + 5}`} fill={blue} />
+                          {editorMode && <rect width="100%" height="100%" fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="1" />}
+                        </svg>
+
+                        {/* Click to Pay */}
+                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.c2p.x, top: p.c2p.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("c2p", e)}>
+                          <div style={{ background: white, borderRadius: 20, padding: "24px 28px", boxShadow: "0 8px 40px rgba(123,47,255,0.15)", border: `2px solid ${editorMode ? "#ef4444" : blue + "30"}`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140 }}>
+                            <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 20, maxWidth: "100%" }} />
+                          </div>
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>c2p ({p.c2p.x}, {p.c2p.y})</span>}
+                        </motion.div>
+
+                        {/* Digital Card Facilitator */}
+                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.dcf.x, top: p.dcf.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("dcf", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12 }}>
+                            <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}><CreditCard size={22} color={white} strokeWidth={1.5} /></div>
+                            <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Digital Card</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Facilitator</p></div>
+                          </div>
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>dcf ({p.dcf.x}, {p.dcf.y})</span>}
+                        </motion.div>
+
+                        {/* Participating Issuer */}
+                        <motion.div variants={fadeUp} style={{ position: "absolute", left: p.issuer.x, top: p.issuer.y, cursor: editorMode ? "grab" : "default" }} onMouseDown={(e) => handleMouseDown("issuer", e)}>
+                          <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12 }}>
+                            <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}><Building2 size={22} color={white} strokeWidth={1.5} /></div>
+                            <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Participating</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Issuer</p></div>
+                          </div>
+                          {editorMode && <span style={{ position: "absolute", top: -18, left: 0, fontSize: 10, color: "#ef4444", fontWeight: 700 }}>issuer ({p.issuer.x}, {p.issuer.y})</span>}
+                        </motion.div>
+
+                      </div>
                     </div>
-                  </motion.div>
-
-                  {/* Arrow Integrator → Unified (curveUp, right) */}
-                  <svg style={{ position: "absolute", left: 344, top: 48, overflow: "visible" }} width="120" height="160">
-                    <path d="M0,160 L0,60 Q0,0 60,0 L108,0" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="108,-5 120,0 108,5" fill={blue} />
-                  </svg>
-
-                  {/* Arrow Integrator → Mastercard (curveDown, right) */}
-                  <svg style={{ position: "absolute", left: 347, top: 289, overflow: "visible" }} width="120" height="160">
-                    <path d="M0,0 L0,100 Q0,160 60,160 L108,160" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="108,155 120,160 108,165" fill={blue} />
-                  </svg>
-
-                  {/* Unified Checkout Solutions */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 464, top: 13 }}>
-                    <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, background: "linear-gradient(135deg, #0D7C5F, #15A87C)", display: "flex", alignItems: "center", justifyContent: "center" }}><Globe size={22} color={white} strokeWidth={1.5} /></div>
-                      <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Unified Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
-                    </div>
-                  </motion.div>
-
-                  {/* Mastercard Checkout Solutions */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 466, top: 404 }}>
-                    <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, background: "linear-gradient(135deg, #0D7C5F, #15A87C)", display: "flex", alignItems: "center", justifyContent: "center" }}><Globe size={22} color={white} strokeWidth={1.5} /></div>
-                      <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Mastercard Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
-                    </div>
-                  </motion.div>
-
-                  {/* Arrow DCF → C2P (down) */}
-                  <svg style={{ position: "absolute", left: 553, top: 83, overflow: "visible" }} width="40" height="100">
-                    <line x1="20" y1="0" x2="20" y2="90" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="15,90 20,100 25,90" fill={blue} />
-                  </svg>
-
-                  {/* Arrow Issuer → C2P (up) */}
-                  <svg style={{ position: "absolute", left: 569, top: 296, overflow: "visible" }} width="20" height="120">
-                    <line x1="10" y1="120" x2="10" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="5,10 10,0 15,10" fill={blue} />
-                  </svg>
-
-                  {/* Arrow Unified → C2P (left) */}
-                  <svg style={{ position: "absolute", left: 649, top: 155, overflow: "visible" }} width="80" height="90">
-                    <line x1="80" y1="45" x2="10" y2="45" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="10,40 0,45 10,50" fill={blue} />
-                  </svg>
-
-                  {/* Arrow Mastercard → C2P (left) */}
-                  <svg style={{ position: "absolute", left: 649, top: 239, overflow: "visible" }} width="60" height="80">
-                    <line x1="60" y1="40" x2="10" y2="40" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="10,35 0,40 10,45" fill={blue} />
-                  </svg>
-
-                  {/* Click to Pay */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 505, top: 184 }}>
-                    <div style={{ background: white, borderRadius: 20, padding: "24px 28px", boxShadow: "0 8px 40px rgba(123,47,255,0.15)", border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140 }}>
-                      <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 20, maxWidth: "100%" }} />
-                    </div>
-                  </motion.div>
-
-                  {/* Digital Card Facilitator */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 710, top: 156 }}>
-                    <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12 }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}><CreditCard size={22} color={white} strokeWidth={1.5} /></div>
-                      <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Digital Card</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Facilitator</p></div>
-                    </div>
-                  </motion.div>
-
-                  {/* Participating Issuer */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 711, top: 240 }}>
-                    <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12 }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}><Building2 size={22} color={white} strokeWidth={1.5} /></div>
-                      <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Participating</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Issuer</p></div>
-                    </div>
-                  </motion.div>
-
-                </div>
-              </div>
+                  </>
+                );
+              })()}
               {/* Mobile layout - vertical flow */}
               <div className="md:hidden flex flex-col items-center gap-4">
                 {[
