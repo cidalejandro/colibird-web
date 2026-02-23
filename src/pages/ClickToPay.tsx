@@ -218,7 +218,7 @@ export default function ClickToPay() {
     },
     {
       q: "¿Qué tan seguro es Click to Pay?",
-      a: "Usa tokenización de red (Visa Token Service, Mastercard MDES), lo que significa que el número de tarjeta real nunca se comparte con el comercio. Esto reduce fraude y mejora las tasas de autorización en promedio 4.3%.",
+      a: "Usa tokenización de red (Visa Token Service, Mastercard MDES), lo que significa que el número de tarjeta real nunca se comparte con el comercio. Esto reduce fraude y mejora las tasas de autorización en promedio 4.3% para Visa y entre 3 y 6% para Mastercard.",
     },
   ];
 
