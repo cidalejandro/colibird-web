@@ -528,9 +528,9 @@ export default function ClickToPay() {
                   </motion.div>
 
                   {/* ── Arrow Consumer → Integrator ── */}
-                  <svg style={{ position: "absolute", left: 190, top: "50%", transform: "translateY(-50%)" }} width="60" height="20">
-                    <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="48,5 58,10 48,15" fill={blue} />
+                  <svg style={{ position: "absolute", left: 228, top: "50%", transform: "translateY(-50%)" }} width="32" height="20">
+                    <line x1="0" y1="10" x2="20" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="20,5 30,10 20,15" fill={blue} />
                   </svg>
 
                   {/* ── Integrator ── */}
