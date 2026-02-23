@@ -114,6 +114,12 @@ export default function ClickToPay() {
       toast({ title: "Completá los campos requeridos", variant: "destructive" });
       return;
     }
+    // Send form data via mailto to alejandro@magnopartners.com
+    const subject = encodeURIComponent(`Scoping Click to Pay - ${form.empresa}`);
+    const body = encodeURIComponent(
+      `Nombre: ${form.nombre}\nEmpresa: ${form.empresa}\nRol: ${form.rol}\nEmail: ${form.email}\nEtapa: ${form.etapa}\nDescripción: ${form.descripcion}`
+    );
+    window.open(`mailto:alejandro@magnopartners.com?subject=${subject}&body=${body}`, '_blank');
     setSubmitted(true);
     toast({ title: "¡Scoping solicitado!", description: "Te contactaremos en menos de 48 horas." });
   };
@@ -1263,62 +1269,10 @@ export default function ClickToPay() {
               </motion.form>
             )}
 
-            {/* WhatsApp floating CTA */}
-            <motion.div variants={fadeUp} style={{ textAlign: "center", marginTop: 28 }}>
-              <a
-                href="https://wa.me/1234567890"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 10,
-                  background: "#25D366",
-                  color: white,
-                  borderRadius: 12,
-                  padding: "12px 24px",
-                  fontWeight: 700,
-                  fontSize: 15,
-                  textDecoration: "none",
-                  boxShadow: "0 4px 20px rgba(37,211,102,0.35)",
-                }}
-              >
-                <MessageCircle size={20} />
-                Chateá directo con un experto en pagos
-              </a>
-            </motion.div>
           </Section>
         </div>
       </section>
 
-      {/* WhatsApp floating button */}
-      <a
-        href="https://wa.me/1234567890"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="WhatsApp"
-        style={{
-          position: "fixed",
-          bottom: 28,
-          right: 28,
-          width: 56,
-          height: 56,
-          borderRadius: "50%",
-          background: "#25D366",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          boxShadow: "0 4px 20px rgba(37,211,102,0.5)",
-          zIndex: 999,
-          color: white,
-          textDecoration: "none",
-          transition: "transform 0.2s",
-        }}
-        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "scale(1.1)"; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; }}
-      >
-        <MessageCircle size={26} />
-      </a>
     </div>
   );
 }
