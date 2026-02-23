@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import c2pHorizontalDark from "@/assets/c2p-horizontal-dark.svg";
 import c2pIconDark from "@/assets/c2p-icon-dark.svg";
 import c2pHorizontalMarkLight from "@/assets/c2p-horizontal-mark-light.svg";
+import c2pHelperLight from "@/assets/c2p-helper-light.svg";
 
 // ─── Design tokens — Colibird palette ────────────────────────────────────────
 const navy = "#1A0A2E";           // deep violet-dark background
@@ -795,8 +796,8 @@ export default function ClickToPay() {
               ].map((item: any, i) => (
                 <motion.div key={i} variants={fadeUp} className="flex gap-4 items-start">
                   {item.isC2P ? (
-                    <div style={{ width: 40, height: 40, borderRadius: 10, background: white, border: `2px solid ${blue}30`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
-                      <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 14 }} />
+                    <div style={{ width: 40, height: 40, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
+                      <img src={c2pHelperLight} alt="Click to Pay" style={{ height: 36 }} />
                     </div>
                   ) : (
                     <div style={{ width: 40, height: 40, borderRadius: 10, background: item.gradient, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
