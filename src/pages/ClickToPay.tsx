@@ -664,7 +664,7 @@ export default function ClickToPay() {
                           <img src={c2pHorizontalMarkLight} alt="Click to Pay" style={{ height: 20, maxWidth: "100%" }} />
                         </div>
                       ) : (
-                        <div style={{ background: white, borderRadius: (tmpl as any).borderRadius, padding: (tmpl as any).padding, boxShadow: (tmpl as any).boxShadow, border: `1px solid ${sel && editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 160 }}>
+                        <div style={{ background: white, borderRadius: (tmpl as any).borderRadius, padding: (tmpl as any).padding, boxShadow: (tmpl as any).boxShadow, border: `1px solid ${sel && editorMode ? "#ef4444" : blue + "15"}`, display: "flex", alignItems: "center", gap: 12, minWidth: 160, width: (key === "dcf" || key === "issuer") ? 200 : undefined }}>
                           <div style={{ width: (tmpl as any).iconSize || 44, height: (tmpl as any).iconSize || 44, borderRadius: (tmpl as any).iconRadius || 10, background: (tmpl as any).gradient, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                             {iconMap[n.icon] || <Star size={22} color={white} />}
                           </div>
