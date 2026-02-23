@@ -91,6 +91,182 @@ function Tag({ label }: { label: string }) {
   );
 }
 
+// ─── Diagram Editor Component ─────────────────────────────────────────────────
+type ArrowData = { x: number; y: number; w: number; h: number; dir: "right" | "left" | "down" | "up"; type: "straight" | "curveDown" | "curveUp" };
+type NodeData = { x: number; y: number };
+
+function DiagramEditor() {
+  const [positions, setPositions] = useState<Record<string, NodeData>>({
+    consumer: { x: -96, y: 197 },
+    integrator: { x: 296, y: 200 },
+    unified: { x: 506, y: 12 },
+    mastercard: { x: 510, y: 396 },
+    c2p: { x: 546, y: 186 },
+    dcf: { x: 753, y: 155 },
+    issuer: { x: 754, y: 249 },
+  });
+
+  const [arrows, setArrows] = useState<Record<string, ArrowData>>({
+    arrowConsInt: { x: 125, y: 232, w: 180, h: 20, dir: "right", type: "straight" },
+    arrowIntUp: { x: 388, y: 51, w: 120, h: 160, dir: "right", type: "curveUp" },
+    arrowIntDown: { x: 390, y: 288, w: 120, h: 160, dir: "right", type: "curveDown" },
+    arrowUnifiedC2P: { x: 692, y: 205, w: 60, h: 20, dir: "right", type: "straight" },
+    arrowMcC2P: { x: 695, y: 259, w: 60, h: 20, dir: "right", type: "straight" },
+    arrowDCF: { x: 605, y: 93, w: 20, h: 80, dir: "down", type: "straight" },
+    arrowIssuer: { x: 617, y: 316, w: 20, h: 80, dir: "up", type: "straight" },
+  });
+
+  const dragRef = useRef<{ id: string; kind: "node" | "arrow"; startX: number; startY: number; origX: number; origY: number } | null>(null);
+
+  const onMouseDown = (e: React.MouseEvent, id: string, kind: "node" | "arrow") => {
+    e.preventDefault();
+    const data = kind === "node" ? positions[id] : arrows[id];
+    dragRef.current = { id, kind, startX: e.clientX, startY: e.clientY, origX: data.x, origY: data.y };
+  };
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!dragRef.current) return;
+      const { id, kind, startX, startY, origX, origY } = dragRef.current;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (kind === "node") {
+        setPositions(p => ({ ...p, [id]: { x: origX + dx, y: origY + dy } }));
+      } else {
+        setArrows(a => ({ ...a, [id]: { ...a[id], x: origX + dx, y: origY + dy } }));
+      }
+    };
+    const onUp = () => { dragRef.current = null; };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => { window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
+  }, []);
+
+  const flipArrow = (id: string) => {
+    setArrows(a => {
+      const ar = a[id];
+      const map: Record<string, "right" | "left" | "down" | "up"> = { right: "left", left: "right", down: "up", up: "down" };
+      return { ...a, [id]: { ...ar, dir: map[ar.dir] } };
+    });
+  };
+
+  const resizeArrow = (id: string, axis: "w" | "h", delta: number) => {
+    setArrows(a => ({ ...a, [id]: { ...a[id], [axis]: Math.max(10, a[id][axis] + delta) } }));
+  };
+
+  const copyJSON = () => {
+    const out = { nodes: positions, arrows };
+    navigator.clipboard.writeText(JSON.stringify(out, null, 2));
+  };
+
+  const renderArrow = (id: string, ar: ArrowData) => {
+    const { w, h, dir, type } = ar;
+    let content: React.ReactNode;
+
+    if (type === "straight" && (dir === "right" || dir === "left")) {
+      const tip = dir === "right"
+        ? <polygon points={`${w - 10},${h / 2 - 5} ${w},${h / 2} ${w - 10},${h / 2 + 5}`} fill={blue} />
+        : <polygon points={`10,${h / 2 - 5} 0,${h / 2} 10,${h / 2 + 5}`} fill={blue} />;
+      const x1 = dir === "right" ? 0 : w;
+      const x2 = dir === "right" ? w - 10 : 10;
+      content = <><line x1={x1} y1={h / 2} x2={x2} y2={h / 2} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />{tip}</>;
+    } else if (type === "straight" && (dir === "down" || dir === "up")) {
+      const tip = dir === "down"
+        ? <polygon points={`${w / 2 - 5},${h - 10} ${w / 2},${h} ${w / 2 + 5},${h - 10}`} fill={blue} />
+        : <polygon points={`${w / 2 - 5},10 ${w / 2},0 ${w / 2 + 5},10`} fill={blue} />;
+      const y1 = dir === "down" ? 0 : h;
+      const y2 = dir === "down" ? h - 10 : 10;
+      content = <><line x1={w / 2} y1={y1} x2={w / 2} y2={y2} stroke={blue} strokeWidth="2" strokeDasharray="6 4" />{tip}</>;
+    } else if (type === "curveUp") {
+      if (dir === "right") {
+        content = <><path d={`M0,${h} L0,60 Q0,0 60,0 L${w - 12},0`} fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" /><polygon points={`${w - 12},-5 ${w},0 ${w - 12},5`} fill={blue} /></>;
+      } else {
+        content = <><path d={`M${w},0 L60,0 Q0,0 0,60 L0,${h}`} fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" /><polygon points={`-5,${h - 10} 0,${h} 5,${h - 10}`} fill={blue} /></>;
+      }
+    } else if (type === "curveDown") {
+      if (dir === "right") {
+        content = <><path d={`M0,0 L0,${h - 60} Q0,${h} 60,${h} L${w - 12},${h}`} fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" /><polygon points={`${w - 12},${h - 5} ${w},${h} ${w - 12},${h + 5}`} fill={blue} /></>;
+      } else {
+        content = <><path d={`M${w},${h} L60,${h} Q0,${h} 0,${h - 60} L0,0`} fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" /><polygon points={`-5,10 0,0 5,10`} fill={blue} /></>;
+      }
+    }
+
+    return (
+      <div key={id} style={{ position: "absolute", left: ar.x, top: ar.y, cursor: "grab", zIndex: 0 }} onMouseDown={e => onMouseDown(e, id, "arrow")}>
+        <svg width={w} height={h} style={{ overflow: "visible" }}>{content}</svg>
+        <div style={{ position: "absolute", top: -28, left: 0, display: "flex", gap: 4, zIndex: 10 }}>
+          <button onClick={(e) => { e.stopPropagation(); flipArrow(id); }} style={{ background: blue, color: white, border: "none", borderRadius: 4, padding: "2px 6px", fontSize: 10, cursor: "pointer" }}>↻</button>
+          <button onClick={(e) => { e.stopPropagation(); resizeArrow(id, "w", 20); }} style={{ background: "#333", color: white, border: "none", borderRadius: 4, padding: "2px 6px", fontSize: 10, cursor: "pointer" }}>W+</button>
+          <button onClick={(e) => { e.stopPropagation(); resizeArrow(id, "w", -20); }} style={{ background: "#333", color: white, border: "none", borderRadius: 4, padding: "2px 6px", fontSize: 10, cursor: "pointer" }}>W-</button>
+          <button onClick={(e) => { e.stopPropagation(); resizeArrow(id, "h", 20); }} style={{ background: "#333", color: white, border: "none", borderRadius: 4, padding: "2px 6px", fontSize: 10, cursor: "pointer" }}>H+</button>
+          <button onClick={(e) => { e.stopPropagation(); resizeArrow(id, "h", -20); }} style={{ background: "#333", color: white, border: "none", borderRadius: 4, padding: "2px 6px", fontSize: 10, cursor: "pointer" }}>H-</button>
+        </div>
+      </div>
+    );
+  };
+
+  const nodeCards: Record<string, React.ReactNode> = {
+    consumer: (
+      <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 180 }}>
+        <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}><Smartphone size={24} color={white} strokeWidth={1.5} /></div>
+        <div><p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Consumer</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>(Performs checkout)</p></div>
+      </div>
+    ),
+    integrator: (
+      <div style={{ background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 160 }}>
+        <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}><Code2 size={24} color={white} strokeWidth={1.5} /></div>
+        <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Integrator</p>
+      </div>
+    ),
+    unified: (
+      <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
+        <div style={{ width: 44, height: 44, borderRadius: 10, background: "linear-gradient(135deg, #0D7C5F, #15A87C)", display: "flex", alignItems: "center", justifyContent: "center" }}><Globe size={22} color={white} strokeWidth={1.5} /></div>
+        <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Unified Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
+      </div>
+    ),
+    mastercard: (
+      <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190 }}>
+        <div style={{ width: 44, height: 44, borderRadius: 10, background: "linear-gradient(135deg, #0D7C5F, #15A87C)", display: "flex", alignItems: "center", justifyContent: "center" }}><Globe size={22} color={white} strokeWidth={1.5} /></div>
+        <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Mastercard Checkout</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p></div>
+      </div>
+    ),
+    c2p: (
+      <div style={{ background: white, borderRadius: 20, padding: "24px 28px", boxShadow: "0 8px 40px rgba(123,47,255,0.15)", border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140 }}>
+        <div className="flex items-center gap-3"><img src={visaLogo} alt="Visa" style={{ height: 28 }} /><img src={mastercardLogo} alt="Mastercard" style={{ height: 28 }} /></div>
+        <p style={{ fontWeight: 800, fontSize: 15, color: navy }}>Click to Pay</p>
+      </div>
+    ),
+    dcf: (
+      <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}><CreditCard size={22} color={white} strokeWidth={1.5} /></div>
+        <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Digital Card</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Facilitator</p></div>
+      </div>
+    ),
+    issuer: (
+      <div style={{ background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)", border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}><Building2 size={22} color={white} strokeWidth={1.5} /></div>
+        <div><p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Participating</p><p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Issuer</p></div>
+      </div>
+    ),
+  };
+
+  return (
+    <div className="relative" style={{ minHeight: 520 }}>
+      <div style={{ position: "fixed", top: 10, right: 10, zIndex: 9999, background: "rgba(0,0,0,0.85)", color: "#0f0", padding: 12, borderRadius: 8, fontSize: 11, maxHeight: "50vh", overflow: "auto", fontFamily: "monospace" }}>
+        <button onClick={copyJSON} style={{ background: blue, color: white, border: "none", borderRadius: 4, padding: "4px 12px", fontSize: 12, cursor: "pointer", marginBottom: 8, display: "block" }}>Copiar JSON</button>
+        <pre style={{ margin: 0 }}>{JSON.stringify({ nodes: positions, arrows }, null, 2)}</pre>
+      </div>
+      {Object.entries(positions).map(([id, pos]) => (
+        <div key={id} style={{ position: "absolute", left: pos.x, top: pos.y, cursor: "grab", zIndex: 1 }} onMouseDown={e => onMouseDown(e, id, "node")}>
+          {nodeCards[id]}
+          <span style={{ position: "absolute", top: -16, left: 0, fontSize: 9, color: blue, fontWeight: 700 }}>{id}</span>
+        </div>
+      ))}
+      {Object.entries(arrows).map(([id, ar]) => renderArrow(id, ar))}
+    </div>
+  );
+}
+
 // ═════════════════════════════════════════════════════════════════════════════
 export default function ClickToPay() {
   const { toast } = useToast();
@@ -508,162 +684,9 @@ export default function ClickToPay() {
 
             {/* Flow diagram */}
             <div className="relative max-w-5xl mx-auto">
-              {/* Desktop layout */}
               <div className="hidden md:block">
-                <div className="relative" style={{ minHeight: 480 }}>
-
-                  {/* ── Consumer ── */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: -96, top: 197 }}>
-                    <div style={{
-                      background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
-                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 180,
-                    }}>
-                      <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <Smartphone size={24} color={white} strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Consumer</p>
-                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>(Performs checkout)</p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* ── Arrow Consumer → Integrator ── */}
-                  <svg style={{ position: "absolute", left: 125, top: 232 }} width="180" height="20">
-                    <line x1="0" y1="10" x2="160" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="160,5 170,10 160,15" fill={blue} />
-                  </svg>
-
-                  {/* ── Integrator ── */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 296, top: 200 }}>
-                    <div style={{
-                      background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
-                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 160,
-                    }}>
-                      <div style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, ${blue}, ${blueMid})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <Code2 size={24} color={white} strokeWidth={1.5} />
-                      </div>
-                      <p style={{ fontWeight: 700, fontSize: 14, color: navy }}>Integrator</p>
-                    </div>
-                  </motion.div>
-
-                  {/* ── Arrow Integrator → Unified (up) ── */}
-                  <svg style={{ position: "absolute", left: 388, top: 51 }} width="120" height="160">
-                    <path d="M0,150 L0,60 Q0,0 60,0 L108,0" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="108,-5 118,0 108,5" fill={blue} />
-                  </svg>
-
-                  {/* ── Arrow Integrator → Mastercard (down) ── */}
-                  <svg style={{ position: "absolute", left: 390, top: 288 }} width="120" height="160">
-                    <path d="M0,0 L0,90 Q0,150 60,150 L108,150" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="108,145 118,150 108,155" fill={blue} />
-                  </svg>
-
-                  {/* ── Unified Checkout Solutions ── */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 506, top: 12 }}>
-                    <div style={{
-                      background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
-                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190,
-                    }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, #0D7C5F, #15A87C)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <Globe size={22} color={white} strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Unified Checkout</p>
-                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* ── Mastercard Checkout Solutions ── */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 510, top: 396 }}>
-                    <div style={{
-                      background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
-                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12, minWidth: 190,
-                    }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, #0D7C5F, #15A87C)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <Globe size={22} color={white} strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Mastercard Checkout</p>
-                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Solutions</p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* ── Arrow Unified → Click to Pay ── */}
-                  <svg style={{ position: "absolute", left: 692, top: 205 }} width="60" height="20">
-                    <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="48,5 58,10 48,15" fill={blue} />
-                  </svg>
-
-                  {/* ── Arrow Mastercard → Click to Pay ── */}
-                  <svg style={{ position: "absolute", left: 695, top: 259 }} width="60" height="20">
-                    <line x1="0" y1="10" x2="48" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="48,5 58,10 48,15" fill={blue} />
-                  </svg>
-
-                  {/* ── Click to Pay ── */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 546, top: 186 }}>
-                    <div style={{
-                      background: white, borderRadius: 20, padding: "24px 28px", boxShadow: `0 8px 40px rgba(123,47,255,0.15)`,
-                      border: `2px solid ${blue}30`, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, minWidth: 140,
-                    }}>
-                      <div className="flex items-center gap-3">
-                        <img src={visaLogo} alt="Visa" style={{ height: 28 }} />
-                        <img src={mastercardLogo} alt="Mastercard" style={{ height: 28 }} />
-                      </div>
-                      <p style={{ fontWeight: 800, fontSize: 15, color: navy }}>Click to Pay</p>
-                    </div>
-                  </motion.div>
-
-                  {/* ── Arrow DCF → Click to Pay ── */}
-                  <svg style={{ position: "absolute", left: 605, top: 93 }} width="20" height="80">
-                    <line x1="10" y1="0" x2="10" y2="65" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="5,65 10,75 15,65" fill={blue} />
-                  </svg>
-
-                  {/* ── Arrow Issuer → Click to Pay ── */}
-                  <svg style={{ position: "absolute", left: 617, top: 316 }} width="20" height="80">
-                    <line x1="10" y1="80" x2="10" y2="15" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="5,15 10,5 15,15" fill={blue} />
-                  </svg>
-
-                  {/* ── Digital Card Facilitator ── */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 753, top: 155 }}>
-                    <div style={{
-                      background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
-                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12,
-                    }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <CreditCard size={22} color={white} strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Digital Card</p>
-                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Facilitator</p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* ── Participating Issuer ── */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 754, top: 249 }}>
-                    <div style={{
-                      background: white, borderRadius: 16, padding: "16px 20px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
-                      border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 12,
-                    }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, background: `linear-gradient(135deg, ${colibirdOrange}, #FF9A33)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <Building2 size={22} color={white} strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <p style={{ fontWeight: 700, fontSize: 13, color: navy }}>Participating</p>
-                        <p style={{ fontSize: 12, color: "rgba(26,10,46,0.55)" }}>Issuer</p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                </div>
+                <DiagramEditor />
               </div>
-
               {/* Mobile layout - vertical flow */}
               <div className="md:hidden flex flex-col items-center gap-4">
                 {[
