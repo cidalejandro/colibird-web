@@ -70,12 +70,6 @@ const Header = () => {
             </a>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button variant="hero" size="default">
-              Agendar Call
-            </Button>
-          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -117,9 +111,6 @@ const Header = () => {
                 <span className="w-2 h-2 rounded-full bg-white/70 animate-pulse" />
                 Click to Pay
               </a>
-              <Button variant="hero" className="mt-2">
-                Agendar Call
-              </Button>
             </nav>
           </div>
         )}

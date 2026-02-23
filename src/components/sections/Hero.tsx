@@ -70,10 +70,6 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <Button variant="hero" size="lg">
-              Agendar una call
-              <ArrowRight className="ml-2" size={20} />
-            </Button>
             <Button variant="heroOutline" size="lg">
               Conocer más
             </Button>
