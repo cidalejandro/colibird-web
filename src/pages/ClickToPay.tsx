@@ -210,7 +210,7 @@ export default function ClickToPay() {
     },
     {
       q: "¿Qué necesita un comercio para integrarlo?",
-      a: "Trabajamos con el procesador o PSP del comercio para implementar el SRCI SDK y el botón Click to Pay. Nuestros developers React lo integran en el checkout existente sin reemplazar la experiencia actual.",
+      a: "Trabajamos con el procesador o PSP del comercio para implementar el SDK Acquiring y el botón Click to Pay. Nuestros developers React lo integran en el checkout existente sin reemplazar la experiencia actual.",
     },
     {
       q: "¿Cuánto tiempo tarda una implementación?",
