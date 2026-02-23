@@ -124,7 +124,7 @@ export default function ClickToPay() {
 
   const stats = [
     { number: 128, suffix: "%", label: "Crecimiento interanual en transacciones tokenizadas con Click to Pay", source: "VisaNet · Q3 FY2023 vs Q3 FY2024" },
-    { number: 89, suffix: "%", label: "de los clientes percibieron Click to Pay igual o mejor que otros métodos digitales", source: "Investigación IPSOS 2023 · UK & España" },
+    { number: 89, suffix: "%", label: "de los Clientes percibieron Click to Pay igual o mejor que otros métodos digitales", source: "Investigación IPSOS 2023 · UK & España" },
     { number: 4.3, suffix: "%", label: "de aumento promedio en tasa de autorización vs transacciones con PAN tradicional", source: "VisaNet · Oct–Dic 2023 · CNP global" },
     { number: 65, suffix: "+", label: "mercados donde Click to Pay está disponible — ¡y seguimos creciendo!", source: "Mastercard MDES · 2025" },
     { number: 3, suffix: "-6 ppt", label: "de mejora en tasas de aprobación en transacciones tokenizadas vs ingreso manual de PAN, Fecha de vencimiento y CVV", source: "Mastercard Datawarehouse · Dic 2024 · MDES for Merchants · CNP first attempt" },
@@ -162,7 +162,7 @@ export default function ClickToPay() {
     {
       icon: <Kanban size={32} color={blueMid} />,
       role: "Product Manager de Pagos",
-      desc: "PMs especializados en productos de pagos digitales. Lideramos discovery, roadmap, alineación de stakeholders y sprints de entrega ágil — siempre con la experiencia del cliente en el centro.",
+      desc: "PMs especializados en productos de pagos digitales. Lideramos discovery, roadmap, alineación de stakeholders y sprints de entrega ágil — siempre con la experiencia del Cliente en el centro.",
       tags: ["Agile", "Product Discovery", "Customer Journey", "Roadmap"],
     },
     {
@@ -175,7 +175,7 @@ export default function ClickToPay() {
 
   const workSteps = [
     { icon: <Search size={28} />, title: "Discovery & Assessment", desc: "Mapeamos tu checkout actual, stack tecnológico, relación con esquemas y objetivos de negocio. Definimos el alcance exacto de la implementación." },
-    { icon: <PenLine size={28} />, title: "UX Design & Architecture", desc: "Diseñamos el journey de Click to Pay centrado en tu cliente. Blueprint técnico de integración: APIs, SDK, flujos de autenticación y tokenización." },
+    { icon: <PenLine size={28} />, title: "UX Design & Architecture", desc: "Diseñamos el journey de Click to Pay centrado en tu Cliente. Blueprint técnico de integración: APIs, SDK, flujos de autenticación y tokenización." },
     { icon: <Code2 size={28} />, title: "Agile Build & Integration", desc: "Sprints ágiles. Componentes React. Integración API. Cobertura de testing completa. Revisiones continuas con tu equipo." },
     { icon: <Rocket size={28} />, title: "Certificación, Launch & Optimize", desc: "Acompañamiento en la certificación con Visa/Mastercard. Go-live support. Analytics de conversión y mejora continua de la UX post-lanzamiento." },
   ];
@@ -205,7 +205,7 @@ export default function ClickToPay() {
     },
     {
       q: "¿Cómo se beneficia un emisor implementando Click to Pay?",
-      a: "Los emisores pueden inscribir automáticamente a sus tarjetahabientes, convertir su tarjeta en la opción default de pago online, fortalecer la relación con su cliente y reducir la pérdida de transacciones frente a wallets de terceros.",
+      a: "Los emisores pueden inscribir automáticamente a sus tarjetahabientes, convertir su tarjeta en la opción default de pago online, fortalecer la relación con su Cliente y reducir la pérdida de transacciones frente a wallets de terceros.",
     },
     {
       q: "¿Qué necesita un comercio para integrarlo?",
@@ -324,7 +324,7 @@ export default function ClickToPay() {
               </svg>
               Click to Pay.<br />
               <span style={{ background: `linear-gradient(90deg, ${blue}, ${blueMid}, ${colibirdOrange})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Rápido, experto y centrado en el cliente.
+                Rápido, experto y centrado en el Cliente.
               </span>
             </motion.h1>
 
@@ -803,7 +803,7 @@ export default function ClickToPay() {
               variants={fadeUp}
               style={{ color: navy, fontSize: "clamp(1.4rem, 3vw, 2rem)", fontWeight: 800, textAlign: "center", marginBottom: 48 }}
             >
-              Lo que dicen nuestros clientes
+              Lo que dicen nuestros Clientes
             </motion.h2>
             <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {testimonials.map((t, i) => (

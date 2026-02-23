@@ -52,7 +52,7 @@ const cases = [
   {
     logo: logoBna,
     name: "Banco Nación Argentina",
-    description: "Estructura, modelo orientado a cliente, roadmap y ejecución."
+    description: "Estructura, modelo orientado a Cliente, roadmap y ejecución."
   },
   {
     logo: logoInterbanking,
