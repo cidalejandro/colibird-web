@@ -511,8 +511,14 @@ export default function ClickToPay() {
               {/* Desktop layout */}
               <div className="hidden md:block">
                 <div className="relative" style={{ minHeight: 480 }}>
+                  {/* ── Arrow Consumer → Integrator (behind nodes) ── */}
+                  <svg style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 0 }} width="460" height="20">
+                    <line x1="114" y1="10" x2="358" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
+                    <polygon points="350,5 360,10 350,15" fill={blue} />
+                  </svg>
+
                   {/* ── Row: Consumer ── */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)" }}>
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 1 }}>
                     <div style={{
                       background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                       border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 180,
@@ -527,14 +533,8 @@ export default function ClickToPay() {
                     </div>
                   </motion.div>
 
-                  {/* ── Arrow Consumer → Integrator ── */}
-                  <svg style={{ position: "absolute", left: 228, top: "50%", transform: "translateY(-50%)" }} width="32" height="20">
-                    <line x1="0" y1="10" x2="20" y2="10" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
-                    <polygon points="20,5 30,10 20,15" fill={blue} />
-                  </svg>
-
                   {/* ── Integrator ── */}
-                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 260, top: "50%", transform: "translateY(-50%)" }}>
+                  <motion.div variants={fadeUp} style={{ position: "absolute", left: 300, top: "50%", transform: "translateY(-50%)", zIndex: 1 }}>
                     <div style={{
                       background: white, borderRadius: 16, padding: "20px 24px", boxShadow: "0 4px 24px rgba(123,47,255,0.08)",
                       border: `1px solid ${blue}15`, display: "flex", alignItems: "center", gap: 14, minWidth: 160,
@@ -547,13 +547,13 @@ export default function ClickToPay() {
                   </motion.div>
 
                   {/* ── Arrow Integrator → Unified (up) ── */}
-                  <svg style={{ position: "absolute", left: 340, top: 60 }} width="120" height="130">
+                  <svg style={{ position: "absolute", left: 380, top: 60 }} width="120" height="130">
                     <path d="M0,130 L0,60 Q0,0 60,0 L108,0" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
                     <polygon points="108,-5 118,0 108,5" fill={blue} />
                   </svg>
 
                   {/* ── Arrow Integrator → Mastercard (down) ── */}
-                  <svg style={{ position: "absolute", left: 340, top: "50%", marginTop: 24 }} width="120" height="130">
+                  <svg style={{ position: "absolute", left: 380, top: "50%", marginTop: 24 }} width="120" height="130">
                     <path d="M0,0 L0,70 Q0,130 60,130 L108,130" fill="none" stroke={blue} strokeWidth="2" strokeDasharray="6 4" />
                     <polygon points="108,125 118,130 108,135" fill={blue} />
                   </svg>
