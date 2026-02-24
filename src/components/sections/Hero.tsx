@@ -63,10 +63,17 @@ const Hero = () => {
           <p className="text-gradient text-xl md:text-2xl font-semibold mb-6 animate-fade-in-up">
             Where strategy becomes execution.
           </p>
-          
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            Transformamos complejidad en ejecución concreta y valor sostenible. 
-            Cerramos la brecha entre las ideas estratégicas y los resultados que efectivamente ocurren.
+
+          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-4 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            Magno Partners es una consultora especializada en soluciones y servicios para la industria de medios de pago, 
+            ayudando a nuestros clientes a alcanzar sus objetivos estratégicos. Contamos con un profundo conocimiento 
+            del ecosistema de pagos y los desafíos y oportunidades que enfrenta.
+          </p>
+
+          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+            Tenemos una visión clara de las tendencias e innovaciones que están transformando el panorama financiero. 
+            Aprovechamos nuestra experiencia y visión para ofrecer servicios de alta calidad y a medida, 
+            generando valor para nuestros clientes y fortaleciendo su ventaja competitiva.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
