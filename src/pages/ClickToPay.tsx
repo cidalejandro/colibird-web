@@ -125,10 +125,10 @@ export default function ClickToPay() {
   };
 
   const steps = [
-    { icon: <img src={c2pHorizontalDark} alt="Click to Pay" className="w-96" />, label: "Integra el ícono de Click To Pay en el checkout de tu sitio de compra en línea y agiliza el proceso de pago." },
-    { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Permití que tus Clientes paguen sin fricción y seleccionen la tarjeta con la que quieren pagar sin ingresar PAN, Fecha de vencimiento ni CVV2." },
-    { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Minimiza el fraude y mejora tus tasas de aprobación asignándole al Cliente un desafío a completar (passkey)." },
-    { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Baja las tasas de abandono en el check out y el fraude en línea con C2P. ¡Listo!" },
+    { icon: <img src={c2pHorizontalDark} alt="Click to Pay" className="w-96" />, label: "Integrá el ícono de Click To Pay en el checkout de tu sitio de compra en línea y agiliza el proceso de pago." },
+    { icon: <CreditCard size={40} strokeWidth={1.2} color="white" />, label: "Permití que tus Clientes paguen sin fricción y seleccionen la tarjeta con la que quieren comprar sin ingresar PAN, Fecha de vencimiento ni CVV2." },
+    { icon: <ShieldCheck size={40} strokeWidth={1.2} color="white" />, label: "Minimizá el fraude y mejora tus tasas de aprobación asignándole al Cliente un desafío a completar (passkey)." },
+    { icon: <CheckCircle2 size={40} strokeWidth={1.2} color="white" />, label: "Bajá las tasas de abandono en el checkout y el fraude en línea con C2P. ¡Listo!" },
   ];
 
   const stats = [
