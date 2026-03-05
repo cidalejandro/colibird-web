@@ -1,14 +1,23 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Sitemap (update domain when deploying)
+Sitemap: https://colibird.com.ar/sitemap.xml
+
+# Block admin/internal if added later
+Disallow: /admin/
+Disallow: /api/internal/
+
+Allow: /
+Allow: /echeq
+Allow: /radian
+Allow: /scf
+Allow: /click-to-pay
+Allow: /nosotros
+Allow: /contacto
+Allow: /desarrolladores
+
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /*.php$
+Disallow: /*.cgi$
