@@ -103,7 +103,7 @@ export function Footer() {
 
         <div className="border-t border-border mt-16 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-muted-foreground">&copy; 2024 Colibird. Todos los derechos reservados.</p>
+            <p className="text-sm text-muted-foreground">&copy; 2025 Colibird. Todos los derechos reservados.</p>
 
           </div>
         </div>
