@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import type { Variants } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import { Navigation } from "@/components/colibird/navigation";
 import c2pHorizontalDark from "@/assets/c2p-horizontal-dark.svg";
 import c2pIconDark from "@/assets/c2p-icon-dark.svg";
 import c2pHorizontalMarkLight from "@/assets/c2p-horizontal-mark-light.svg";
@@ -274,6 +275,7 @@ export default function ClickToPay() {
 
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: white, color: navy }} className="overflow-x-hidden">
+      <Navigation />
 
       {/* ══════════════════════ HERO ══════════════════════════════════════════ */}
       <section

@@ -22,6 +22,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Raíz: sitio Colibird (inicio, productos, roadmap, etc.) */}
           <Route path="/" element={<ColibirdHome />} />
           <Route path="/click-to-pay" element={<ClickToPay />} />
           <Route path="/contacto" element={<Contacto />} />
