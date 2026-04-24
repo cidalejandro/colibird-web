@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-purple: #7C3AED;
+  --color-brand-violet: #6D28D9;
+  --color-brand-magenta: #C026D3;
+  --color-brand-pink: #EC4899;
+  --color-brand-dark: #FAFAFE;
+  --color-brand-surface: #F5F3FF;
+  --color-brand-card: #FFFFFF;
+  --color-brand-border: #EDE9FE;
+  --color-brand-muted: #F3E8FF;
+  --color-brand-text-muted: #6B7280;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --animate-fade-up: fadeUp 0.6s ease-out forwards;
+  --animate-fade-in: fadeIn 0.5s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #FAFAFE;
+  background-image: radial-gradient(rgba(109, 40, 217, 0.07) 1px, transparent 1px);
+  background-size: 36px 36px;
+  color: #0F172A;
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #F5F3FF; }
+::-webkit-scrollbar-thumb { background: #DDD6FE; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #7C3AED; }
+
+::selection { background: rgba(124,58,237,0.15); color: #0F172A; }
+
+/* ── Light-mode text overrides ─────────────────────────────────────────────
+   These rules come after @import "tailwindcss" so they win at equal
+   specificity (single-class = 0,1,0). Gradient buttons restore white below.
+   ────────────────────────────────────────────────────────────────────────── */
+.text-white  { color: #0F172A; }
+.text-gray-50 { color: #F8FAFC; }
+.text-gray-200 { color: #1E293B; }
+.text-gray-300 { color: #334155; }
+.text-gray-400 { color: #475569; }
+.text-gray-500 { color: #64748B; }
+
+/* Preserve white text on gradient backgrounds (same element or child) */
+.bg-brand-gradient,
+.bg-brand-gradient.text-white,
+.bg-brand-gradient .text-white { color: white !important; }
+
+/* Code block dark zone: restore original dark-mode text colors */
+.code-dark { background: #0F172A !important; color: #E2E8F0 !important; }
+.code-dark .text-gray-300 { color: #CBD5E1 !important; }
+.code-dark .text-gray-500 { color: #94A3B8 !important; }
+
+/* Dark section zone (footer, etc.) */
+.dark-zone,
+.dark-zone .text-white  { color: #F1F5F9 !important; }
+.dark-zone .text-gray-400 { color: #94A3B8 !important; }
+.dark-zone .text-gray-500 { color: #64748B !important; }
+.dark-zone .text-gray-300 { color: #CBD5E1 !important; }
+
+/* ── Design tokens ─────────────────────────────────────────────────────── */
+
+.gradient-text {
+  background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-subtle {
+  background: linear-gradient(135deg, #6D28D9 0%, #DB2777 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-brand-gradient {
+  background: linear-gradient(135deg, #7C3AED 0%, #DB2777 100%);
+}
+
+.bg-brand-gradient-hover:hover {
+  background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+}
+
+.glow-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, rgba(124,58,237,0.35), rgba(192,38,211,0.35)) border-box;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.07);
+  transition: all 0.3s ease;
+}
+
+.glow-border:hover {
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, rgba(124,58,237,0.75), rgba(192,38,211,0.75)) border-box;
+  box-shadow: 0 6px 24px rgba(124,58,237,0.14);
+}
+
+.card-dark {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(124,58,237,0.12);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.card-dark:hover {
+  border-color: rgba(124,58,237,0.3);
+  background: white;
+  box-shadow: 0 6px 20px rgba(124,58,237,0.1);
+}
+
+.hero-glow {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 600px;
+  background: radial-gradient(ellipse at center, rgba(124,58,237,0.18) 0%, rgba(192,38,211,0.08) 40%, transparent 70%);
+  pointer-events: none;
+  filter: blur(60px);
+}
+
+.section-glow-left {
+  position: absolute;
+  left: -200px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(124,58,237,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(60px);
+}
+
+.section-glow-right {
+  position: absolute;
+  right: -200px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(192,38,211,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(60px);
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  z-index: 9999;
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-fade-up { animation: fadeUp 0.6s ease-out forwards; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.03), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
