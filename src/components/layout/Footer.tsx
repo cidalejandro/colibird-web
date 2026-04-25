@@ -27,7 +27,7 @@ export default function Footer() {
               {f.tagline}
             </p>
             <a
-              href="https://www.linkedin.com/company/colibird"
+              href="https://www.linkedin.com/company/colibirdlatam/posts/?feedView=all"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex p-2.5 rounded-lg border border-brand-border text-gray-400 hover:text-blue-400 hover:border-blue-400/30 transition-all"

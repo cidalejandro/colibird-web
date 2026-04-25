@@ -29,14 +29,14 @@ export default function CTA() {
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
           <a
-            href="mailto:hola@colibird.com.ar"
+            href="mailto:ceo@colibird.co,cpto@colibird.co"
             className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-brand-gradient text-white font-semibold text-base shadow-xl shadow-purple-900/40 hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
           >
             {t.cta.primary}
             <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
           </a>
           <a
-            href="mailto:hola@colibird.com.ar"
+            href="mailto:ceo@colibird.co,cpto@colibird.co"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-brand-border text-gray-300 font-semibold text-base hover:border-brand-purple/50 hover:text-white hover:bg-brand-card/50 transition-all duration-200"
           >
             <MessageSquare size={18} />
@@ -46,8 +46,8 @@ export default function CTA() {
 
         {/* Contact details */}
         <div className="mt-10 flex flex-wrap justify-center items-center gap-6 text-sm text-gray-500">
-          <a href="mailto:hola@colibird.com.ar" className="hover:text-gray-300 transition-colors">
-            hola@colibird.com.ar
+          <a href="mailto:ceo@colibird.co,cpto@colibird.co" className="hover:text-gray-300 transition-colors">
+            ceo@colibird.co
           </a>
           <span className="w-1 h-1 rounded-full bg-gray-700" />
           <span>+54 911 3375 0788</span>

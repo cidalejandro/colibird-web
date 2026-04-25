@@ -11,8 +11,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: "/favicon-bird.png",
+    apple: "/favicon-bird.png",
   },
   title: "Colibird — Infraestructura Financiera B2B para LATAM",
   description:

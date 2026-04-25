@@ -80,7 +80,7 @@ export const translations = {
             { name: "Supply Chain Finance", desc: "Programas buyer-driven para financiar cadenas de suministro completas.", tag: "SCF", slug: "scf" },
             { name: "Confirming", desc: "Reverse factoring: el comprador confirma y el proveedor cobra antes.", tag: "Confirming", slug: "confirming" },
             { name: "eCheqs", desc: "Descuento digital de cheques electrónicos con integración bancaria nativa.", tag: "Argentina", slug: "echeqs" },
-            { name: "OPP + Cupones de Tarjeta", desc: "Descuento de cupones para adquirentes. Monetizá flujos futuros de tarjetas.", tag: "Adquirentes", slug: "opp-card" },
+            { name: "OPP + Cupones de Tarjeta", desc: "Cupones pendientes de tarjeta convertidos en OPP transferibles o anticipos inmediatos para merchants.", tag: "Adquirentes", slug: "opp-card" },
           ],
         },
         {
@@ -304,7 +304,7 @@ export const translations = {
             { name: "Supply Chain Finance", desc: "Buyer-driven programs to finance complete supply chains.", tag: "SCF", slug: "scf" },
             { name: "Confirming", desc: "Reverse factoring: the buyer confirms and the supplier gets paid early.", tag: "Confirming", slug: "confirming" },
             { name: "eCheqs", desc: "Digital discount of electronic checks with native bank integration.", tag: "Argentina", slug: "echeqs" },
-            { name: "OPP + Card Receivables", desc: "Card receivable discount for acquirers. Monetize future card flows.", tag: "Acquirers", slug: "opp-card" },
+            { name: "OPP + Card Receivables", desc: "Pending card receivables turned into transferable payment orders or immediate advances for merchants.", tag: "Acquirers", slug: "opp-card" },
           ],
         },
         {
