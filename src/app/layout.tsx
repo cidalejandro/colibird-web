@@ -10,10 +10,6 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  icons: {
-    icon: "/favicon-bird.png",
-    apple: "/favicon-bird.png",
-  },
   title: "Colibird — Infraestructura Financiera B2B para LATAM",
   description:
     "Bancos y fintechs construyen SCF, Confirming, eCheqs, OPP y Pagos B2B sobre la plataforma modular de Colibird. API-first, IA nativa, compliance by design.",
