@@ -126,14 +126,14 @@ export const products: Product[] = [
     slug: "echeqs",
     category: "financing",
     color: "teal",
-    tech_specs: ["BCRA Integration", "ECHEQ API", "Real-time Validation", "Argentina Compliant", "SLA 99.9%", "Audit Trail"],
+    tech_specs: ["COELSA Integration", "ECHEQ API", "Real-time Validation", "Argentina Compliant", "SLA 99.9%", "Audit Trail"],
     es: {
       name: "eCheqs",
       tagline: "Descuento digital de cheques electrónicos con integración bancaria nativa",
-      description: "Plataforma especializada para el descuento de cheques electrónicos en Argentina. Integración directa con la red bancaria y el BCRA para validación, endoso y liquidación en tiempo real.",
+      description: "Plataforma especializada para el descuento de cheques electrónicos en Argentina. Integración directa con la red bancaria y COELSA para validación, endoso y liquidación en tiempo real.",
       badge: "Argentina",
       features: [
-        { title: "Integración BCRA nativa", desc: "Validación en tiempo real contra el sistema de cheques electrónicos del Banco Central de la República Argentina." },
+        { title: "Integración COELSA nativa", desc: "Validación en tiempo real contra el sistema de cheques electrónicos a través de COELSA, la cámara compensadora del sistema bancario argentino." },
         { title: "Endoso digital", desc: "Proceso de endoso 100% digital y trazable. Sin papeles, sin errores manuales, con firma electrónica avanzada." },
         { title: "Liquidación T+0 / T+1", desc: "Motor de liquidación optimizado para acreditar fondos al descontatario el mismo día o el día siguiente." },
         { title: "Risk scoring automático", desc: "Scoring del librador, historial de rechazo y semáforos de riesgo integrados con DecisionHub." },
@@ -152,10 +152,10 @@ export const products: Product[] = [
     en: {
       name: "eCheqs",
       tagline: "Digital electronic check discounting with native bank integration",
-      description: "Specialized platform for electronic check discounting in Argentina. Direct integration with the banking network and BCRA for real-time validation, endorsement and settlement.",
+      description: "Specialized platform for electronic check discounting in Argentina. Direct integration with the banking network and COELSA for real-time validation, endorsement and settlement.",
       badge: "Argentina",
       features: [
-        { title: "Native BCRA integration", desc: "Real-time validation against Argentina's Central Bank electronic check system." },
+        { title: "Native COELSA integration", desc: "Real-time validation against Argentina's electronic check system through COELSA, the Argentine banking clearing house." },
         { title: "Digital endorsement", desc: "100% digital and traceable endorsement process. No paper, no manual errors, with advanced electronic signature." },
         { title: "T+0 / T+1 settlement", desc: "Optimized settlement engine to credit funds to the discountee same day or next day." },
         { title: "Automatic risk scoring", desc: "Drawer scoring, rejection history and risk traffic lights integrated with DecisionHub." },
@@ -176,7 +176,7 @@ export const products: Product[] = [
     slug: "opp-card",
     category: "financing",
     color: "pink",
-    tech_specs: ["BCRA / AFIP Compliance", "Coelsa Integration", "CBU/CVU + Wallets", "API REST + Webhooks", "OpenAPI 3.0", "SLA 99.9%", "AES-256 + TLS 1.3", "MFA + RBAC"],
+    tech_specs: ["BCRA / ARCA Compliance", "Coelsa Integration", "CBU/CVU + Wallets", "API REST + Webhooks", "OpenAPI 3.0", "SLA 99.9%", "AES-256 + TLS 1.3", "MFA + RBAC"],
     es: {
       name: "OPP + Cupones de Tarjeta",
       tagline: "Transformá los cupones de tarjeta pendientes en liquidez inmediata o instrumentos de pago transferibles",
@@ -276,7 +276,7 @@ export const products: Product[] = [
     slug: "gateway-b2b",
     category: "payments",
     color: "green",
-    tech_specs: ["REST API", "ISO 20022", "Multi-rail", "PCI-DSS Level 1", "Failover automático", "SLA 99.95%"],
+    tech_specs: ["REST API", "ISO 20022", "Multi-rail", "PSP (Argentina)", "PCI-DSS Level 1", "Failover automático", "SLA 99.95%"],
     es: {
       name: "Gateway de Pagos B2B",
       tagline: "Infraestructura de pagos de alto volumen para el mercado empresarial",
@@ -376,11 +376,11 @@ export const products: Product[] = [
     slug: "e-invoicing",
     category: "compliance",
     color: "teal",
-    tech_specs: ["DIAN / AFIP / SAT / SII", "XML UBL 2.1", "Multi-País", "Real-time Validation", "Archiving 10 años", "API REST"],
+    tech_specs: ["DIAN / ARCA / SAT / SII", "XML UBL 2.1", "Multi-País", "Real-time Validation", "Archiving 10 años", "API REST"],
     es: {
       name: "e-Invoicing",
       tagline: "Facturación electrónica multi-país para toda LATAM desde una sola API",
-      description: "Capa de integración que unifica la conexión con los sistemas de facturación electrónica de cada país LATAM: DIAN (Colombia), AFIP (Argentina), SAT (México), SII (Chile) y más. Una API, múltiples países.",
+      description: "Capa de integración que unifica la conexión con los sistemas de facturación electrónica de cada país LATAM: DIAN (Colombia), ARCA (Argentina), SAT (México), SII (Chile) y más. Una API, múltiples países.",
       badge: "Multi-País",
       features: [
         { title: "Multi-país unificado", desc: "Una sola integración API que abstrae la complejidad de cada autoridad tributaria. Agregá países sin cambiar tu código." },
@@ -402,7 +402,7 @@ export const products: Product[] = [
     en: {
       name: "e-Invoicing",
       tagline: "Multi-country electronic invoicing for all of LATAM from a single API",
-      description: "Integration layer that unifies the connection with each LATAM country's e-invoicing systems: DIAN (Colombia), AFIP (Argentina), SAT (Mexico), SII (Chile) and more. One API, multiple countries.",
+      description: "Integration layer that unifies the connection with each LATAM country's e-invoicing systems: DIAN (Colombia), ARCA (Argentina), SAT (Mexico), SII (Chile) and more. One API, multiple countries.",
       badge: "Multi-Country",
       features: [
         { title: "Unified multi-country", desc: "A single API integration that abstracts the complexity of each tax authority. Add countries without changing your code." },

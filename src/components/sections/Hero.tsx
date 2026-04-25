@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLang } from "@/context/LanguageContext";
 import { ArrowRight, Zap, Shield, Globe, Brain } from "lucide-react";
 
@@ -34,6 +35,11 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Logo */}
+        <div className="flex justify-center mb-8 animate-fade-up">
+          <Image src="/logo.png" alt="Colibird" width={220} height={66} className="h-16 w-auto object-contain" priority />
+        </div>
+
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-purple/30 bg-brand-purple/10 text-purple-300 text-sm font-medium mb-8 animate-fade-up">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-purple animate-pulse" />
