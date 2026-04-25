@@ -35,9 +35,9 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Logo */}
-        <div className="flex justify-center mb-8 animate-fade-up">
-          <Image src="/logo.png" alt="Colibird" width={220} height={66} className="h-16 w-auto object-contain" priority />
+        {/* Isologotipo */}
+        <div className="flex justify-center mb-6 animate-fade-up">
+          <Image src="/favicon-bird.png" alt="Colibird" width={120} height={120} className="h-28 w-28 object-contain mix-blend-multiply drop-shadow-[0_0_32px_rgba(124,58,237,0.4)]" priority />
         </div>
 
         {/* Badge */}
