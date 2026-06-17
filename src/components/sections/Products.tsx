@@ -24,6 +24,7 @@ const productIcons = [
   <Globe key="gateway" size={20} />,
   <Globe key="radian" size={20} />,
   <Database key="einv" size={20} />,
+  <FileText key="tax" size={20} />,
   <Shield key="dec" size={20} />,
   <Shield key="trust" size={20} />,
   <Link2 key="api" size={20} />,
@@ -51,7 +52,9 @@ const tagColors: Record<string, string> = {
   AI: "bg-purple-500/15 text-purple-300 border-purple-500/20",
   "5 min": "bg-green-500/15 text-green-300 border-green-500/20",
   "API-First": "bg-violet-500/15 text-violet-300 border-violet-500/20",
-  "AI Agents": "bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-500/20",
+  "Impuestos": "bg-teal-500/15 text-teal-300 border-teal-500/20",
+  Taxes: "bg-teal-500/15 text-teal-300 border-teal-500/20",
+  LMCP: "bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-500/20",
 };
 
 export default function Products() {

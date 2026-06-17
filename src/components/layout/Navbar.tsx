@@ -31,6 +31,7 @@ const productCategories = [
     items: [
       { nameEs: "RADIAN Colombia", nameEn: "RADIAN Colombia", slug: "radian", icon: Database },
       { nameEs: "e-Invoicing", nameEn: "e-Invoicing", slug: "e-invoicing", icon: FileText },
+      { nameEs: "Motor de Impuestos FCE", nameEn: "FCE Tax Engine", slug: "tax-engine", icon: FileText },
     ],
   },
   {
@@ -40,7 +41,7 @@ const productCategories = [
       { nameEs: "DecisionHub · Risk Engine", nameEn: "DecisionHub · Risk Engine", slug: "decisionhub", icon: Shield },
       { nameEs: "TrustPath · Onboarding", nameEn: "TrustPath · Onboarding", slug: "trustpath", icon: Shield },
       { nameEs: "API Integration Layer", nameEn: "API Integration Layer", slug: "api-layer", icon: Link2 },
-      { nameEs: "MCP Agents", nameEn: "MCP Agents", slug: "mcp-agents", icon: Bot },
+      { nameEs: "LMCP", nameEn: "LMCP", slug: "lmcp", icon: Bot },
     ],
   },
 ];
@@ -128,7 +129,7 @@ export default function Navbar() {
                   </div>
                   <div className="mt-4 pt-4 border-t border-brand-border flex items-center justify-between">
                     <span className="text-xs text-brand-text-muted">
-                      {lang === "es" ? "12 módulos · Todos API-first" : "12 modules · All API-first"}
+                      {lang === "es" ? "13 módulos · Todos API-first" : "13 modules · All API-first"}
                     </span>
                     <Link
                       href="/#productos"
@@ -144,6 +145,9 @@ export default function Navbar() {
 
             <Link href="/#plataforma" className="px-3 py-2 text-sm font-medium transition-colors rounded-lg hover:bg-brand-purple/8">
               {t.nav.platform}
+            </Link>
+            <Link href="/#lmcp" className="px-3 py-2 text-sm font-medium transition-colors rounded-lg hover:bg-brand-purple/8">
+              {t.nav.lmcp}
             </Link>
             <Link href="/#developers" className="px-3 py-2 text-sm font-medium transition-colors rounded-lg hover:bg-brand-purple/8">
               {t.nav.developers}
@@ -209,6 +213,9 @@ export default function Navbar() {
             <div className="border-t border-brand-border my-2" />
             <Link href="/#plataforma" onClick={() => setOpen(false)} className="block px-3 py-2 text-sm rounded-lg hover:bg-brand-purple/8 transition-colors">
               {t.nav.platform}
+            </Link>
+            <Link href="/#lmcp" onClick={() => setOpen(false)} className="block px-3 py-2 text-sm rounded-lg hover:bg-brand-purple/8 transition-colors">
+              {t.nav.lmcp}
             </Link>
             <Link href="/#developers" onClick={() => setOpen(false)} className="block px-3 py-2 text-sm rounded-lg hover:bg-brand-purple/8 transition-colors">
               {t.nav.developers}

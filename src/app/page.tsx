@@ -5,6 +5,7 @@ import TrustBar from "@/components/sections/TrustBar";
 import Problem from "@/components/sections/Problem";
 import Platform from "@/components/sections/Platform";
 import Products from "@/components/sections/Products";
+import LMCP from "@/components/sections/LMCP";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Market from "@/components/sections/Market";
 import CTA from "@/components/sections/CTA";
@@ -18,6 +19,7 @@ export default function Home() {
       <Problem />
       <Platform />
       <Products />
+      <LMCP />
       <HowItWorks />
       <Market />
       <CTA />

@@ -5,6 +5,7 @@ export const translations = {
     nav: {
       platform: "Plataforma",
       products: "Productos",
+      lmcp: "LMCP",
       about: "Nosotros",
       investors: "Inversores",
       developers: "Desarrolladores",
@@ -97,6 +98,12 @@ export const translations = {
           items: [
             { name: "RADIAN Colombia", desc: "Integración nativa con el sistema de facturación electrónica de Colombia.", tag: "Colombia", slug: "radian" },
             { name: "e-Invoicing", desc: "Conexión con sistemas de facturación electrónica en múltiples países LATAM.", tag: "Multi-País", slug: "e-invoicing" },
+            {
+              name: "Motor de Impuestos FCE",
+              desc: "Cálculo A–H para descuento FCE MiPyME: Sellos, IIBB, padrones y liquidación fiscal.",
+              tag: "Impuestos",
+              slug: "tax-engine",
+            },
           ],
         },
         {
@@ -122,10 +129,10 @@ export const translations = {
               slug: "api-layer",
             },
             {
-              name: "MCP Agents",
-              desc: "Agentes de IA que operan tu plataforma financiera en lenguaje natural vía Model Context Protocol.",
-              tag: "AI Agents",
-              slug: "mcp-agents",
+              name: "LMCP",
+              desc: "161 herramientas MCP locales para Mac. Privacidad total, sin API keys. Producto Colibird en local-mcp.com.",
+              tag: "LMCP",
+              slug: "lmcp",
             },
           ],
         },
@@ -210,6 +217,75 @@ export const translations = {
       primary: "Solicitar Demo",
       secondary: "Hablar con el equipo",
     },
+    lmcp: {
+      tag: "Producto Colibird · IA Local",
+      headline: "LMCP: tu IA con acceso nativo a tu Mac",
+      sub: "Local MCP conecta Claude, ChatGPT y Cursor a Mail, Calendar, Teams, OneDrive y 161 herramientas más. Todo corre en tu dispositivo — sin nube, sin tokens, sin API keys.",
+      cta_download: "Descargar LMCP",
+      cta_learn: "Ver producto completo",
+      free_note: "Gratis · macOS 13+ · Instalación en 2 minutos · local-mcp.com",
+      demo_prompt: "Preparame para la reunión de las 15hs",
+      demo_response:
+        "3 emails sin leer de proveedores · Reunión con finanzas a las 15:00 · El canal #tesorería mencionó el cierre de mes ayer.",
+      stats: [
+        { value: "161", label: "Herramientas MCP" },
+        { value: "16K+", label: "Descargas npm" },
+        { value: "2 min", label: "Setup" },
+        { value: "100%", label: "Local" },
+      ],
+      fin: {
+        tag: "Para bancos y fintechs",
+        headline: "Banca agéntica: tus APIs, el agente de cada cliente",
+        sub: "Si ya tenés API Banking, un servidor MCP publica tu catálogo una sola vez. Individuos y PyMEs operan en lenguaje natural — sin integrar API por API.",
+        problem_title: "El problema",
+        problem:
+          "Cada cliente o socio integra servicio por servicio. PyMEs sin equipo técnico quedan fuera. El modelo N×M no escala y el backlog de integraciones crece más rápido que la capacidad del banco.",
+        solution_title: "La solución MCP",
+        solution:
+          "Publicás cuentas, pagos, transferencias y créditos como tools versionadas. El cliente conecta Claude, ChatGPT o Cursor. Pide en lenguaje natural; el agente ejecuta sobre tu core con seguridad transaccional.",
+        security_title: "Seguridad incorporada",
+        security_bullets: [
+          "Autenticación fuerte antes de operar sobre cuentas.",
+          "2FA obligatorio en transferencias, pagos y emisión de instrumentos.",
+          "Preview y confirmación en toda operación de escritura.",
+          "Auditoría completa; datos que permanecen en la entidad.",
+        ],
+        journeys_title: "Casos de uso ilustrativos",
+        journeys: [
+          {
+            persona: "Persona",
+            prompt: "Pagá mis servicios del mes y avisame si algún consumo subió más de un 20%.",
+            steps: [
+              "Lee facturas desde correo y APIs bancarias.",
+              "Ejecuta pagos con confirmación 2FA.",
+              "Reporta variaciones vs. meses anteriores.",
+            ],
+          },
+          {
+            persona: "PyME",
+            prompt: "Conciliá los cobros de hoy, pagá proveedores vencidos y colocá el excedente.",
+            steps: [
+              "Concilia cobros contra ERP o planilla del cliente.",
+              "Paga proveedores en lote con 2FA.",
+              "Coloca excedente en instrumento de liquidez.",
+            ],
+          },
+          {
+            persona: "Empresa",
+            prompt: "Emití los cheques electrónicos de esta planilla y programá sueldos del viernes.",
+            steps: [
+              "Emite instrumentos desde planilla del cliente.",
+              "Programa transferencias de nómina.",
+              "Actualiza posición en tablero del cliente.",
+            ],
+          },
+        ],
+        framing_note:
+          "Banca agéntica sobre canales digitales existentes — no reemplaza Open Finance ni embedded finance clásico. El agente puede combinar APIs bancarias con contexto del cliente (ERP, correo, planillas) con PII protegida.",
+        cta_text: "¿Querés explorar un servidor MCP para tu entidad financiera?",
+        cta_button: "Hablar con el equipo",
+      },
+    },
     footer: {
       tagline: "La infraestructura financiera B2B para LATAM.",
       products: "Productos",
@@ -229,6 +305,7 @@ export const translations = {
     nav: {
       platform: "Platform",
       products: "Products",
+      lmcp: "LMCP",
       about: "About",
       investors: "Investors",
       developers: "Developers",
@@ -321,6 +398,12 @@ export const translations = {
           items: [
             { name: "RADIAN Colombia", desc: "Native integration with Colombia's electronic invoicing system.", tag: "Colombia", slug: "radian" },
             { name: "e-Invoicing", desc: "Connection to electronic invoicing systems across multiple LATAM countries.", tag: "Multi-Country", slug: "e-invoicing" },
+            {
+              name: "FCE Tax Engine",
+              desc: "A–H calculation for FCE MiPyME discount: stamps, IIBB, registries and tax settlement.",
+              tag: "Taxes",
+              slug: "tax-engine",
+            },
           ],
         },
         {
@@ -330,7 +413,7 @@ export const translations = {
             { name: "DecisionHub · Risk Engine", desc: "Real-time risk engine: traffic lights, scoring and configurable rules.", tag: "AI", slug: "decisionhub" },
             { name: "TrustPath · Onboarding", desc: "Digital KYC/AML: 5-minute onboarding, validation and initial scoring.", tag: "5 min", slug: "trustpath" },
             { name: "API Integration Layer", desc: "API-first integration in days. SDKs, webhooks and full documentation.", tag: "API-First", slug: "api-layer" },
-            { name: "MCP Agents", desc: "AI agents that operate your financial platform in natural language via Model Context Protocol.", tag: "AI Agents", slug: "mcp-agents" },
+            { name: "LMCP", desc: "161 local MCP tools for Mac. Full privacy, no API keys. Colibird product at local-mcp.com.", tag: "LMCP", slug: "lmcp" },
           ],
         },
       ],
@@ -401,6 +484,75 @@ export const translations = {
       sub: "Join the banks and fintechs already transforming access to capital in LATAM with Colibird technology.",
       primary: "Book a Demo",
       secondary: "Talk to the team",
+    },
+    lmcp: {
+      tag: "Colibird Product · Local AI",
+      headline: "LMCP: native AI access to your Mac",
+      sub: "Local MCP connects Claude, ChatGPT and Cursor to Mail, Calendar, Teams, OneDrive and 161 more tools. Everything runs on your device — no cloud, no tokens, no API keys.",
+      cta_download: "Download LMCP",
+      cta_learn: "View full product",
+      free_note: "Free · macOS 13+ · 2-minute setup · local-mcp.com",
+      demo_prompt: "Prep me for the 3pm meeting",
+      demo_response:
+        "3 unread supplier emails · Finance meeting at 3:00pm · #treasury channel mentioned month-end close yesterday.",
+      stats: [
+        { value: "161", label: "MCP Tools" },
+        { value: "16K+", label: "npm Downloads" },
+        { value: "2 min", label: "Setup" },
+        { value: "100%", label: "Local" },
+      ],
+      fin: {
+        tag: "For banks & fintechs",
+        headline: "Agentic banking: your APIs, each customer's agent",
+        sub: "If you already have API Banking, one MCP server publishes your catalog once. Individuals and SMBs operate in natural language — no API-by-API integration.",
+        problem_title: "The problem",
+        problem:
+          "Each customer or partner integrates service by service. SMBs without dev teams are left out. The N×M model doesn't scale and the integration backlog grows faster than the bank's capacity.",
+        solution_title: "The MCP solution",
+        solution:
+          "Publish accounts, payments, transfers and credit as versioned tools. The customer connects Claude, ChatGPT or Cursor. They ask in natural language; the agent executes on your core with transactional security.",
+        security_title: "Built-in security",
+        security_bullets: [
+          "Strong authentication before operating on accounts.",
+          "Mandatory 2FA on transfers, payments and instrument issuance.",
+          "Preview and confirmation on every write operation.",
+          "Full audit trail; data stays within the institution.",
+        ],
+        journeys_title: "Illustrative use cases",
+        journeys: [
+          {
+            persona: "Individual",
+            prompt: "Pay my monthly bills and tell me if any spending increased more than 20%.",
+            steps: [
+              "Reads bills from email and banking APIs.",
+              "Executes payments with 2FA confirmation.",
+              "Reports variations vs. previous months.",
+            ],
+          },
+          {
+            persona: "SMB",
+            prompt: "Reconcile today's collections, pay overdue suppliers and place the excess.",
+            steps: [
+              "Reconciles collections against customer ERP or spreadsheet.",
+              "Pays suppliers in batch with 2FA.",
+              "Places excess in a liquidity instrument.",
+            ],
+          },
+          {
+            persona: "Enterprise",
+            prompt: "Issue electronic checks from this spreadsheet and schedule Friday payroll.",
+            steps: [
+              "Issues instruments from customer spreadsheet.",
+              "Schedules payroll transfers.",
+              "Updates position on customer dashboard.",
+            ],
+          },
+        ],
+        framing_note:
+          "Agentic banking on existing digital channels — not a replacement for Open Finance or classic embedded finance. The agent can combine banking APIs with customer context (ERP, email, spreadsheets) with protected PII.",
+        cta_text: "Want to explore an MCP server for your financial institution?",
+        cta_button: "Talk to the team",
+      },
     },
     footer: {
       tagline: "The B2B financial infrastructure for LATAM.",

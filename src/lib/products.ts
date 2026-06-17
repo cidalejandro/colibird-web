@@ -2,6 +2,35 @@ export type ProductFeature = { title: string; desc: string };
 export type ProductStep = { number: string; title: string; desc: string };
 export type ProductUseCase = { title: string; desc: string };
 
+export type FinCaseJourney = {
+  persona: string;
+  prompt: string;
+  steps: string[];
+};
+
+export type FinCaseMetric = {
+  value: string;
+  label: string;
+  desc: string;
+};
+
+export type FinCaseStudy = {
+  tag: string;
+  headline: string;
+  sub: string;
+  problem_title: string;
+  problem: string;
+  solution_title: string;
+  solution: string;
+  security_title: string;
+  security_bullets: string[];
+  journeys_title: string;
+  journeys: FinCaseJourney[];
+  metrics_title: string;
+  metrics: FinCaseMetric[];
+  framing_note: string;
+};
+
 export type ProductLang = {
   name: string;
   tagline: string;
@@ -10,6 +39,7 @@ export type ProductLang = {
   features: ProductFeature[];
   steps: ProductStep[];
   use_cases: ProductUseCase[];
+  fin_case?: FinCaseStudy;
 };
 
 export type Product = {
@@ -17,6 +47,7 @@ export type Product = {
   category: "financing" | "payments" | "compliance" | "infrastructure";
   color: "purple" | "pink" | "teal" | "blue" | "green" | "orange";
   tech_specs: string[];
+  external_url?: string;
   es: ProductLang;
   en: ProductLang;
 };
@@ -573,52 +604,399 @@ export const products: Product[] = [
     },
   },
   {
-    slug: "mcp-agents",
+    slug: "lmcp",
     category: "infrastructure",
     color: "purple",
-    tech_specs: ["MCP Protocol", "Claude / GPT Compatible", "Tool Calling", "Audit Trail", "Configurable Permissions", "Real-time Streaming"],
+    external_url: "https://local-mcp.com/get?ref=colibird",
+    tech_specs: [
+      "161 MCP Tools",
+      "macOS 13+",
+      "Claude · ChatGPT · Cursor",
+      "100% Local & Private",
+      "GDPR by Design",
+      "Cloud Relay (opt-in)",
+    ],
     es: {
-      name: "MCP Agents",
-      tagline: "Agentes de IA que operan tu plataforma financiera en lenguaje natural",
-      description: "Colibird expone toda su suite financiera como herramientas MCP (Model Context Protocol). Cualquier agente de IA compatible puede aprobar facturas, generar reportes, onboardear proveedores y gestionar riesgos — con lenguaje natural y trazabilidad total.",
-      badge: "AI Agents",
+      name: "LMCP",
+      tagline: "Tu IA opera Mail, Calendar, Teams y Office en tu Mac — sin API keys ni nube",
+      description:
+        "LMCP (Local MCP) es el producto de Colibird que conecta Claude, ChatGPT, Cursor y cualquier cliente MCP con las apps de tu Mac. 161 herramientas locales para email, calendario, Teams, Slack, WhatsApp, OneDrive, Office, Notion y más. Tus datos nunca salen de tu dispositivo.",
+      badge: "LMCP",
       features: [
-        { title: "Suite financiera como herramientas MCP", desc: "Cada módulo de Colibird — SCF, eCheqs, DecisionHub, TrustPath — está disponible como tool MCP lista para conectar con cualquier LLM." },
-        { title: "Automatización de workflows complejos", desc: "Los agentes pueden ejecutar flujos de múltiples pasos: validar facturas → evaluar riesgo → aprobar → notificar. Sin intervención humana para casos claros." },
-        { title: "Control de permisos granular", desc: "Definí exactamente qué puede y qué no puede hacer cada agente. Aprobaciones automáticas hasta ciertos montos, revisión humana para el resto." },
-        { title: "Trazabilidad y auditoría total", desc: "Cada acción ejecutada por un agente queda registrada con timestamp, usuario AI, resultado y evidencia. Cumplimiento regulatorio garantizado." },
+        {
+          title: "161 herramientas, cero fricción",
+          desc: "Mail, Calendar, Contacts, Teams, Slack, WhatsApp, OneDrive, Excel, Word, Notion, iMessage, Safari y más — un solo instalador, sin OAuth ni API keys para tus apps personales.",
+        },
+        {
+          title: "Privacidad por arquitectura",
+          desc: "Todo corre en tu Mac. Sin procesamiento cloud de emails, archivos ni mensajes. GDPR y CCPA compliant by design. Cloud Relay opcional y desactivado por defecto.",
+        },
+        {
+          title: "Compatible con todo el ecosistema IA",
+          desc: "Claude Desktop, Claude Code, Cursor (modo Agent), VS Code, Windsurf, Zed — vía stdio local. ChatGPT y Claude.ai web vía túnel cifrado opt-in.",
+        },
+        {
+          title: "Instalación en 2 minutos",
+          desc: "App de menú bar firmada y notarizada, o un comando en terminal. Auto-configura tus clientes de IA detectados. Gratis, licencia permanente.",
+        },
       ],
       steps: [
-        { number: "01", title: "Conectá tu agente al MCP Server", desc: "Configurá el MCP Server de Colibird en tu cliente de IA (Claude, plataforma propia, etc.) con tu API key. Listo en minutos." },
-        { number: "02", title: "El agente descubre las herramientas", desc: "El LLM recibe automáticamente la lista de tools disponibles: crear_programa_SCF, validar_factura, evaluar_riesgo, onboardear_proveedor y más." },
-        { number: "03", title: "Workflows en lenguaje natural", desc: "\"Aprobá todas las facturas RADIAN de proveedores AAA bajo $50.000\" → el agente ejecuta el flujo completo, paso a paso, con trazabilidad." },
+        {
+          number: "01",
+          title: "Instalá LMCP",
+          desc: "Descargá la app desde local-mcp.com o ejecutá el instalador en terminal. macOS 13+, Apple Silicon e Intel.",
+        },
+        {
+          number: "02",
+          title: "Conectá tu asistente de IA",
+          desc: "Claude, Cursor o ChatGPT descubren automáticamente las 161 tools. En Cursor: activá local-mcp en Settings → MCP y usá modo Agent.",
+        },
+        {
+          number: "03",
+          title: "Pedí en lenguaje natural",
+          desc: "\"Resumí mis emails no leídos\", \"¿Qué dijo el canal de engineering en Teams?\", \"Conciliá los cobros de hoy\" — el agente encadena herramientas localmente.",
+        },
       ],
       use_cases: [
-        { title: "Mesas de operaciones con IA", desc: "Automatizá la aprobación de operaciones rutinarias de SCF y factoring con agentes que actúan dentro de tus límites de riesgo." },
-        { title: "Reportes y análisis autónomos", desc: "\"Generá el reporte de riesgo de los 20 principales proveedores del comprador X\" — el agente consulta DecisionHub y entrega el análisis." },
-        { title: "Onboarding masivo asistido por IA", desc: "Procesá cientos de nuevos proveedores automáticamente: el agente corre TrustPath, evalúa riesgo y escala a revisión humana solo los casos complejos." },
+        {
+          title: "Profesionales y ejecutivos",
+          desc: "Briefing matutino, triage de inbox, preparación de reuniones y seguimiento de tareas — sin cambiar de app.",
+        },
+        {
+          title: "Equipos de desarrollo",
+          desc: "Leé Mail, Teams y OneDrive desde Cursor sin salir del IDE. Ideal para context switching cero.",
+        },
+        {
+          title: "Sectores regulados",
+          desc: "Legal, salud y finanzas: datos sensibles que nunca transitan por servidores de terceros.",
+        },
+      ],
+      fin_case: {
+        tag: "Banca agéntica",
+        headline: "Un servidor MCP para que tus clientes operen tu banca en lenguaje natural",
+        sub: "Patrón de adopción para bancos y fintechs con API Banking: publicás tus capacidades una sola vez; cada cliente conecta su propio agente de IA — sin integraciones N×M.",
+        problem_title: "El cuello de botella no es la API, es la adopción",
+        problem:
+          "Muchas entidades ya exponen cuentas, transferencias, pagos y créditos como APIs. Pero cada cliente, fintech o PyME integra servicio por servicio, con equipos de desarrollo que no escalan. Individuos y PyMEs sin capacidad técnica quedan fuera: el costo de integrar supera al beneficio percibido. El modelo N clientes × M APIs crece de forma cuadrática.",
+        solution_title: "De N×M integraciones a un servidor MCP",
+        solution:
+          "Publicás el catálogo bancario una vez como herramientas MCP versionadas. El cliente — persona, PyME o empresa — conecta Claude, ChatGPT o Cursor a tu servidor. Pide en lenguaje natural; el agente traduce a las APIs del core. Onboarding self-service en minutos, sin sandbox propio ni equipo de desarrollo del lado del cliente.",
+        security_title: "Seguridad transaccional incorporada",
+        security_bullets: [
+          "Autenticación fuerte (OAuth2/OIDC) antes de cualquier acción sobre cuentas del cliente.",
+          "Doble factor obligatorio en operaciones financieras: transferir, pagar, emitir cheques.",
+          "Lectura instantánea; escritura con preview y confirmación explícita antes de ejecutar en el core.",
+          "Auditoría completa, permisos granulares y datos que permanecen en la entidad financiera.",
+        ],
+        journeys_title: "Journeys de ejemplo (sin nombrar clientes)",
+        journeys: [
+          {
+            persona: "Persona · asistente financiero personal",
+            prompt: "Pagá mis servicios del mes y avisame si algún consumo subió más de un 20%.",
+            steps: [
+              "Lee facturas y servicios desde el correo del cliente y las APIs bancarias.",
+              "Ejecuta los pagos con confirmación 2FA.",
+              "Reporta variaciones respecto a meses anteriores.",
+            ],
+          },
+          {
+            persona: "PyME · tesorería automatizada",
+            prompt: "Conciliá los cobros de hoy, pagá a proveedores vencidos y colocá el excedente.",
+            steps: [
+              "Concilia cobros del día contra el ERP o planilla del cliente.",
+              "Paga proveedores vencidos en lote con 2FA.",
+              "Constituye un plazo fijo o instrumento con el excedente de liquidez.",
+            ],
+          },
+          {
+            persona: "Empresa · operación a escala",
+            prompt: "Emití los cheques electrónicos de esta planilla y programá las transferencias de sueldos del viernes.",
+            steps: [
+              "Emite instrumentos de pago desde la planilla del cliente.",
+              "Programa transferencias de nómina con fecha de ejecución.",
+              "Actualiza posición de inversiones o saldos en el tablero del cliente.",
+            ],
+          },
+        ],
+        metrics_title: "Palancas de valor (cifras ilustrativas)",
+        metrics: [
+          {
+            value: "−70–90%",
+            label: "Costo de integración",
+            desc: "De semanas de desarrollo por socio a alta self-service en minutos.",
+          },
+          {
+            value: "2–3×",
+            label: "Adopción de APIs",
+            desc: "Más individuos y PyMEs activando servicios sin equipo técnico propio.",
+          },
+          {
+            value: "+15–25%",
+            label: "Cross-sell contextual",
+            desc: "Oferta en el momento justo dentro de cada interacción del agente.",
+          },
+          {
+            value: "−20–30%",
+            label: "Costo de servicio",
+            desc: "La automatización conversacional descomprime canales de atención.",
+          },
+        ],
+        framing_note:
+          "No es Open Finance ni embedded finance clásico: es banca agéntica — la entidad expone sus propias APIs a los agentes de IA de sus propios clientes vía MCP, sobre canales digitales existentes, con autenticación fuerte y protección de datos personales. El agente puede combinar APIs bancarias con el contexto del cliente (ERP, planillas, correo) con PII enmascarada y datos que permanecen en entornos controlados.",
+      },
+    },
+    en: {
+      name: "LMCP",
+      tagline: "Your AI operates Mail, Calendar, Teams and Office on your Mac — no API keys, no cloud",
+      description:
+        "LMCP (Local MCP) is Colibird's product that connects Claude, ChatGPT, Cursor and any MCP client to your Mac apps. 161 local tools for email, calendar, Teams, Slack, WhatsApp, OneDrive, Office, Notion and more. Your data never leaves your device.",
+      badge: "LMCP",
+      features: [
+        {
+          title: "161 tools, zero friction",
+          desc: "Mail, Calendar, Contacts, Teams, Slack, WhatsApp, OneDrive, Excel, Word, Notion, iMessage, Safari and more — one installer, no OAuth or API keys for your personal apps.",
+        },
+        {
+          title: "Privacy by architecture",
+          desc: "Everything runs on your Mac. No cloud processing of emails, files or messages. GDPR and CCPA compliant by design. Optional Cloud Relay, off by default.",
+        },
+        {
+          title: "Works with the full AI ecosystem",
+          desc: "Claude Desktop, Claude Code, Cursor (Agent mode), VS Code, Windsurf, Zed — via local stdio. ChatGPT and Claude.ai web via opt-in encrypted tunnel.",
+        },
+        {
+          title: "2-minute setup",
+          desc: "Signed, notarized menu bar app or a one-line terminal install. Auto-configures detected AI clients. Free, permanent license.",
+        },
+      ],
+      steps: [
+        {
+          number: "01",
+          title: "Install LMCP",
+          desc: "Download from local-mcp.com or run the terminal installer. macOS 13+, Apple Silicon and Intel.",
+        },
+        {
+          number: "02",
+          title: "Connect your AI assistant",
+          desc: "Claude, Cursor or ChatGPT discover 161 tools automatically. In Cursor: enable local-mcp in Settings → MCP and use Agent mode.",
+        },
+        {
+          number: "03",
+          title: "Ask in natural language",
+          desc: "\"Summarize my unread emails\", \"What did the engineering channel say in Teams?\", \"Reconcile today's collections\" — the agent chains tools locally.",
+        },
+      ],
+      use_cases: [
+        {
+          title: "Professionals & executives",
+          desc: "Morning briefings, inbox triage, meeting prep and follow-ups — without switching apps.",
+        },
+        {
+          title: "Development teams",
+          desc: "Read Mail, Teams and OneDrive from Cursor without leaving the IDE. Zero context switching.",
+        },
+        {
+          title: "Regulated industries",
+          desc: "Legal, healthcare and finance: sensitive data that never transits third-party servers.",
+        },
+      ],
+      fin_case: {
+        tag: "Agentic banking",
+        headline: "One MCP server so your customers operate your bank in natural language",
+        sub: "Adoption pattern for banks and fintechs with API Banking: publish capabilities once; each customer connects their own AI agent — no N×M integrations.",
+        problem_title: "The bottleneck isn't the API, it's adoption",
+        problem:
+          "Many institutions already expose accounts, transfers, payments and credit as APIs. But each customer, fintech or SMB integrates service by service with dev teams that don't scale. Individuals and SMBs without technical capacity are left out: integration cost exceeds perceived benefit. The N customers × M APIs model grows quadratically.",
+        solution_title: "From N×M integrations to one MCP server",
+        solution:
+          "Publish your banking catalog once as versioned MCP tools. The customer — individual, SMB or enterprise — connects Claude, ChatGPT or Cursor to your server. They ask in natural language; the agent translates to core APIs. Self-service onboarding in minutes, no sandbox or dev team on the customer side.",
+        security_title: "Built-in transactional security",
+        security_bullets: [
+          "Strong authentication (OAuth2/OIDC) before any action on customer accounts.",
+          "Mandatory 2FA on financial operations: transfer, pay, issue instruments.",
+          "Instant reads; writes show a preview and require explicit confirmation before core execution.",
+          "Full audit trail, granular permissions and data that stays within the financial institution.",
+        ],
+        journeys_title: "Example journeys (no named institutions)",
+        journeys: [
+          {
+            persona: "Individual · personal finance assistant",
+            prompt: "Pay my monthly bills and tell me if any spending increased more than 20%.",
+            steps: [
+              "Reads bills and services from the customer's email and banking APIs.",
+              "Executes payments with 2FA confirmation.",
+              "Reports variations vs. previous months.",
+            ],
+          },
+          {
+            persona: "SMB · automated treasury",
+            prompt: "Reconcile today's collections, pay overdue suppliers and place the excess.",
+            steps: [
+              "Reconciles today's collections against the customer's ERP or spreadsheet.",
+              "Pays overdue suppliers in batch with 2FA.",
+              "Places excess liquidity in a term deposit or instrument.",
+            ],
+          },
+          {
+            persona: "Enterprise · scale operations",
+            prompt: "Issue the electronic checks from this spreadsheet and schedule Friday payroll transfers.",
+            steps: [
+              "Issues payment instruments from the customer's spreadsheet.",
+              "Schedules payroll transfers with execution date.",
+              "Updates investment position or balances on the customer's dashboard.",
+            ],
+          },
+        ],
+        metrics_title: "Value levers (illustrative figures)",
+        metrics: [
+          {
+            value: "−70–90%",
+            label: "Integration cost",
+            desc: "From weeks of dev per partner to self-service onboarding in minutes.",
+          },
+          {
+            value: "2–3×",
+            label: "API adoption",
+            desc: "More individuals and SMBs activating services without their own dev team.",
+          },
+          {
+            value: "+15–25%",
+            label: "Contextual cross-sell",
+            desc: "Right offer at the right moment within each agent interaction.",
+          },
+          {
+            value: "−20–30%",
+            label: "Service cost",
+            desc: "Conversational automation relieves support channels.",
+          },
+        ],
+        framing_note:
+          "This is not classic Open Finance or embedded finance: it's agentic banking — the institution exposes its own APIs to its own customers' AI agents via MCP, on existing digital channels, with strong authentication and personal data protection. The agent can combine banking APIs with customer context (ERP, spreadsheets, email) with masked PII and data staying in controlled environments.",
+      },
+    },
+  },
+  {
+    slug: "tax-engine",
+    category: "compliance",
+    color: "teal",
+    tech_specs: [
+      "Esquema A–H FCE MiPyME",
+      "Sellos + IIBB + SIRCIP",
+      "Cálculo manual y lote CSV",
+      "Parametría por fondeador",
+      "Padrones y legajos impositivos",
+      "Export CSV + historial",
+    ],
+    es: {
+      name: "Motor de Impuestos FCE",
+      tagline: "Calculá la liquidación A–H de un descuento FCE MiPyME con precisión fiscal",
+      description:
+        "Motor de cálculo de impuestos de Colibird para descuento de Facturas de Crédito Electrónicas MiPyME. Parametrizá Sellos por fondeador, importá padrones, calculá retenciones, intereses, comisión Colibird e IIBB — manualmente o por lote CSV — y exportá resultados auditables.",
+      badge: "Impuestos FCE",
+      features: [
+        {
+          title: "Esquema A–H completo",
+          desc: "Desde el monto de la FCE hasta el neto a acreditar: retenciones, interés del fondeador, Sellos, IIBB sobre intereses y comisión, comisión Colibird, percepciones y IVA cuando aplica.",
+        },
+        {
+          title: "Parametría por organización fondeadora",
+          desc: "Configurá Anexo A (Sellos), percepciones IIBB sobre intereses, IVA sobre interés y comisión por cada organización fondeadora — con versionado y vigencia.",
+        },
+        {
+          title: "Padrones y legajos impositivos",
+          desc: "Importá padrones provinciales por CUIT, gestioná legajos del emisor y aplicá alícuotas reales en ítems G y E del esquema.",
+        },
+        {
+          title: "Manual, lote e historial",
+          desc: "Calculá operaciones individuales o hasta 500 filas por CSV. Exportá resultados, conservá historial y corré QA del motor con escenarios de referencia.",
+        },
+      ],
+      steps: [
+        {
+          number: "01",
+          title: "Configurá fondeadores y comisiones",
+          desc: "Definí Sellos (24 jurisdicciones), reparto de comisión en bps, Agente Colibird (ítem G) y tablas SIRCIP desde el panel de parametría.",
+        },
+        {
+          number: "02",
+          title: "Importá padrones y legajos",
+          desc: "Cargá padrones por jurisdicción y asociá legajos impositivos a los CUIT emisores que operan en tu programa de descuento.",
+        },
+        {
+          number: "03",
+          title: "Calculá y exportá",
+          desc: "Ingresá datos de la operación o subí un CSV. El motor devuelve el desglose A–H listo para liquidación y auditoría fiscal.",
+        },
+      ],
+      use_cases: [
+        {
+          title: "Mesas de factoring y FCE",
+          desc: "Liquidá descuentos con el desglose impositivo correcto por jurisdicción, sin planillas manuales ni errores en Sellos o IIBB.",
+        },
+        {
+          title: "Equipos fiscales de fintechs",
+          desc: "Centralizá la parametría impositiva de múltiples organizaciones fondeadoras y validá cada operación contra padrones vigentes.",
+        },
+        {
+          title: "Plataformas Colibird integradas",
+          desc: "Complementá SCF, eCheqs y confirming con un motor de impuestos nativo, alineado a la operatoria FCE MiPyME en Argentina.",
+        },
       ],
     },
     en: {
-      name: "MCP Agents",
-      tagline: "AI agents that operate your financial platform in natural language",
-      description: "Colibird exposes its entire financial suite as MCP (Model Context Protocol) tools. Any compatible AI agent can approve invoices, generate reports, onboard suppliers and manage risk — with natural language and full traceability.",
-      badge: "AI Agents",
+      name: "FCE Tax Engine",
+      tagline: "Calculate the A–H settlement of an FCE MiPyME discount with fiscal precision",
+      description:
+        "Colibird's tax calculation engine for Electronic Credit Invoice (FCE MiPyME) discounting. Configure stamps per funder, import tax registries, calculate withholdings, interest, Colibird commission and IIBB — manually or via CSV batch — and export auditable results.",
+      badge: "FCE Taxes",
       features: [
-        { title: "Financial suite as MCP tools", desc: "Every Colibird module — SCF, eCheqs, DecisionHub, TrustPath — is available as an MCP tool ready to connect with any LLM." },
-        { title: "Complex workflow automation", desc: "Agents can execute multi-step flows: validate invoices → assess risk → approve → notify. No human intervention for clear cases." },
-        { title: "Granular permission control", desc: "Define exactly what each agent can and cannot do. Automatic approvals up to certain amounts, human review for the rest." },
-        { title: "Full traceability & audit", desc: "Every action executed by an agent is logged with timestamp, AI user, result and evidence. Regulatory compliance guaranteed." },
+        {
+          title: "Full A–H schema",
+          desc: "From FCE amount to net proceeds: withholdings, funder interest, stamps, IIBB on interest and commission, Colibird commission, perceptions and VAT when applicable.",
+        },
+        {
+          title: "Per-funder configuration",
+          desc: "Set Annex A (stamps), IIBB perceptions on interest, VAT on interest and commission for each funding organization — with versioning and effective dates.",
+        },
+        {
+          title: "Registries and tax files",
+          desc: "Import provincial registries by CUIT, manage issuer tax files and apply real rates on schema items G and E.",
+        },
+        {
+          title: "Manual, batch and history",
+          desc: "Calculate single operations or up to 500 CSV rows. Export results, keep history and run engine QA with reference scenarios.",
+        },
       ],
       steps: [
-        { number: "01", title: "Connect your agent to the MCP Server", desc: "Configure Colibird's MCP Server in your AI client (Claude, your own platform, etc.) with your API key. Ready in minutes." },
-        { number: "02", title: "Agent discovers tools", desc: "The LLM automatically receives the list of available tools: create_scf_program, validate_invoice, assess_risk, onboard_supplier and more." },
-        { number: "03", title: "Workflows in natural language", desc: "\"Approve all RADIAN invoices from AAA suppliers under $50,000\" → the agent executes the complete flow, step by step, with traceability." },
+        {
+          number: "01",
+          title: "Configure funders and fees",
+          desc: "Define stamps (24 jurisdictions), commission bps split, Colibird agent (item G) and SIRCIP tables from the settings panel.",
+        },
+        {
+          number: "02",
+          title: "Import registries and tax files",
+          desc: "Upload registries per jurisdiction and link tax files to issuer CUITs in your discount program.",
+        },
+        {
+          number: "03",
+          title: "Calculate and export",
+          desc: "Enter operation data or upload a CSV. The engine returns the A–H breakdown ready for settlement and tax audit.",
+        },
       ],
       use_cases: [
-        { title: "AI-powered operations desks", desc: "Automate approval of routine SCF and factoring operations with agents acting within your risk limits." },
-        { title: "Autonomous reports & analytics", desc: "\"Generate the risk report for buyer X's top 20 suppliers\" — the agent queries DecisionHub and delivers the analysis." },
-        { title: "AI-assisted mass onboarding", desc: "Process hundreds of new suppliers automatically: the agent runs TrustPath, assesses risk and escalates to human review only complex cases." },
+        {
+          title: "Factoring and FCE desks",
+          desc: "Settle discounts with the correct tax breakdown per jurisdiction, without manual spreadsheets or stamp/IIBB errors.",
+        },
+        {
+          title: "Fintech tax teams",
+          desc: "Centralize tax settings for multiple funding organizations and validate each operation against current registries.",
+        },
+        {
+          title: "Integrated Colibird platforms",
+          desc: "Complement SCF, eCheqs and confirming with a native tax engine aligned to FCE MiPyME operations in Argentina.",
+        },
       ],
     },
   },
