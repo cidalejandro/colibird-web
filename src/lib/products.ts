@@ -54,6 +54,7 @@ export type Product = {
   color: "purple" | "pink" | "teal" | "blue" | "green" | "orange";
   tech_specs: string[];
   external_url?: string;
+  info_url?: string;
   es: ProductLang;
   en: ProductLang;
 };
@@ -616,6 +617,7 @@ export const products: Product[] = [
     category: "infrastructure",
     color: "purple",
     external_url: "https://local-mcp.com/get?ref=colibird",
+    info_url: "https://local-mcp.com/?ref=colibird",
     tech_specs: [
       "161 MCP Tools",
       "macOS 13+",

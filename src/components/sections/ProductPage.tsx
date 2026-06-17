@@ -92,7 +92,7 @@ export default function ProductPage({ slug }: { slug: string }) {
               {data.description}
             </p>
 
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 flex-wrap">
               {product.external_url ? (
                 <a
                   href={product.external_url}
@@ -110,6 +110,17 @@ export default function ProductPage({ slug }: { slug: string }) {
                 >
                   {lang === "es" ? "Solicitar Demo" : "Book a Demo"}
                   <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              )}
+              {product.info_url && (
+                <a
+                  href={product.info_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-fuchsia-500/30 text-fuchsia-200 font-semibold hover:border-fuchsia-500/50 hover:text-white hover:bg-fuchsia-500/5 transition-all duration-200"
+                >
+                  {lang === "es" ? "Más info en local-mcp.com" : "More at local-mcp.com"}
+                  <ExternalLink size={16} />
                 </a>
               )}
               <a
@@ -319,15 +330,41 @@ export default function ProductPage({ slug }: { slug: string }) {
                   : `Ready to integrate ${data.name}?`}
             </h2>
             <p className="text-gray-400 text-lg mb-8">
-              {product.external_url
-                ? lang === "es"
-                  ? "Descargá gratis en local-mcp.com o contactanos para banca agéntica enterprise."
-                  : "Download free at local-mcp.com or contact us for enterprise agentic banking."
-                : lang === "es"
-                  ? "Hablá con nuestro equipo y arrancá con el sandbox en menos de un día."
-                  : "Talk to our team and get started with the sandbox in less than a day."}
+              {product.external_url ? (
+                lang === "es" ? (
+                  <>
+                    Descargá gratis o visitá{" "}
+                    <a
+                      href={product.info_url ?? "https://local-mcp.com/?ref=colibird"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-fuchsia-300 hover:text-fuchsia-200 underline underline-offset-2"
+                    >
+                      local-mcp.com
+                    </a>{" "}
+                    para guías, documentación y más información. Para banca agéntica enterprise, contactanos.
+                  </>
+                ) : (
+                  <>
+                    Download free or visit{" "}
+                    <a
+                      href={product.info_url ?? "https://local-mcp.com/?ref=colibird"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-fuchsia-300 hover:text-fuchsia-200 underline underline-offset-2"
+                    >
+                      local-mcp.com
+                    </a>{" "}
+                    for guides, docs and more. Contact us for enterprise agentic banking.
+                  </>
+                )
+              ) : lang === "es" ? (
+                  "Hablá con nuestro equipo y arrancá con el sandbox en menos de un día."
+                ) : (
+                  "Talk to our team and get started with the sandbox in less than a day."
+                )}
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
               {product.external_url && (
                 <a
                   href={product.external_url}
@@ -337,6 +374,17 @@ export default function ProductPage({ slug }: { slug: string }) {
                 >
                   {lang === "es" ? "Descargar LMCP" : "Download LMCP"}
                   <ExternalLink size={18} />
+                </a>
+              )}
+              {product.info_url && (
+                <a
+                  href={product.info_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-fuchsia-500/30 text-fuchsia-200 font-semibold hover:border-fuchsia-500/50 hover:text-white transition-all"
+                >
+                  {lang === "es" ? "Más info en local-mcp.com" : "More at local-mcp.com"}
+                  <ExternalLink size={16} />
                 </a>
               )}
               <a

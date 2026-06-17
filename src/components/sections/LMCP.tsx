@@ -17,6 +17,8 @@ import {
 
 const toolPills = ["Mail", "Calendar", "Teams", "Slack", "OneDrive", "Excel", "Notion", "iMessage"];
 
+const LMCP_SITE_URL = "https://local-mcp.com/?ref=colibird";
+
 export default function LMCP() {
   const { t } = useLang();
 
@@ -55,7 +57,7 @@ export default function LMCP() {
                 +153
               </span>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3">
               <a
                 href="https://local-mcp.com/get?ref=colibird"
                 target="_blank"
@@ -63,6 +65,15 @@ export default function LMCP() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-brand-gradient text-white font-semibold shadow-lg shadow-purple-900/30 hover:opacity-90 transition-all"
               >
                 {t.lmcp.cta_download}
+                <ExternalLink size={16} />
+              </a>
+              <a
+                href={LMCP_SITE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-fuchsia-500/30 text-fuchsia-200 font-semibold hover:border-fuchsia-500/50 hover:text-white transition-all"
+              >
+                {t.lmcp.cta_site}
                 <ExternalLink size={16} />
               </a>
               <Link
@@ -73,7 +84,18 @@ export default function LMCP() {
                 <ArrowRight size={16} />
               </Link>
             </div>
-            <p className="mt-4 text-xs text-gray-500">{t.lmcp.free_note}</p>
+            <p className="mt-4 text-xs text-gray-500">
+              {t.lmcp.free_note}
+              {" · "}
+              <a
+                href={LMCP_SITE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-fuchsia-300/90 hover:text-fuchsia-200 underline underline-offset-2"
+              >
+                local-mcp.com
+              </a>
+            </p>
           </div>
 
           <div className="glow-border rounded-2xl p-6 bg-brand-card/80">

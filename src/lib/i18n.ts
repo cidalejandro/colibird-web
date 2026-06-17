@@ -223,7 +223,8 @@ export const translations = {
       sub: "Local MCP conecta Claude, ChatGPT y Cursor a Mail, Calendar, Teams, OneDrive y 161 herramientas más. Todo corre en tu dispositivo — sin nube, sin tokens, sin API keys.",
       cta_download: "Descargar LMCP",
       cta_learn: "Ver producto completo",
-      free_note: "Gratis · macOS 13+ · Instalación en 2 minutos · local-mcp.com",
+      cta_site: "Más info en local-mcp.com",
+      free_note: "Gratis · macOS 13+ · Instalación en 2 minutos",
       demo_prompt: "Preparame para la reunión de las 15hs",
       demo_response:
         "3 emails sin leer de proveedores · Reunión con finanzas a las 15:00 · El canal #tesorería mencionó el cierre de mes ayer.",
@@ -504,7 +505,8 @@ export const translations = {
       sub: "Local MCP connects Claude, ChatGPT and Cursor to Mail, Calendar, Teams, OneDrive and 161 more tools. Everything runs on your device — no cloud, no tokens, no API keys.",
       cta_download: "Download LMCP",
       cta_learn: "View full product",
-      free_note: "Free · macOS 13+ · 2-minute setup · local-mcp.com",
+      cta_site: "More at local-mcp.com",
+      free_note: "Free · macOS 13+ · 2-minute setup",
       demo_prompt: "Prep me for the 3pm meeting",
       demo_response:
         "3 unread supplier emails · Finance meeting at 3:00pm · #treasury channel mentioned month-end close yesterday.",
