@@ -10,6 +10,7 @@ const legacyRedirects = [
   { source: "/radian", destination: "/productos/radian" },
   { source: "/scf", destination: "/productos/scf" },
   { source: "/argentina", destination: "/productos/tax-engine" },
+  { source: "/colombia", destination: "/productos/radian" },
   { source: "/productos", destination: "/#productos" },
 ] as const;
 
