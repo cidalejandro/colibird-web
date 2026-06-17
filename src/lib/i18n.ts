@@ -96,12 +96,12 @@ export const translations = {
           name: "Compliance & Data",
           color: "violet",
           items: [
-            { name: "RADIAN Colombia", desc: "Integración nativa con el sistema de facturación electrónica de Colombia.", tag: "Colombia", slug: "radian" },
+            { name: "RADIAN Colombia", desc: "Colombia — integración nativa con facturación electrónica DIAN y circulación RADIAN.", tag: "Colombia", slug: "radian" },
             { name: "e-Invoicing", desc: "Conexión con sistemas de facturación electrónica en múltiples países LATAM.", tag: "Multi-País", slug: "e-invoicing" },
             {
               name: "Motor de Impuestos FCE",
-              desc: "Cálculo A–H para descuento FCE MiPyME: Sellos, IIBB, padrones y liquidación fiscal.",
-              tag: "Impuestos",
+              desc: "Argentina — cálculo A–H para descuento FCE MiPyME: Sellos, IIBB, padrones y liquidación fiscal.",
+              tag: "Argentina",
               slug: "tax-engine",
             },
           ],
@@ -235,14 +235,27 @@ export const translations = {
       ],
       fin: {
         tag: "Para bancos y fintechs",
-        headline: "Banca agéntica: tus APIs, el agente de cada cliente",
-        sub: "Si ya tenés API Banking, un servidor MCP publica tu catálogo una sola vez. Individuos y PyMEs operan en lenguaje natural — sin integrar API por API.",
-        problem_title: "El problema",
+        headline: "Banca agéntica: el agente de cada cliente, con o sin API Banking",
+        sub: "Un servidor MCP publica tus capacidades una sola vez. Con API Banking, tus clientes dejan de integrar servicio por servicio. Sin API Banking, MCP es el atajo: conectás el core al protocolo que los agentes de IA ya usan — sin construir antes un catálogo REST público.",
+        problem_title: "El cuello de botella es la adopción",
         problem:
-          "Cada cliente o socio integra servicio por servicio. PyMEs sin equipo técnico quedan fuera. El modelo N×M no escala y el backlog de integraciones crece más rápido que la capacidad del banco.",
-        solution_title: "La solución MCP",
+          "API Banking fue pensada para desarrolladores: cada fintech o PyME sigue integrando API por API. Quien no tiene catálogo público enfrenta años de roadmap REST antes de servir clientes sin equipo técnico. En ambos casos, personas y PyMEs quedan afuera.",
+        solution_title: "Dos caminos, un protocolo MCP",
         solution:
-          "Publicás cuentas, pagos, transferencias y créditos como tools versionadas. El cliente conecta Claude, ChatGPT o Cursor. Pide en lenguaje natural; el agente ejecuta sobre tu core con seguridad transaccional.",
+          "MCP es la capa de adopción para agentes de IA: tools por intención de negocio, un solo protocolo del lado del cliente y seguridad transaccional incorporada.",
+        api_path_title: "Ya tenés API Banking",
+        api_path:
+          "Publicás tu catálogo REST una vez como herramientas MCP versionadas. El cliente conecta Claude, ChatGPT o Cursor, pide en lenguaje natural y el agente ejecuta sobre tus APIs con auth y 2FA — sin sandbox ni equipo de desarrollo del lado del cliente.",
+        direct_path_title: "Sin API Banking: saltate el catálogo REST",
+        direct_path:
+          "MCP no exige una capa pública REST previa. Un servidor fino se conecta a tu core, middleware o host-to-host y expone tools por caso de uso — consultar saldo, pagar, transferir — en el protocolo que los asistentes de IA ya entienden. El cliente no integra: configura su agente y opera.",
+        direct_path_how_title: "Cómo ir directo a MCP",
+        direct_path_steps: [
+          "Definí tools por intención (no endpoints CRUD): cada tool valida, autoriza y llama al core.",
+          "Auth fuerte y 2FA en la capa MCP — la misma seguridad que en canales digitales.",
+          "Iterá el catálogo: empezá con lectura y operaciones de bajo riesgo; versioná cada tool.",
+          "Opcional después: exponer las mismas capacidades como API Banking para integradores tradicionales.",
+        ],
         security_title: "Seguridad incorporada",
         security_bullets: [
           "Autenticación fuerte antes de operar sobre cuentas.",
@@ -281,7 +294,7 @@ export const translations = {
           },
         ],
         framing_note:
-          "Banca agéntica sobre canales digitales existentes — no reemplaza Open Finance ni embedded finance clásico. El agente puede combinar APIs bancarias con contexto del cliente (ERP, correo, planillas) con PII protegida.",
+          "Banca agéntica sobre canales digitales existentes — no reemplaza Open Finance ni embedded finance clásico. MCP puede apoyarse en API Banking o ir directo al core; el agente combina capacidades bancarias con contexto del cliente (ERP, correo, planillas) con PII protegida.",
         cta_text: "¿Querés explorar un servidor MCP para tu entidad financiera?",
         cta_button: "Hablar con el equipo",
       },
@@ -295,7 +308,7 @@ export const translations = {
       product_links: ["SCF / Supply Chain Finance", "Confirming", "eCheqs", "OPP + Cupones", "Click to Pay", "Gateway B2B", "RADIAN Colombia", "Risk Engine"],
       resource_links: ["Documentación API", "Sandbox", "Guías de integración", "Centro de ayuda"],
       company_links: ["Nosotros", "Inversores", "Blog", "Carreras"],
-      copyright: "© 2025 Colibird. Todos los derechos reservados.",
+      copyright: "© 2026 Colibird. Todos los derechos reservados.",
       email: "hola@colibird.com.ar",
       phone: "+54 911 3375 0788",
       location: "Buenos Aires, Argentina",
@@ -396,12 +409,12 @@ export const translations = {
           name: "Compliance & Data",
           color: "violet",
           items: [
-            { name: "RADIAN Colombia", desc: "Native integration with Colombia's electronic invoicing system.", tag: "Colombia", slug: "radian" },
+            { name: "RADIAN Colombia", desc: "Colombia — native DIAN electronic invoicing and RADIAN circulation integration.", tag: "Colombia", slug: "radian" },
             { name: "e-Invoicing", desc: "Connection to electronic invoicing systems across multiple LATAM countries.", tag: "Multi-Country", slug: "e-invoicing" },
             {
               name: "FCE Tax Engine",
-              desc: "A–H calculation for FCE MiPyME discount: stamps, IIBB, registries and tax settlement.",
-              tag: "Taxes",
+              desc: "Argentina — A–H calculation for FCE MiPyME discount: stamps, IIBB, registries and tax settlement.",
+              tag: "Argentina",
               slug: "tax-engine",
             },
           ],
@@ -503,14 +516,27 @@ export const translations = {
       ],
       fin: {
         tag: "For banks & fintechs",
-        headline: "Agentic banking: your APIs, each customer's agent",
-        sub: "If you already have API Banking, one MCP server publishes your catalog once. Individuals and SMBs operate in natural language — no API-by-API integration.",
-        problem_title: "The problem",
+        headline: "Agentic banking: each customer's agent, with or without API Banking",
+        sub: "One MCP server publishes your capabilities once. With API Banking, customers stop integrating service by service. Without it, MCP is the shortcut: connect your core to the protocol AI agents already use — no public REST catalog required first.",
+        problem_title: "The bottleneck is adoption",
         problem:
-          "Each customer or partner integrates service by service. SMBs without dev teams are left out. The N×M model doesn't scale and the integration backlog grows faster than the bank's capacity.",
-        solution_title: "The MCP solution",
+          "API Banking was built for developers: each fintech or SMB still integrates API by API. Without a public catalog, institutions face years of REST roadmap before serving non-technical customers. Either way, individuals and SMBs are left out.",
+        solution_title: "Two paths, one MCP protocol",
         solution:
-          "Publish accounts, payments, transfers and credit as versioned tools. The customer connects Claude, ChatGPT or Cursor. They ask in natural language; the agent executes on your core with transactional security.",
+          "MCP is the adoption layer for AI agents: business-intent tools, one client-side protocol and built-in transactional security.",
+        api_path_title: "You already have API Banking",
+        api_path:
+          "Publish your REST catalog once as versioned MCP tools. The customer connects Claude, ChatGPT or Cursor, asks in natural language and the agent runs on your APIs with auth and 2FA — no sandbox or dev team on the customer side.",
+        direct_path_title: "No API Banking: skip the REST catalog",
+        direct_path:
+          "MCP does not require a public REST layer first. A thin server connects to your core, middleware or host-to-host and exposes use-case tools — balance, pay, transfer — in the protocol AI assistants already speak. The customer does not integrate: they configure their agent and operate.",
+        direct_path_how_title: "How to go straight to MCP",
+        direct_path_steps: [
+          "Define tools by intent (not CRUD endpoints): each tool validates, authorizes and calls the core.",
+          "Strong auth and 2FA in the MCP layer — same security as digital channels.",
+          "Iterate the catalog: start with reads and low-risk operations; version every tool.",
+          "Optionally later: expose the same capabilities as API Banking for traditional integrators.",
+        ],
         security_title: "Built-in security",
         security_bullets: [
           "Strong authentication before operating on accounts.",
@@ -549,7 +575,7 @@ export const translations = {
           },
         ],
         framing_note:
-          "Agentic banking on existing digital channels — not a replacement for Open Finance or classic embedded finance. The agent can combine banking APIs with customer context (ERP, email, spreadsheets) with protected PII.",
+          "Agentic banking on existing digital channels — not a replacement for Open Finance or classic embedded finance. MCP can sit on API Banking or go direct to core; the agent combines banking capabilities with customer context (ERP, email, spreadsheets) with protected PII.",
         cta_text: "Want to explore an MCP server for your financial institution?",
         cta_button: "Talk to the team",
       },
@@ -563,7 +589,7 @@ export const translations = {
       product_links: ["SCF / Supply Chain Finance", "Confirming", "eCheqs", "OPP + Card Receivables", "Click to Pay", "B2B Gateway", "RADIAN Colombia", "Risk Engine"],
       resource_links: ["API Documentation", "Sandbox", "Integration guides", "Help center"],
       company_links: ["About", "Investors", "Blog", "Careers"],
-      copyright: "© 2025 Colibird. All rights reserved.",
+      copyright: "© 2026 Colibird. All rights reserved.",
       email: "hola@colibird.com.ar",
       phone: "+54 911 3375 0788",
       location: "Buenos Aires, Argentina",

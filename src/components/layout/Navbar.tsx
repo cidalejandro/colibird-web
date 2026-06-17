@@ -31,7 +31,7 @@ const productCategories = [
     items: [
       { nameEs: "RADIAN Colombia", nameEn: "RADIAN Colombia", slug: "radian", icon: Database },
       { nameEs: "e-Invoicing", nameEn: "e-Invoicing", slug: "e-invoicing", icon: FileText },
-      { nameEs: "Motor de Impuestos FCE", nameEn: "FCE Tax Engine", slug: "tax-engine", icon: FileText },
+      { nameEs: "Motor Impuestos FCE (AR)", nameEn: "FCE Tax Engine (AR)", slug: "tax-engine", icon: FileText },
     ],
   },
   {

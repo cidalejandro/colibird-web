@@ -22,6 +22,12 @@ export type FinCaseStudy = {
   problem: string;
   solution_title: string;
   solution: string;
+  api_path_title: string;
+  api_path: string;
+  direct_path_title: string;
+  direct_path: string;
+  direct_path_how_title: string;
+  direct_path_steps: string[];
   security_title: string;
   security_bullets: string[];
   journeys_title: string;
@@ -360,8 +366,9 @@ export const products: Product[] = [
     tech_specs: ["DIAN API Integration", "CUFE Validation", "XML UBL 2.1", "Colombia Compliant", "Real-time Events", "WebSocket"],
     es: {
       name: "RADIAN Colombia",
-      tagline: "Integración nativa con el ecosistema de facturación electrónica de Colombia",
-      description: "Módulo especializado para conectar operaciones financieras con RADIAN, el sistema de la DIAN para la circulación y negociación de facturas electrónicas. Habilitá SCF y factoring sobre facturas RADIAN de forma legal y trazable.",
+      tagline: "Colombia — integración nativa con el ecosistema de facturación electrónica DIAN / RADIAN",
+      description:
+        "Módulo exclusivo para Colombia: conectá operaciones financieras con RADIAN, el sistema de la DIAN para la circulación y negociación de facturas electrónicas. Habilitá SCF y factoring sobre facturas RADIAN de forma legal y trazable en el mercado colombiano.",
       badge: "Colombia",
       features: [
         { title: "Validación CUFE en tiempo real", desc: "Validación instantánea del Código Único de Factura Electrónica contra los registros de la DIAN vía API oficial." },
@@ -382,8 +389,9 @@ export const products: Product[] = [
     },
     en: {
       name: "RADIAN Colombia",
-      tagline: "Native integration with Colombia's electronic invoicing ecosystem",
-      description: "Specialized module to connect financial operations with RADIAN, DIAN's system for the circulation and trading of electronic invoices. Enable SCF and factoring on RADIAN invoices legally and traceably.",
+      tagline: "Colombia — native integration with the DIAN / RADIAN electronic invoicing ecosystem",
+      description:
+        "Colombia-only module: connect financial operations with RADIAN, DIAN's system for the circulation and trading of electronic invoices. Enable SCF and factoring on RADIAN invoices legally and traceably in the Colombian market.",
       badge: "Colombia",
       features: [
         { title: "Real-time CUFE validation", desc: "Instant validation of the Unique Electronic Invoice Code against DIAN records via official API." },
@@ -674,13 +682,26 @@ export const products: Product[] = [
       fin_case: {
         tag: "Banca agéntica",
         headline: "Un servidor MCP para que tus clientes operen tu banca en lenguaje natural",
-        sub: "Patrón de adopción para bancos y fintechs con API Banking: publicás tus capacidades una sola vez; cada cliente conecta su propio agente de IA — sin integraciones N×M.",
-        problem_title: "El cuello de botella no es la API, es la adopción",
+        sub: "Con o sin API Banking: publicás capacidades una sola vez en MCP. Si ya tenés catálogo REST, acelerás la adopción. Si no, MCP conecta el core directo al agente de cada cliente — sin años de portal de APIs previo.",
+        problem_title: "El cuello de botella no es el protocolo, es la adopción",
         problem:
-          "Muchas entidades ya exponen cuentas, transferencias, pagos y créditos como APIs. Pero cada cliente, fintech o PyME integra servicio por servicio, con equipos de desarrollo que no escalan. Individuos y PyMEs sin capacidad técnica quedan fuera: el costo de integrar supera al beneficio percibido. El modelo N clientes × M APIs crece de forma cuadrática.",
-        solution_title: "De N×M integraciones a un servidor MCP",
+          "Muchas entidades ya exponen cuentas, transferencias y pagos como APIs — pero cada cliente integra servicio por servicio con equipos que no escalan. Otras aún no tienen API Banking y postergan la banca agéntica hasta terminar un catálogo REST completo. En ambos escenarios, personas y PyMEs sin desarrolladores quedan afuera: el costo de integrar supera al beneficio o directamente no pueden participar.",
+        solution_title: "Dos caminos, un protocolo MCP",
         solution:
-          "Publicás el catálogo bancario una vez como herramientas MCP versionadas. El cliente — persona, PyME o empresa — conecta Claude, ChatGPT o Cursor a tu servidor. Pide en lenguaje natural; el agente traduce a las APIs del core. Onboarding self-service en minutos, sin sandbox propio ni equipo de desarrollo del lado del cliente.",
+          "MCP es la interfaz pensada para agentes de IA: herramientas por intención de negocio, un protocolo del lado del cliente y controles transaccionales en cada operación de escritura.",
+        api_path_title: "Con API Banking: MCP encima de lo que ya tenés",
+        api_path:
+          "Tu catálogo REST se publica una vez como herramientas MCP versionadas. El cliente — persona, PyME o empresa — conecta Claude, ChatGPT o Cursor, pide en lenguaje natural y el agente traduce a tus APIs existentes. Onboarding self-service en minutos, sin sandbox propio ni equipo de desarrollo del lado del cliente.",
+        direct_path_title: "Sin API Banking: directo del core al agente",
+        direct_path:
+          "No hace falta publicar primero decenas de endpoints REST. Un servidor MCP fino se acopla a tu core, bus de servicios o integraciones host-to-host y expone tools por caso de uso — saldos, pagos, transferencias, cheques — con schemas que el agente entiende. El cliente no desarrolla: autoriza su asistente y opera en lenguaje natural desde el día uno.",
+        direct_path_how_title: "Cómo saltear API Banking e ir a MCP",
+        direct_path_steps: [
+          "Mapeá intenciones de negocio a tools MCP (no réplicas 1:1 de endpoints): cada tool orquesta validación, permisos y llamada al core.",
+          "Incorporá OAuth/OIDC y 2FA en el servidor MCP antes de cualquier escritura en el core — preview y confirmación incluidos.",
+          "Lanzá incremental: lectura y operaciones acotadas primero; expandí el catálogo con versionado semántico.",
+          "Más adelante, si lo necesitás, derivá un catálogo REST/OpenAPI desde las mismas capacidades para fintechs que prefieren integración clásica.",
+        ],
         security_title: "Seguridad transaccional incorporada",
         security_bullets: [
           "Autenticación fuerte (OAuth2/OIDC) antes de cualquier acción sobre cuentas del cliente.",
@@ -742,7 +763,7 @@ export const products: Product[] = [
           },
         ],
         framing_note:
-          "No es Open Finance ni embedded finance clásico: es banca agéntica — la entidad expone sus propias APIs a los agentes de IA de sus propios clientes vía MCP, sobre canales digitales existentes, con autenticación fuerte y protección de datos personales. El agente puede combinar APIs bancarias con el contexto del cliente (ERP, planillas, correo) con PII enmascarada y datos que permanecen en entornos controlados.",
+          "No es Open Finance ni embedded finance clásico: es banca agéntica — la entidad expone capacidades a los agentes de IA de sus clientes vía MCP, con o sin API Banking previa, sobre canales digitales existentes, con autenticación fuerte y protección de datos personales. El agente puede combinar operaciones bancarias con contexto del cliente (ERP, planillas, correo) con PII enmascarada.",
       },
     },
     en: {
@@ -803,13 +824,26 @@ export const products: Product[] = [
       fin_case: {
         tag: "Agentic banking",
         headline: "One MCP server so your customers operate your bank in natural language",
-        sub: "Adoption pattern for banks and fintechs with API Banking: publish capabilities once; each customer connects their own AI agent — no N×M integrations.",
-        problem_title: "The bottleneck isn't the API, it's adoption",
+        sub: "With or without API Banking: publish capabilities once in MCP. If you already have a REST catalog, you accelerate adoption. If not, MCP connects core to each customer's agent — without years of API portal work first.",
+        problem_title: "The bottleneck isn't the protocol, it's adoption",
         problem:
-          "Many institutions already expose accounts, transfers, payments and credit as APIs. But each customer, fintech or SMB integrates service by service with dev teams that don't scale. Individuals and SMBs without technical capacity are left out: integration cost exceeds perceived benefit. The N customers × M APIs model grows quadratically.",
-        solution_title: "From N×M integrations to one MCP server",
+          "Many institutions already expose accounts, transfers and payments as APIs — but each customer still integrates service by service with teams that don't scale. Others don't have API Banking yet and delay agentic banking until a full REST catalog ships. In both cases, individuals and SMBs without developers are left out: integration cost exceeds benefit or they simply can't participate.",
+        solution_title: "Two paths, one MCP protocol",
         solution:
-          "Publish your banking catalog once as versioned MCP tools. The customer — individual, SMB or enterprise — connects Claude, ChatGPT or Cursor to your server. They ask in natural language; the agent translates to core APIs. Self-service onboarding in minutes, no sandbox or dev team on the customer side.",
+          "MCP is the interface built for AI agents: business-intent tools, one client-side protocol and transactional controls on every write operation.",
+        api_path_title: "With API Banking: MCP on top of what you have",
+        api_path:
+          "Your REST catalog is published once as versioned MCP tools. The customer — individual, SMB or enterprise — connects Claude, ChatGPT or Cursor, asks in natural language and the agent translates to your existing APIs. Self-service onboarding in minutes, no sandbox or dev team on the customer side.",
+        direct_path_title: "Without API Banking: core straight to the agent",
+        direct_path:
+          "You don't need dozens of public REST endpoints first. A thin MCP server attaches to your core, service bus or host-to-host integrations and exposes use-case tools — balances, payments, transfers, instruments — with schemas the agent understands. The customer doesn't build software: they authorize their assistant and operate in natural language from day one.",
+        direct_path_how_title: "How to skip API Banking and go to MCP",
+        direct_path_steps: [
+          "Map business intents to MCP tools (not 1:1 endpoint copies): each tool orchestrates validation, permissions and core calls.",
+          "Embed OAuth/OIDC and 2FA in the MCP server before any core write — preview and confirmation included.",
+          "Launch incrementally: reads and scoped operations first; expand the catalog with semantic versioning.",
+          "Later, if needed, derive a REST/OpenAPI catalog from the same capabilities for fintechs that prefer classic integration.",
+        ],
         security_title: "Built-in transactional security",
         security_bullets: [
           "Strong authentication (OAuth2/OIDC) before any action on customer accounts.",
@@ -871,7 +905,7 @@ export const products: Product[] = [
           },
         ],
         framing_note:
-          "This is not classic Open Finance or embedded finance: it's agentic banking — the institution exposes its own APIs to its own customers' AI agents via MCP, on existing digital channels, with strong authentication and personal data protection. The agent can combine banking APIs with customer context (ERP, spreadsheets, email) with masked PII and data staying in controlled environments.",
+          "This is not classic Open Finance or embedded finance: it's agentic banking — the institution exposes capabilities to customers' AI agents via MCP, with or without prior API Banking, on existing digital channels, with strong authentication and personal data protection. The agent can combine banking operations with customer context (ERP, spreadsheets, email) with masked PII.",
       },
     },
   },
@@ -880,6 +914,7 @@ export const products: Product[] = [
     category: "compliance",
     color: "teal",
     tech_specs: [
+      "Argentina · FCE MiPyME",
       "Esquema A–H FCE MiPyME",
       "Sellos + IIBB + SIRCIP",
       "Cálculo manual y lote CSV",
@@ -889,10 +924,10 @@ export const products: Product[] = [
     ],
     es: {
       name: "Motor de Impuestos FCE",
-      tagline: "Calculá la liquidación A–H de un descuento FCE MiPyME con precisión fiscal",
+      tagline: "Argentina — liquidación A–H de descuento FCE MiPyME con precisión fiscal provincial",
       description:
-        "Motor de cálculo de impuestos de Colibird para descuento de Facturas de Crédito Electrónicas MiPyME. Parametrizá Sellos por fondeador, importá padrones, calculá retenciones, intereses, comisión Colibird e IIBB — manualmente o por lote CSV — y exportá resultados auditables.",
-      badge: "Impuestos FCE",
+        "Motor de cálculo de impuestos de Colibird para Argentina: descuento de Facturas de Crédito Electrónicas MiPyME. Parametrizá Sellos por fondeador, importá padrones provinciales, calculá retenciones, intereses, comisión Colibird e IIBB — manualmente o por lote CSV — y exportá resultados auditables.",
+      badge: "Argentina",
       features: [
         {
           title: "Esquema A–H completo",
@@ -945,10 +980,10 @@ export const products: Product[] = [
     },
     en: {
       name: "FCE Tax Engine",
-      tagline: "Calculate the A–H settlement of an FCE MiPyME discount with fiscal precision",
+      tagline: "Argentina — A–H settlement for FCE MiPyME discount with provincial tax precision",
       description:
-        "Colibird's tax calculation engine for Electronic Credit Invoice (FCE MiPyME) discounting. Configure stamps per funder, import tax registries, calculate withholdings, interest, Colibird commission and IIBB — manually or via CSV batch — and export auditable results.",
-      badge: "FCE Taxes",
+        "Colibird's tax calculation engine for Argentina: Electronic Credit Invoice (FCE MiPyME) discounting. Configure stamps per funder, import provincial registries, calculate withholdings, interest, Colibird commission and IIBB — manually or via CSV batch — and export auditable results.",
+      badge: "Argentina",
       features: [
         {
           title: "Full A–H schema",

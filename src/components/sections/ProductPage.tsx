@@ -200,7 +200,7 @@ export default function ProductPage({ slug }: { slug: string }) {
                 <p className="text-gray-400 max-w-3xl mx-auto leading-relaxed">{data.fin_case.sub}</p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6 mb-10">
+              <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div className="glow-border rounded-2xl p-6">
                   <h3 className="text-sm font-semibold text-red-300/90 uppercase tracking-wide mb-3">
                     {data.fin_case.problem_title}
@@ -208,10 +208,36 @@ export default function ProductPage({ slug }: { slug: string }) {
                   <p className="text-sm text-gray-400 leading-relaxed">{data.fin_case.problem}</p>
                 </div>
                 <div className="glow-border rounded-2xl p-6">
-                  <h3 className="text-sm font-semibold text-green-300/90 uppercase tracking-wide mb-3">
+                  <h3 className="text-sm font-semibold text-purple-300/90 uppercase tracking-wide mb-3">
                     {data.fin_case.solution_title}
                   </h3>
                   <p className="text-sm text-gray-400 leading-relaxed">{data.fin_case.solution}</p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6 mb-10">
+                <div className="rounded-2xl border border-green-500/20 bg-green-500/5 p-6">
+                  <h3 className="text-sm font-semibold text-green-300/90 uppercase tracking-wide mb-3">
+                    {data.fin_case.api_path_title}
+                  </h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{data.fin_case.api_path}</p>
+                </div>
+                <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-6">
+                  <h3 className="text-sm font-semibold text-cyan-300/90 uppercase tracking-wide mb-3">
+                    {data.fin_case.direct_path_title}
+                  </h3>
+                  <p className="text-sm text-gray-400 leading-relaxed mb-4">{data.fin_case.direct_path}</p>
+                  <h4 className="text-xs font-semibold text-white/80 uppercase tracking-wide mb-2">
+                    {data.fin_case.direct_path_how_title}
+                  </h4>
+                  <ol className="space-y-2">
+                    {data.fin_case.direct_path_steps.map((step, i) => (
+                      <li key={i} className="flex gap-2 text-xs text-gray-400 leading-relaxed">
+                        <span className="text-cyan-400 font-mono flex-shrink-0">{i + 1}.</span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
                 </div>
               </div>
 

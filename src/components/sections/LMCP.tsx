@@ -135,12 +135,33 @@ export default function LMCP() {
               <h4 className="text-sm font-semibold text-red-300/90 uppercase tracking-wide mb-3 flex items-center gap-2">
                 {t.lmcp.fin.problem_title}
               </h4>
-              <p className="text-sm text-gray-400 leading-relaxed mb-6">{t.lmcp.fin.problem}</p>
-              <h4 className="text-sm font-semibold text-green-300/90 uppercase tracking-wide mb-3 flex items-center gap-2">
-                <Bot size={14} />
+              <p className="text-sm text-gray-400 leading-relaxed mb-8">{t.lmcp.fin.problem}</p>
+              <h4 className="text-sm font-semibold text-purple-300/90 uppercase tracking-wide mb-2">
                 {t.lmcp.fin.solution_title}
               </h4>
-              <p className="text-sm text-gray-400 leading-relaxed">{t.lmcp.fin.solution}</p>
+              <p className="text-sm text-gray-400 leading-relaxed mb-6">{t.lmcp.fin.solution}</p>
+              <h4 className="text-sm font-semibold text-green-300/90 uppercase tracking-wide mb-2 flex items-center gap-2">
+                <Bot size={14} />
+                {t.lmcp.fin.api_path_title}
+              </h4>
+              <p className="text-sm text-gray-400 leading-relaxed mb-6">{t.lmcp.fin.api_path}</p>
+              <h4 className="text-sm font-semibold text-cyan-300/90 uppercase tracking-wide mb-2">
+                {t.lmcp.fin.direct_path_title}
+              </h4>
+              <p className="text-sm text-gray-400 leading-relaxed mb-4">{t.lmcp.fin.direct_path}</p>
+              <h5 className="text-xs font-semibold text-white/80 uppercase tracking-wide mb-2">
+                {t.lmcp.fin.direct_path_how_title}
+              </h5>
+              <ol className="space-y-2">
+                {t.lmcp.fin.direct_path_steps.map((step, i) => (
+                  <li key={i} className="flex gap-2 text-xs text-gray-400 leading-relaxed">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-muted text-purple-300 text-[10px] font-bold flex items-center justify-center">
+                      {i + 1}
+                    </span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
             </div>
             <div className="p-8 sm:p-10 bg-brand-surface/40">
               <h4 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
