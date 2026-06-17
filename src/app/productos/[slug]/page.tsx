@@ -16,6 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${name} — Colibird`,
     description: tagline,
+    alternates: {
+      canonical: `/productos/${slug}`,
+    },
   };
 }
 
