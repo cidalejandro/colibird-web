@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { JsonLd } from "@/components/JsonLd";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/json-ld";
 import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({
@@ -31,11 +33,20 @@ export const metadata: Metadata = {
     siteName: "Colibird",
     locale: "es_AR",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Colibird — Infraestructura Financiera B2B para LATAM",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Colibird — Infraestructura Financiera B2B para LATAM",
     description: "La plataforma que mueve el capital en LATAM.",
+    images: ["/twitter-image"],
   },
 };
 
@@ -45,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-brand-dark antialiased">
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <LanguageProvider>
           <div className="noise-overlay" />
           {children}
