@@ -42,3 +42,7 @@ next-env.d.ts
 
 # nested clone (deployed separately on Railway)
 /tax-engine/
+
+# editor / local artifacts
+*.code-workspace
+*.pptx
