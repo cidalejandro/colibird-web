@@ -65,6 +65,14 @@ export default function RootLayout({
               y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           })(window, document, "clarity", "script", "xitze40ba6");`}
         </Script>
+        {/* Google Analytics 4 (gtag.js) */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-W9JMXD9EGY" strategy="afterInteractive" />
+        <Script id="ga4" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-W9JMXD9EGY');`}
+        </Script>
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <LanguageProvider>
           <div className="noise-overlay" />
