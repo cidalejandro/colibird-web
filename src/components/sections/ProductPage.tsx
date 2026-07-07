@@ -93,7 +93,17 @@ export default function ProductPage({ slug }: { slug: string }) {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 flex-wrap">
-              {product.external_url ? (
+              {product.demo_url ? (
+                <a
+                  href={product.demo_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-brand-gradient text-white font-semibold shadow-xl shadow-purple-900/40 hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
+                >
+                  {lang === "es" ? "Ver demo en vivo" : "See live demo"}
+                  <ExternalLink size={18} className="group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              ) : product.external_url ? (
                 <a
                   href={product.external_url}
                   target="_blank"
@@ -365,6 +375,17 @@ export default function ProductPage({ slug }: { slug: string }) {
                 )}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
+              {product.demo_url && (
+                <a
+                  href={product.demo_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-brand-gradient text-white font-semibold shadow-xl shadow-purple-900/40 hover:opacity-90 transition-all"
+                >
+                  {lang === "es" ? "Ver demo en vivo" : "See live demo"}
+                  <ExternalLink size={18} />
+                </a>
+              )}
               {product.external_url && (
                 <a
                   href={product.external_url}

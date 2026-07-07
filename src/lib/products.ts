@@ -55,6 +55,7 @@ export type Product = {
   tech_specs: string[];
   external_url?: string;
   info_url?: string;
+  demo_url?: string;
   es: ProductLang;
   en: ProductLang;
 };
@@ -314,6 +315,7 @@ export const products: Product[] = [
     slug: "gateway-b2b",
     category: "payments",
     color: "green",
+    demo_url: "https://demo-marketplace-production.up.railway.app/home.html",
     tech_specs: ["REST API", "ISO 20022", "Multi-rail", "PSP (Argentina)", "PCI-DSS Level 1", "Failover automático", "SLA 99.95%"],
     es: {
       name: "Gateway de Pagos B2B",
