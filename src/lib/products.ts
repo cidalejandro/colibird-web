@@ -621,8 +621,8 @@ export const products: Product[] = [
     external_url: "https://local-mcp.com/get?ref=colibird",
     info_url: "https://local-mcp.com/?ref=colibird",
     tech_specs: [
-      "161 MCP Tools",
-      "macOS 13+",
+      "270+ MCP Tools",
+      "Mac & Windows",
       "Claude · ChatGPT · Cursor",
       "100% Local & Private",
       "GDPR by Design",
@@ -630,18 +630,18 @@ export const products: Product[] = [
     ],
     es: {
       name: "LMCP",
-      tagline: "Tu IA opera Mail, Calendar, Teams y Office en tu Mac — sin API keys ni nube",
+      tagline: "Tu IA opera Mail, Calendar, Teams y Office en tu computadora — sin API keys",
       description:
-        "LMCP (Local MCP) es el producto de Colibird que conecta Claude, ChatGPT, Cursor y cualquier cliente MCP con las apps de tu Mac. 161 herramientas locales para email, calendario, Teams, Slack, WhatsApp, OneDrive, Office, Notion y más. Tus datos nunca salen de tu dispositivo.",
+        "LMCP (Local MCP) es el producto de Colibird que conecta Claude, ChatGPT, Cursor y cualquier cliente MCP con las apps de tu computadora, en Mac y Windows. Más de 270 herramientas locales para email, calendario, Teams, Slack, WhatsApp, OneDrive, Office, Notion y más. Tus datos nunca salen de tu dispositivo.",
       badge: "LMCP",
       features: [
         {
-          title: "161 herramientas, cero fricción",
+          title: "Más de 270 herramientas, cero fricción",
           desc: "Mail, Calendar, Contacts, Teams, Slack, WhatsApp, OneDrive, Excel, Word, Notion, iMessage, Safari y más — un solo instalador, sin OAuth ni API keys para tus apps personales.",
         },
         {
           title: "Privacidad por arquitectura",
-          desc: "Todo corre en tu Mac. Sin procesamiento cloud de emails, archivos ni mensajes. GDPR y CCPA compliant by design. Cloud Relay opcional y desactivado por defecto.",
+          desc: "Todo corre en tu computadora. Sin procesamiento cloud de emails, archivos ni mensajes. GDPR y CCPA compliant by design. Cloud Relay opcional y desactivado por defecto.",
         },
         {
           title: "Compatible con todo el ecosistema IA",
@@ -649,19 +649,19 @@ export const products: Product[] = [
         },
         {
           title: "Instalación en 2 minutos",
-          desc: "App de menú bar firmada y notarizada, o un comando en terminal. Auto-configura tus clientes de IA detectados. Gratis, licencia permanente.",
+          desc: "App de menú bar firmada y notarizada, o un comando en terminal. Auto-configura tus clientes de IA detectados. Plan gratuito y planes pagos desde USD 10 por mes.",
         },
       ],
       steps: [
         {
           number: "01",
           title: "Instalá LMCP",
-          desc: "Descargá la app desde local-mcp.com o ejecutá el instalador en terminal. macOS 13+, Apple Silicon e Intel.",
+          desc: "Descargá la app desde local-mcp.com o ejecutá el instalador en terminal. Mac (macOS 13+, Apple Silicon e Intel) y Windows.",
         },
         {
           number: "02",
           title: "Conectá tu asistente de IA",
-          desc: "Claude, Cursor o ChatGPT descubren automáticamente las 161 tools. En Cursor: activá local-mcp en Settings → MCP y usá modo Agent.",
+          desc: "Claude, Cursor o ChatGPT descubren automáticamente las herramientas. En Cursor: activá local-mcp en Settings → MCP y usá modo Agent.",
         },
         {
           number: "03",
@@ -772,18 +772,18 @@ export const products: Product[] = [
     },
     en: {
       name: "LMCP",
-      tagline: "Your AI operates Mail, Calendar, Teams and Office on your Mac — no API keys, no cloud",
+      tagline: "Your AI operates Mail, Calendar, Teams and Office on your computer — no API keys",
       description:
-        "LMCP (Local MCP) is Colibird's product that connects Claude, ChatGPT, Cursor and any MCP client to your Mac apps. 161 local tools for email, calendar, Teams, Slack, WhatsApp, OneDrive, Office, Notion and more. Your data never leaves your device.",
+        "LMCP (Local MCP) is Colibird's product that connects Claude, ChatGPT, Cursor and any MCP client to the apps on your computer, on Mac and Windows. 270+ local tools for email, calendar, Teams, Slack, WhatsApp, OneDrive, Office, Notion and more. Your data never leaves your device.",
       badge: "LMCP",
       features: [
         {
-          title: "161 tools, zero friction",
+          title: "270+ tools, zero friction",
           desc: "Mail, Calendar, Contacts, Teams, Slack, WhatsApp, OneDrive, Excel, Word, Notion, iMessage, Safari and more — one installer, no OAuth or API keys for your personal apps.",
         },
         {
           title: "Privacy by architecture",
-          desc: "Everything runs on your Mac. No cloud processing of emails, files or messages. GDPR and CCPA compliant by design. Optional Cloud Relay, off by default.",
+          desc: "Everything runs on your computer. No cloud processing of emails, files or messages. GDPR and CCPA compliant by design. Optional Cloud Relay, off by default.",
         },
         {
           title: "Works with the full AI ecosystem",
@@ -791,19 +791,19 @@ export const products: Product[] = [
         },
         {
           title: "2-minute setup",
-          desc: "Signed, notarized menu bar app or a one-line terminal install. Auto-configures detected AI clients. Free, permanent license.",
+          desc: "Signed, notarized menu bar app or a one-line terminal install. Auto-configures detected AI clients. Free plan, and paid plans from $10/month.",
         },
       ],
       steps: [
         {
           number: "01",
           title: "Install LMCP",
-          desc: "Download from local-mcp.com or run the terminal installer. macOS 13+, Apple Silicon and Intel.",
+          desc: "Download from local-mcp.com or run the terminal installer. Mac (macOS 13+, Apple Silicon and Intel) and Windows.",
         },
         {
           number: "02",
           title: "Connect your AI assistant",
-          desc: "Claude, Cursor or ChatGPT discover 161 tools automatically. In Cursor: enable local-mcp in Settings → MCP and use Agent mode.",
+          desc: "Claude, Cursor or ChatGPT discover the tools automatically. In Cursor: enable local-mcp in Settings → MCP and use Agent mode.",
         },
         {
           number: "03",
