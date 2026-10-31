@@ -130,7 +130,7 @@ export const translations = {
             },
             {
               name: "LMCP",
-              desc: "Más de 270 herramientas MCP locales para Mac y Windows. Privacidad total, sin API keys. Producto Colibird en local-mcp.com.",
+              desc: "Más de 240 herramientas MCP locales para Mac y Windows. Privacidad total, sin API keys. Producto Colibird en local-mcp.com.",
               tag: "LMCP",
               slug: "lmcp",
             },
@@ -220,7 +220,7 @@ export const translations = {
     lmcp: {
       tag: "Producto Colibird · IA Local",
       headline: "LMCP: tu IA con acceso nativo a tu computadora",
-      sub: "Local MCP conecta Claude, ChatGPT y Cursor a Mail, Calendar, Teams, OneDrive, Office y más de 270 herramientas, en Mac y Windows. Todo corre en tu dispositivo — sin tokens ni API keys.",
+      sub: "Local MCP conecta Claude, ChatGPT y Cursor a Mail, Calendar, Teams, OneDrive, Office y más de 240 herramientas, en Mac y Windows. Todo corre en tu dispositivo — sin tokens ni API keys.",
       cta_download: "Descargar LMCP",
       cta_learn: "Ver producto completo",
       cta_site: "Más info en local-mcp.com",
@@ -229,7 +229,7 @@ export const translations = {
       demo_response:
         "3 emails sin leer de proveedores · Reunión con finanzas a las 15:00 · El canal #tesorería mencionó el cierre de mes ayer.",
       stats: [
-        { value: "270+", label: "Herramientas MCP" },
+        { value: "240+", label: "Herramientas MCP" },
         { value: "14M+", label: "Acciones ejecutadas" },
         { value: "2 min", label: "Setup" },
         { value: "100%", label: "Local" },
@@ -427,7 +427,7 @@ export const translations = {
             { name: "DecisionHub · Risk Engine", desc: "Real-time risk engine: traffic lights, scoring and configurable rules.", tag: "AI", slug: "decisionhub" },
             { name: "TrustPath · Onboarding", desc: "Digital KYC/AML: 5-minute onboarding, validation and initial scoring.", tag: "5 min", slug: "trustpath" },
             { name: "API Integration Layer", desc: "API-first integration in days. SDKs, webhooks and full documentation.", tag: "API-First", slug: "api-layer" },
-            { name: "LMCP", desc: "270+ local MCP tools for Mac and Windows. Full privacy, no API keys. Colibird product at local-mcp.com.", tag: "LMCP", slug: "lmcp" },
+            { name: "LMCP", desc: "240+ local MCP tools for Mac and Windows. Full privacy, no API keys. Colibird product at local-mcp.com.", tag: "LMCP", slug: "lmcp" },
           ],
         },
       ],
@@ -502,7 +502,7 @@ export const translations = {
     lmcp: {
       tag: "Colibird Product · Local AI",
       headline: "LMCP: native AI access to your computer",
-      sub: "Local MCP connects Claude, ChatGPT and Cursor to Mail, Calendar, Teams, OneDrive, Office and 270+ tools, on Mac and Windows. Everything runs on your device — no tokens, no API keys.",
+      sub: "Local MCP connects Claude, ChatGPT and Cursor to Mail, Calendar, Teams, OneDrive, Office and 240+ tools, on Mac and Windows. Everything runs on your device — no tokens, no API keys.",
       cta_download: "Download LMCP",
       cta_learn: "View full product",
       cta_site: "More at local-mcp.com",
@@ -511,7 +511,7 @@ export const translations = {
       demo_response:
         "3 unread supplier emails · Finance meeting at 3:00pm · #treasury channel mentioned month-end close yesterday.",
       stats: [
-        { value: "270+", label: "MCP Tools" },
+        { value: "240+", label: "MCP Tools" },
         { value: "14M+", label: "Actions executed" },
         { value: "2 min", label: "Setup" },
         { value: "100%", label: "Local" },

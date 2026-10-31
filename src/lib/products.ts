@@ -621,7 +621,7 @@ export const products: Product[] = [
     external_url: "https://local-mcp.com/get?ref=colibird",
     info_url: "https://local-mcp.com/?ref=colibird",
     tech_specs: [
-      "270+ MCP Tools",
+      "240+ MCP Tools",
       "Mac & Windows",
       "Claude · ChatGPT · Cursor",
       "100% Local & Private",
@@ -632,11 +632,11 @@ export const products: Product[] = [
       name: "LMCP",
       tagline: "Tu IA opera Mail, Calendar, Teams y Office en tu computadora — sin API keys",
       description:
-        "LMCP (Local MCP) es el producto de Colibird que conecta Claude, ChatGPT, Cursor y cualquier cliente MCP con las apps de tu computadora, en Mac y Windows. Más de 270 herramientas locales para email, calendario, Teams, Slack, WhatsApp, OneDrive, Office, Notion y más. Tus datos nunca salen de tu dispositivo.",
+        "LMCP (Local MCP) es el producto de Colibird que conecta Claude, ChatGPT, Cursor y cualquier cliente MCP con las apps de tu computadora, en Mac y Windows. Más de 240 herramientas locales para email, calendario, Teams, Slack, WhatsApp, OneDrive, Office, Notion y más. Tus datos nunca salen de tu dispositivo.",
       badge: "LMCP",
       features: [
         {
-          title: "Más de 270 herramientas, cero fricción",
+          title: "Más de 240 herramientas, cero fricción",
           desc: "Mail, Calendar, Contacts, Teams, Slack, WhatsApp, OneDrive, Excel, Word, Notion, iMessage, Safari y más — un solo instalador, sin OAuth ni API keys para tus apps personales.",
         },
         {
@@ -774,11 +774,11 @@ export const products: Product[] = [
       name: "LMCP",
       tagline: "Your AI operates Mail, Calendar, Teams and Office on your computer — no API keys",
       description:
-        "LMCP (Local MCP) is Colibird's product that connects Claude, ChatGPT, Cursor and any MCP client to the apps on your computer, on Mac and Windows. 270+ local tools for email, calendar, Teams, Slack, WhatsApp, OneDrive, Office, Notion and more. Your data never leaves your device.",
+        "LMCP (Local MCP) is Colibird's product that connects Claude, ChatGPT, Cursor and any MCP client to the apps on your computer, on Mac and Windows. 240+ local tools for email, calendar, Teams, Slack, WhatsApp, OneDrive, Office, Notion and more. Your data never leaves your device.",
       badge: "LMCP",
       features: [
         {
-          title: "270+ tools, zero friction",
+          title: "240+ tools, zero friction",
           desc: "Mail, Calendar, Contacts, Teams, Slack, WhatsApp, OneDrive, Excel, Word, Notion, iMessage, Safari and more — one installer, no OAuth or API keys for your personal apps.",
         },
         {

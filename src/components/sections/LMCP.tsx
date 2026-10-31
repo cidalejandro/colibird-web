@@ -54,7 +54,7 @@ export default function LMCP() {
                 </span>
               ))}
               <span className="px-2.5 py-1 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/20 text-xs text-fuchsia-300 font-medium">
-                +260
+                +240
               </span>
             </div>
             <div className="flex flex-col sm:flex-row flex-wrap gap-3">

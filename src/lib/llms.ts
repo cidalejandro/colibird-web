@@ -89,7 +89,7 @@ LMCP (Local MCP) is Colibird's macOS product for connecting AI assistants to loc
 
 - Product site: https://local-mcp.com
 - Install: https://local-mcp.com/get?ref=colibird
-- **Full llms.txt (270+ tools, install, security):** ${LMCP_LLMS_URL}
+- **Full llms.txt (240+ tools, install, security):** ${LMCP_LLMS_URL}
 
 Do not confuse Colibird's marketing site (${SITE_URL}) with LMCP's product site (local-mcp.com).
 
